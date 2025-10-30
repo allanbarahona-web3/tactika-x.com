@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useState, useRef } from 'react';
 
 const products = [
@@ -476,6 +477,8 @@ export default function Home() {
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [cart, setCart] = useState([]);
 	const [showCart, setShowCart] = useState(false);
+	const [showLogin, setShowLogin] = useState(false);
+	const [user, setUser] = useState(null); // null if not logged in
 	const productsRef = useRef(null);
 
 	const filteredProducts =
@@ -607,6 +610,23 @@ export default function Home() {
 									<i className="fas fa-shopping-cart"></i>
 									<span className="cart-badge">{cartCount}</span>
 								</button>
+								{/* Login/account button */}
+								<button
+									className="icon-btn"
+									style={{
+										minWidth: 120,
+										fontWeight: 600,
+										color: 'var(--dark-navy)',
+										background: 'var(--light-gray)',
+									}}
+									onClick={() => setShowLogin(true)}
+								>
+									<i
+										className="fas fa-user"
+										style={{ marginRight: 8 }}
+									></i>
+									{user ? `Hola, ${user.name}` : 'Cuenta y Listas'}
+								</button>
 							</div>
 						</div>
 					</div>
@@ -618,7 +638,9 @@ export default function Home() {
 							{categories.map((cat) => (
 								<a
 									key={cat.key}
-									className={`nav-item${selectedCategory === cat.key ? ' active' : ''}`}
+									className={`nav-item${
+										selectedCategory === cat.key ? ' active' : ''
+									}`}
 									onClick={() => handleCategoryClick(cat.key)}
 									style={{ cursor: 'pointer' }}
 								>
@@ -709,7 +731,11 @@ export default function Home() {
 							</p>
 						</div>
 						<div className="categories-grid">
-							<div className="category-card" onClick={() => handleCategoryClick('defense')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('defense')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">🛡️</div>
 								<div className="category-content">
 									<h3>Defensa Personal</h3>
@@ -717,7 +743,11 @@ export default function Home() {
 									<span className="category-badge">15+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('tactical')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('tactical')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">🎖️</div>
 								<div className="category-content">
 									<h3>Equipamiento Táctico</h3>
@@ -725,7 +755,11 @@ export default function Home() {
 									<span className="category-badge">25+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('clothing')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('clothing')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">👕</div>
 								<div className="category-content">
 									<h3>Vestimenta</h3>
@@ -733,7 +767,11 @@ export default function Home() {
 									<span className="category-badge">30+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('outdoor')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('outdoor')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">⛺</div>
 								<div className="category-content">
 									<h3>Outdoor & Camping</h3>
@@ -741,7 +779,11 @@ export default function Home() {
 									<span className="category-badge">20+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('optics')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('optics')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">🔭</div>
 								<div className="category-content">
 									<h3>Óptica</h3>
@@ -749,7 +791,11 @@ export default function Home() {
 									<span className="category-badge">12+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('protection')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('protection')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">🦺</div>
 								<div className="category-content">
 									<h3>Protección</h3>
@@ -757,58 +803,42 @@ export default function Home() {
 									<span className="category-badge">10+ productos</span>
 								</div>
 							</div>
-							<div className="category-card" onClick={() => handleCategoryClick('accessories')} style={{ cursor: 'pointer' }}>
+							<div
+								className="category-card"
+								onClick={() => handleCategoryClick('accessories')}
+								style={{ cursor: 'pointer' }}
+							>
 								<div className="category-image">🔧</div>
 								<div className="category-content">
 									<h3>Accesorios</h3>
 									<p>Brújulas, esposas, scanners y más</p>
-									<span className="category-badge">18+ productos</span>
+									<span className="category-badge">8+ productos</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</section>
 				{/* PRODUCTS SECTION */}
-				<section className="products-section" id="products" ref={productsRef}>
+				<section className="products-section" ref={productsRef}>
 					<div className="container">
 						<div className="section-header">
-							<span className="section-badge">CATÁLOGO COMPLETO</span>
-							<h2>Nuestros Productos</h2>
-							<p>Equipamiento profesional para todas tus necesidades</p>
+							<span className="section-badge">NUESTROS PRODUCTOS</span>
+							<h2>Calidad y Variedad en Equipamiento</h2>
+							<p>
+								Descubre nuestra amplia gama de productos seleccionados
+								especialmente para ti
+							</p>
 						</div>
-						<div className="filter-tabs">
-							{categories.map((cat) => (
-								<button
-									key={cat.key}
-									className={`filter-btn${
-										selectedCategory === cat.key ? ' active' : ''
-									}`}
-									onClick={() => setSelectedCategory(cat.key)}
-								>
-									<i className={cat.icon}></i> {cat.label}
-								</button>
-							))}
-						</div>
-						<div className="products-grid" id="products-container">
+						<div className="products-grid">
 							{filteredProducts.length === 0 ? (
-								<p
-									style={{
-										textAlign: 'center',
-										padding: '40px',
-										color: '#888',
-									}}
-								>
-									No hay productos en esta categoría.
-								</p>
+								<p className="no-results">No se encontraron productos.</p>
 							) : (
 								filteredProducts.map((product) => (
 									<div className="product-card" key={product.id}>
 										<div className="product-image">
 											{product.icon}
 											{product.badge && (
-												<span
-													className={`product-badge ${product.badge}`}
-												>
+												<span className="product-badge">
 													{product.badge === 'new'
 														? 'NUEVO'
 														: product.badge === 'popular'
@@ -1057,17 +1087,160 @@ export default function Home() {
 						</div>
 					</div>
 				)}
+				{/* LOGIN MODAL */}
+				{showLogin && (
+					<div className="login-modal-overlay">
+						<div className="login-modal">
+							<button
+								className="login-modal-close"
+								onClick={() => setShowLogin(false)}
+							>
+								&times;
+							</button>
+							<h2>Customer Login</h2>
+							<LoginModalContent setUser={setUser} />
+						</div>
+					</div>
+				)}
 			</main>
 			{/* WhatsApp Floating CTA */}
 			<a
-  href="https://wa.me/50688888888?text=Hola%20quiero%20información%20de%20productos%20TACTIKA-X"
-  className="whatsapp-float whatsapp-bounce"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="WhatsApp Tactika-X"
->
-		<img src="/Whatsapp%20Logo%20Web.png" alt="WhatsApp" width="56" height="56" style={{ display: 'block' }} />
-</a>
+				href="https://wa.me/50688888888?text=Hola%20quiero%20información%20de%20productos%20TACTIKA-X"
+				className="whatsapp-float whatsapp-bounce"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="WhatsApp Tactika-X"
+			>
+				<img
+					src="/Whatsapp%20Logo%20Web.png"
+					alt="WhatsApp"
+					width="56"
+					height="56"
+					style={{ display: 'block' }}
+				/>
+			</a>
+		</>
+	);
+}
+
+// Modularize login modal content for reuse
+function LoginModalContent({ setUser }) {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [otp, setOtp] = useState('');
+	const [error, setError] = useState('');
+	const [showOtp, setShowOtp] = useState(false);
+	const [showQr, setShowQr] = useState(false);
+
+	const handleLoginSubmit = (e) => {
+		e.preventDefault();
+		if (!email || !password) {
+			setError('Please enter both email and password.');
+			return;
+		}
+		setError('');
+		setShowOtp(true);
+	};
+
+	const handleOtpSubmit = (e) => {
+		e.preventDefault();
+		if (!otp) {
+			setError('Please enter the OTP code.');
+			return;
+		}
+		setError('');
+		// Simulate login for demo
+		setUser({ name: email.split('@')[0] });
+		alert('OTP submitted! (Demo only)');
+	};
+
+	return (
+		<>
+			{!showOtp ? (
+				<form className="login-form" onSubmit={handleLoginSubmit}>
+					<label>
+						Email
+						<input
+							type="email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							required
+						/>
+					</label>
+					<label>
+						Password
+						<input
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
+					</label>
+					{error && <div className="login-error">{error}</div>}
+					<button type="submit" className="login-btn">
+						Login
+					</button>
+					<div className="login-modal-actions">
+						<button
+							type="button"
+							onClick={() => alert('TODO: Create account flow')}
+						>
+							Create account
+						</button>
+						<button
+							type="button"
+							onClick={() => alert('TODO: Forgot password flow')}
+						>
+							Forgot password?
+						</button>
+					</div>
+				</form>
+			) : (
+				<form className="login-form" onSubmit={handleOtpSubmit}>
+					<label>
+						Enter OTP Code
+						<input
+							type="text"
+							value={otp}
+							onChange={(e) => setOtp(e.target.value)}
+							required
+						/>
+					</label>
+					{error && <div className="login-error">{error}</div>}
+					<button type="submit" className="login-btn">
+						Verify OTP
+					</button>
+					<div className="login-modal-actions">
+						<button
+							type="button"
+							onClick={() => setShowQr(true)}
+						>
+							Setup Google Authenticator
+						</button>
+						<button
+							type="button"
+							onClick={() => alert('TODO: Send code to phone')}
+						>
+							Send code to phone
+						</button>
+					</div>
+				</form>
+			)}
+			{showQr && (
+				<div className="login-qr">
+					<h4>Google Authenticator Setup</h4>
+					{/* TODO: Replace with real QR code and secret */}
+					<img src="/icon-192x192.png" alt="QR Placeholder" />
+					<div className="login-qr-secret">
+						Secret code: <span>XXXX-XXXX</span>
+					</div>
+					<div className="login-qr-info">
+						Scan this QR with Google Authenticator app.
+						<br />
+						(Demo only, backend integration needed)
+					</div>
+				</div>
+			)}
 		</>
 	);
 }
