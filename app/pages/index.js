@@ -612,11 +612,11 @@ export default function Home() {
 								</button>
 								{/* Login/account button */}
 								<button
-									className="icon-btn"
+									className="account-btn"
 									onClick={() => setShowLogin(true)}
 								>
-									<i className="fas fa-user" style={{ marginRight: 8 }}></i>
-									{user ? `Hola, ${user.name}` : 'Cuenta y Listas'}
+									<i className="fas fa-user"></i>
+									Tu cuenta
 								</button>
 							</div>
 						</div>
