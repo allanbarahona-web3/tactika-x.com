@@ -610,7 +610,7 @@ export default function Home() {
 									<i className="fas fa-shopping-cart"></i>
 									<span className="cart-badge">{cartCount}</span>
 								</button>
-								{/* Login/account button */}
+								{/* Login/account buttvxcvon */}
 								<button
 									className="account-btn"
 									onClick={() => setShowLogin(true)}
