@@ -613,18 +613,9 @@ export default function Home() {
 								{/* Login/account button */}
 								<button
 									className="icon-btn"
-									style={{
-										minWidth: 120,
-										fontWeight: 600,
-										color: 'var(--dark-navy)',
-										background: 'var(--light-gray)',
-									}}
 									onClick={() => setShowLogin(true)}
 								>
-									<i
-										className="fas fa-user"
-										style={{ marginRight: 8 }}
-									></i>
+									<i className="fas fa-user" style={{ marginRight: 8 }}></i>
 									{user ? `Hola, ${user.name}` : 'Cuenta y Listas'}
 								</button>
 							</div>
