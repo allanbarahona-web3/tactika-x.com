@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './login.css'; // Import the global CSS file
+// ...global styles are imported in _app.js or globals.css...
 
 export default function Login() {
   const [showModal, setShowModal] = useState(true);

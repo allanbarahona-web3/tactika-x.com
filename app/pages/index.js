@@ -1103,7 +1103,7 @@ export default function Home() {
 				aria-label="WhatsApp Tactika-X"
 			>
 				<img
-					src="/Whatsapp%20Logo%20Web.png"
+					src="/Whatsapp.png"
 					alt="WhatsApp"
 					width="56"
 					height="56"
