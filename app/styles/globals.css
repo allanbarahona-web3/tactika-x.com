@@ -1110,3 +1110,124 @@
                 height: 150px;
             }
         }
+        
+        /* ===== Login Modal Styles ===== */
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.login-modal {
+  max-width: 400px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border-radius: 8px;
+  background: var(--white);
+  position: relative;
+}
+
+.login-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #888;
+  cursor: pointer;
+}
+
+.login-modal h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  border: 1px solid var(--light-gray);
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--primary-teal);
+}
+
+.login-error {
+  color: var(--accent-danger);
+  margin-bottom: 16px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--primary-yellow);
+  color: var(--dark-navy);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: var(--primary-teal);
+  color: var(--white);
+}
+
+.login-modal-actions {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-modal-actions button {
+  background: none;
+  border: none;
+  color: var(--accent-info);
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+.login-modal-actions button:last-child {
+  margin-right: 0;
+}
+
+.login-qr {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.login-qr img {
+  width: 96px;
+  height: 96px;
+}
+
+.login-qr-secret {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+.login-qr-info {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+}
