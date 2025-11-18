@@ -1,7 +1,29 @@
 import { useState } from 'react';
 
-// Simula productos usando la misma estructura que index.js
-const initialProducts = [
+interface AdminProduct {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  stock: number;
+}
+
+interface Order {
+  id: number;
+  customer: string;
+  total: number;
+  status: 'Pending' | 'Shipped' | 'Delivered';
+}
+
+interface Customer {
+  id: number;
+  name: string;
+  email: string;
+  orders: number;
+}
+
+// Simula productos usando la misma estructura que index.tsx
+const initialProducts: AdminProduct[] = [
   { id: 1, name: 'PR-24 Tonfa Profesional', price: 45.0, category: 'defense', stock: 10 },
   { id: 2, name: 'Arma de Salva Calibre 9mm', price: 150.0, category: 'defense', stock: 5 },
   { id: 3, name: 'Pistola de Balines 4.5mm', price: 85.0, category: 'defense', stock: 8 },
@@ -11,21 +33,22 @@ const initialProducts = [
 ];
 
 export default function AdminPanel() {
-  const [products, setProducts] = useState(initialProducts);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [products, setProducts] = useState<AdminProduct[]>(initialProducts);
+  const [selectedProduct, setSelectedProduct] = useState<AdminProduct | null>(null);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  
   // Demo data for orders and customers
-  const orders = [
+  const orders: Order[] = [
     { id: 101, customer: 'Juan Perez', total: 320, status: 'Pending' },
     { id: 102, customer: 'Ana Gomez', total: 85, status: 'Shipped' },
   ];
-  const customers = [
+  const customers: Customer[] = [
     { id: 1, name: 'Juan Perez', email: 'juan@example.com', orders: 2 },
     { id: 2, name: 'Ana Gomez', email: 'ana@example.com', orders: 1 },
   ];
 
   // Maqueta: solo muestra y elimina productos
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     setProducts(products.filter(p => p.id !== id));
   };
 

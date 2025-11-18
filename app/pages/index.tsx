@@ -1,8 +1,17 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 
-const products = [
+interface Product {
+  id: number;
+  name: string;
+  category: 'defense' | 'tactical' | 'protection' | 'optics' | 'accessories' | 'clothing' | 'outdoor';
+  price: number;
+  icon: string;
+  description: string;
+  badge: 'new' | 'popular' | null;
+}
+
+const products: Product[] = [
 	// DEFENSA PERSONAL
 	{
 		id: 1,
@@ -474,19 +483,18 @@ const categories = [
 ];
 
 export default function Home() {
-	const [selectedCategory, setSelectedCategory] = useState('all');
-	const [cart, setCart] = useState([]);
-	const [showCart, setShowCart] = useState(false);
-	const [showLogin, setShowLogin] = useState(false);
-	const [user, setUser] = useState(null); // null if not logged in
-	const productsRef = useRef(null);
+	const [selectedCategory, setSelectedCategory] = useState<string>('all');
+	const [cart, setCart] = useState<(Product & { quantity: number })[]>([]);
+	const [showCart, setShowCart] = useState<boolean>(false);
+	const [showLogin, setShowLogin] = useState<boolean>(false);
+	const productsRef = useRef<HTMLDivElement>(null);
 
-	const filteredProducts =
+	const filteredProducts: Product[] =
 		selectedCategory === 'all'
 			? products
 			: products.filter((p) => p.category === selectedCategory);
 
-	const addToCart = (product) => {
+	const addToCart = (product: Product) => {
 		setCart((prev) => {
 			const exists = prev.find((item) => item.id === product.id);
 			if (exists) {
@@ -501,11 +509,11 @@ export default function Home() {
 		});
 	};
 
-	const removeFromCart = (productId) => {
+	const removeFromCart = (productId: number) => {
 		setCart((prev) => prev.filter((item) => item.id !== productId));
 	};
 
-	const updateQuantity = (productId, change) => {
+	const updateQuantity = (productId: number, change: number) => {
 		setCart((prev) =>
 			prev
 				.map((item) =>
@@ -524,7 +532,7 @@ export default function Home() {
 	);
 
 	// Función para filtrar y hacer scroll al catálogo
-	const handleCategoryClick = (catKey) => {
+	const handleCategoryClick = (catKey: string) => {
 		setSelectedCategory(catKey);
 		setTimeout(() => {
 			if (productsRef.current) {
@@ -1089,7 +1097,7 @@ export default function Home() {
 								&times;
 							</button>
 							<h2>Customer Login</h2>
-							<LoginModalContent setUser={setUser} />
+							<LoginModalContent />
 						</div>
 					</div>
 				)}
@@ -1115,15 +1123,15 @@ export default function Home() {
 }
 
 // Modularize login modal content for reuse
-function LoginModalContent({ setUser }) {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [otp, setOtp] = useState('');
-	const [error, setError] = useState('');
-	const [showOtp, setShowOtp] = useState(false);
-	const [showQr, setShowQr] = useState(false);
+function LoginModalContent() {
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [otp, setOtp] = useState<string>('');
+	const [error, setError] = useState<string>('');
+	const [showOtp, setShowOtp] = useState<boolean>(false);
+	const [showQr, setShowQr] = useState<boolean>(false);
 
-	const handleLoginSubmit = (e) => {
+	const handleLoginSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!email || !password) {
 			setError('Please enter both email and password.');
@@ -1133,7 +1141,7 @@ function LoginModalContent({ setUser }) {
 		setShowOtp(true);
 	};
 
-	const handleOtpSubmit = (e) => {
+	const handleOtpSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!otp) {
 			setError('Please enter the OTP code.');
@@ -1141,7 +1149,6 @@ function LoginModalContent({ setUser }) {
 		}
 		setError('');
 		// Simulate login for demo
-		setUser({ name: email.split('@')[0] });
 		alert('OTP submitted! (Demo only)');
 	};
 
