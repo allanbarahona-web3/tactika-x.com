@@ -1,0 +1,283 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========================================
+// ENUMS
+// ========================================
+
+enum TenantStatus {
+  active
+  suspended
+  trial
+  cancelled
+}
+
+enum BillingStatus {
+  ok
+  past_due
+  unpaid
+}
+
+enum TenantUserRole {
+  owner
+  manager
+  staff
+}
+
+enum UserStatus {
+  active
+  inactive
+  suspended
+}
+
+enum ProductKind {
+  physical
+  digital
+}
+
+enum OrderStatus {
+  pending
+  paid
+  shipped
+  delivered
+  cancelled
+  refunded
+}
+
+enum PaymentStatus {
+  pending
+  authorized
+  paid
+  failed
+  refunded
+}
+
+enum PaymentProvider {
+  stripe
+  paypal
+  manual
+}
+
+// ========================================
+// TENANT (Base del multi-tenant)
+// ========================================
+
+model Tenant {
+  id            Int           @id @default(autoincrement())
+  name          String
+  slug          String        @unique
+  status        TenantStatus  @default(active)
+  billingStatus BillingStatus @default(ok)
+  industry      String?
+  config        Json?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relaciones
+  tenantUsers TenantUser[]
+  customers   Customer[]
+  products    Product[]
+  orders      Order[]
+  orderItems  OrderItem[]
+  payments    Payment[]
+  sessions    AuthSession[]
+
+  @@map("tenants")
+}
+
+// ========================================
+// USUARIOS INTERNOS DE LA TIENDA
+// ========================================
+
+model TenantUser {
+  id           String         @id @default(uuid())
+  tenantId     Int
+  email        String
+  passwordHash String
+  name         String
+  role         TenantUserRole @default(staff)
+  status       UserStatus     @default(active)
+  tokenVersion Int            @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  // Relaciones
+  tenant   Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  sessions AuthSession[]
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@map("tenant_users")
+}
+
+// ========================================
+// CLIENTES FINALES DE LA TIENDA
+// ========================================
+
+model Customer {
+  id        String     @id @default(uuid())
+  tenantId  Int
+  email     String
+  name      String
+  phone     String?
+  status    UserStatus @default(active)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  // Relaciones
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@map("customers")
+}
+
+// ========================================
+// PRODUCTOS
+// ========================================
+
+model Product {
+  id          String      @id @default(uuid())
+  tenantId    Int
+  name        String
+  slug        String
+  description String?
+  productKind ProductKind @default(physical)
+  isActive    Boolean     @default(true)
+  price       Int
+  currency    String      @default("USD")
+  stock       Int         @default(0)
+  metadata    Json?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relaciones
+  tenant     Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@map("products")
+}
+
+// ========================================
+// ÓRDENES
+// ========================================
+
+model Order {
+  id             String      @id @default(uuid())
+  tenantId       Int
+  orderNumber    String
+  customerId     String?
+  status         OrderStatus @default(pending)
+  subtotalAmount Int
+  taxAmount      Int         @default(0)
+  shippingAmount Int         @default(0)
+  discountAmount Int         @default(0)
+  totalAmount    Int
+  currency       String      @default("USD")
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  // Relaciones
+  tenant   Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customer Customer?   @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  items    OrderItem[]
+  payments Payment[]
+
+  @@unique([tenantId, orderNumber])
+  @@index([tenantId])
+  @@index([customerId])
+  @@map("orders")
+}
+
+// ========================================
+// ÍTEMS DE ORDEN
+// ========================================
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  tenantId   Int
+  orderId    String
+  productId  String
+  quantity   Int
+  unitPrice  Int
+  totalPrice Int
+  createdAt  DateTime @default(now())
+
+  // Relaciones
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ========================================
+// PAGOS
+// ========================================
+
+model Payment {
+  id                 String          @id @default(uuid())
+  tenantId           Int
+  orderId            String
+  status             PaymentStatus   @default(pending)
+  amount             Int
+  currency           String          @default("USD")
+  provider           PaymentProvider @default(manual)
+  providerPaymentId  String?
+  idempotencyKey     String
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  // Relaciones
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, idempotencyKey])
+  @@index([tenantId])
+  @@index([orderId])
+  @@map("payments")
+}
+
+// ========================================
+// SESIONES Y TOKENS (para ACID)
+// ========================================
+
+model AuthSession {
+  id               String   @id @default(uuid())
+  userId           String
+  tenantId         Int
+  jti              String   @unique
+  refreshToken     String   @unique
+  accessTokenJti   String?
+  isRevoked        Boolean  @default(false)
+  ipAddress        String?
+  userAgent        String?
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  lastUsedAt       DateTime @default(now())
+
+  // Relaciones
+  tenant Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   TenantUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tenantId])
+  @@index([jti])
+  @@index([expiresAt])
+  @@map("auth_sessions")
+}
