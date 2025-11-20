@@ -63,7 +63,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
    * 
    * TODO: Implementar cuando se activen las políticas RLS en PostgreSQL
    * Pasos pendientes:
-   * 1. Crear políticas RLS en cada tabla con: WHERE tenant_id = current_setting('app.tenant_id')::bigint
+   * 1. Crear políticas RLS en cada tabla con: WHERE tenant_id = current_setting('app.tenant_id')::integer
    * 2. Habilitar RLS: ALTER TABLE <table> ENABLE ROW LEVEL SECURITY;
    * 3. Descomentar el código de set_config abajo
    * 
