@@ -1,5 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -19,6 +20,16 @@ import { TenantContextMiddleware } from './common/middleware/tenant-context.midd
       isGlobal: true,
       envFilePath: '.env',
     }),
+
+    // 🚨 Rate Limiting / Throttling
+    // Global rate limit: 100 requests per 60 seconds
+    // Can be overridden per endpoint with @Throttle() decorator
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,    // Time window in milliseconds (60 seconds)
+        limit: 100,    // Max requests per window
+      },
+    ]),
     
     // Prisma para acceso a base de datos
     PrismaModule,
