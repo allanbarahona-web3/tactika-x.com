@@ -28,15 +28,31 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@/src/*": [
+        "./src/*"
+      ],
+      "@/themes/*": [
+        "./src/themes/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
       ]
     },
     "allowJs": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

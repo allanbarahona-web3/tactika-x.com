@@ -1,0 +1,86 @@
+'use client';
+
+export default function PlatformPage() {
+  return (
+    <div className="platform-landing">
+      <header className="platform-header">
+        <div className="container">
+          <div className="platform-nav">
+            <div className="platform-logo">
+              <h1>TactikaX Platform</h1>
+              <span>Multi-Tenant eCommerce</span>
+            </div>
+            <nav>
+              <a href="#features">Features</a>
+              <a href="/pricing">Pricing</a>
+              <a href="/login">Login</a>
+              <a href="/register" className="btn btn-primary">Start Free Trial</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <section className="platform-hero">
+        <div className="container">
+          <h2>Launch Your Online Store in Minutes</h2>
+          <p>
+            Create a professional multi-tenant eCommerce platform with custom domains,
+            themes, and full backend integration.
+          </p>
+          <div className="platform-cta">
+            <a href="/register" className="btn btn-primary btn-lg">
+              Get Started Free
+            </a>
+            <a href="#demo" className="btn btn-secondary btn-lg">
+              Watch Demo
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="platform-features">
+        <div className="container">
+          <h3>Why Choose TactikaX?</h3>
+          <div className="features-grid">
+            <div className="feature">
+              <div className="feature-icon">🏪</div>
+              <h4>Multi-Tenant Architecture</h4>
+              <p>Each store gets its own domain, branding, and isolated data.</p>
+            </div>
+            <div className="feature">
+              <div className="feature-icon">🎨</div>
+              <h4>Custom Themes</h4>
+              <p>Choose from pre-built themes or create your own custom design.</p>
+            </div>
+            <div className="feature">
+              <div className="feature-icon">🔒</div>
+              <h4>Secure & Scalable</h4>
+              <p>Built with Next.js 16, NestJS, and PostgreSQL with RLS.</p>
+            </div>
+            <div className="feature">
+              <div className="feature-icon">⚡</div>
+              <h4>Lightning Fast</h4>
+              <p>App Router, Server Components, and Turbopack for optimal performance.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="platform-cta-section">
+        <div className="container">
+          <h3>Ready to Build Your Store?</h3>
+          <p>Join hundreds of merchants already selling online with TactikaX</p>
+          <a href="/register" className="btn btn-primary btn-lg">
+            Start Your Free Trial
+          </a>
+        </div>
+      </section>
+
+      <footer className="platform-footer">
+        <div className="container">
+          <p>&copy; 2025 TactikaX Platform. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
