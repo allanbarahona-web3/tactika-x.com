@@ -9,7 +9,7 @@ import { randomUUID } from 'crypto';
 
 export interface JwtPayload {
   sub: string; // userId
-  tenantId: string;
+  tenantId: number; // Integer ID del tenant (no convertir a string)
   role: string;
   jti: string; // JWT ID para revocación
 }
@@ -136,7 +136,7 @@ export class AuthService {
       const jti = randomUUID();
       const newPayload: JwtPayload = {
         sub: user.id,
-        tenantId: user.tenantId.toString(),
+        tenantId: user.tenantId,
         role: user.role,
         jti,
       };
@@ -178,7 +178,7 @@ export class AuthService {
     const jti = randomUUID();
     const payload: JwtPayload = {
       sub: user.id,
-      tenantId: user.tenantId.toString(),
+      tenantId: user.tenantId,
       role: user.role,
       jti,
     };

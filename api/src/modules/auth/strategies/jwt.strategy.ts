@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return {
       userId: user.id,
       email: user.email,
-      tenantId: user.tenantId.toString(),
+      tenantId: user.tenantId, // Ya es number, no convertir a string
       role: user.role,
       jti: payload.jti,
     };
