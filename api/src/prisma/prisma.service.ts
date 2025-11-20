@@ -48,7 +48,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
    * 
    * Cuando se active RLS en producción, este método:
    * 1. Iniciará una transacción
-   * 2. Ejecutará: SELECT set_config('app.tenant_id', $tenantId, true)
+   * 2. Ejecutará: SELECT set_config('app.tenant_id', $tenantId::text, false)
    * 3. Ejecutará el callback con las queries dentro de la transacción
    * 4. Las políticas RLS en PostgreSQL filtrarán automáticamente por app.tenant_id
    * 
@@ -61,33 +61,23 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
    * });
    * ```
    * 
-   * TODO: Implementar cuando se activen las políticas RLS en PostgreSQL
-   * Pasos pendientes:
-   * 1. Crear políticas RLS en cada tabla con: WHERE tenant_id = current_setting('app.tenant_id')::integer
-   * 2. Habilitar RLS: ALTER TABLE <table> ENABLE ROW LEVEL SECURITY;
-   * 3. Descomentar el código de set_config abajo
+   * RLS está activado en PostgreSQL con políticas que usan:
+   * WHERE "tenantId" = current_setting('app.tenant_id')::int
    * 
-   * @param tenantId - El ID del tenant para filtrar datos
+   * @param tenantId - El ID del tenant para filtrar datos (tipo number/integer)
    * @param callback - Función que ejecuta queries dentro del contexto del tenant
    */
   async withTenant<T>(tenantId: number, callback: (prisma: PrismaClient) => Promise<T>): Promise<T> {
-    // Por ahora solo ejecutamos el callback sin RLS
-    // Más adelante, cuando activemos RLS:
-    
-    /*
     return this.$transaction(async (tx) => {
       // Configurar app.tenant_id para RLS
+      // set_config requiere el valor como string, pero PostgreSQL lo convierte a integer en las políticas
       await tx.$executeRawUnsafe(
-        `SELECT set_config('app.tenant_id', $1, true)`,
-        tenantId.toString()
+        `SELECT set_config('app.tenant_id', $1::text, false)`,
+        String(tenantId),
       );
       
-      // Ejecutar queries del callback
+      // Ejecutar queries del callback - automáticamente filtradas por RLS
       return callback(tx as PrismaClient);
     });
-    */
-    
-    // Versión actual sin RLS (manual filtering)
-    return callback(this);
   }
 }
