@@ -11,6 +11,8 @@ import { TenantUsersModule } from './modules/tenant-users/tenant-users.module';
 import { ProductsModule } from './modules/products/products.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PaymentsModule } from './modules/payments/payments.module';
+import { TenantDomainsModule } from './modules/tenant-domains/tenant-domains.module';
+import { HostExtractionMiddleware } from './common/middleware/host-extraction.middleware';
 import { TenantContextMiddleware } from './common/middleware/tenant-context.middleware';
 
 @Module({
@@ -44,6 +46,7 @@ import { TenantContextMiddleware } from './common/middleware/tenant-context.midd
     ProductsModule,
     OrdersModule,
     PaymentsModule,
+    TenantDomainsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -51,7 +54,12 @@ import { TenantContextMiddleware } from './common/middleware/tenant-context.midd
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
+      // 1️⃣ First: Extract tenantId from domain
+      .apply(HostExtractionMiddleware)
+      .forRoutes('*')
+      
+      // 2️⃣ Second: Set tenant context for RLS
       .apply(TenantContextMiddleware)
-      .forRoutes('*'); // Apply to all routes
+      .forRoutes('*');
   }
 }

@@ -1,7 +1,7 @@
 -- Enable Row Level Security (RLS) on all tables
 -- Run this script after prisma db push to secure the multi-tenant setup
 
--- 1. Enable RLS on all tables
+-- Enable RLS on all tables
 ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
 ALTER TABLE tenant_users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE customers ENABLE ROW LEVEL SECURITY;
@@ -10,6 +10,7 @@ ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE auth_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tenant_domains ENABLE ROW LEVEL SECURITY;
 
 -- 2. Create policies for tenants table
 -- Tenants can only see their own record
@@ -127,6 +128,24 @@ CREATE POLICY "Sessions can update in own tenant" ON auth_sessions
   USING ("tenantId" = current_setting('app.tenant_id')::int);
 
 CREATE POLICY "Sessions can delete in own tenant" ON auth_sessions
+  FOR DELETE
+  USING ("tenantId" = current_setting('app.tenant_id')::int);
+
+-- 9. Create policies for tenant_domains table
+-- Users can only see domains from their tenant
+CREATE POLICY "Domains see own tenant domains" ON tenant_domains
+  FOR SELECT
+  USING ("tenantId" = current_setting('app.tenant_id')::int);
+
+CREATE POLICY "Domains can create in own tenant" ON tenant_domains
+  FOR INSERT
+  WITH CHECK ("tenantId" = current_setting('app.tenant_id')::int);
+
+CREATE POLICY "Domains can update in own tenant" ON tenant_domains
+  FOR UPDATE
+  USING ("tenantId" = current_setting('app.tenant_id')::int);
+
+CREATE POLICY "Domains can delete in own tenant" ON tenant_domains
   FOR DELETE
   USING ("tenantId" = current_setting('app.tenant_id')::int);
 
