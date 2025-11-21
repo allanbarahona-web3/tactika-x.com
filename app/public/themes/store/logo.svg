@@ -1,0 +1,16 @@
+<svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="storeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Logo mark (S) -->
+  <rect x="8" y="8" width="34" height="34" rx="8" fill="url(#storeGradient)"/>
+  <text x="25" y="38" font-size="24" font-weight="900" fill="white" text-anchor="middle" font-family="'Space Grotesk', sans-serif">S</text>
+  
+  <!-- Logo text -->
+  <text x="52" y="33" font-size="20" font-weight="800" fill="#0F172A" font-family="'Space Grotesk', sans-serif">TechStore</text>
+</svg>

@@ -54,10 +54,16 @@ export function Header() {
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-[1000]">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="flex items-center justify-between py-5">
+          <div className="flex items-center justify-between py-3">
             {/* Logo */}
-            <a href="#" className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-display tracking-tight">
-              Barmentech
+            <a href="#" className="flex items-center">
+              <img 
+                src="/themes/barmentech/logo.svg" 
+                alt="Barmentech" 
+                width={180}
+                height={45}
+                className="h-12 w-auto"
+              />
             </a>
 
             {/* Navigation */}
