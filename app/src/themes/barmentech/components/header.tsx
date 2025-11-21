@@ -1,29 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Header() {
-  const [language, setLanguage] = useState<'es' | 'en'>('es');
-
-  const translations = {
-    es: {
-      templates: 'Plantillas',
-      pricing: 'Precios',
-      features: 'Características',
-      faq: 'FAQ',
-      cta: 'Empezar Gratis'
-    },
-    en: {
-      templates: 'Templates',
-      pricing: 'Pricing',
-      features: 'Features',
-      faq: 'FAQ',
-      cta: 'Start Free Trial'
-    }
-  };
-
-  const t = translations[language];
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <>

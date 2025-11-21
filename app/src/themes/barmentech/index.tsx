@@ -7,18 +7,21 @@ import { Features } from './components/features';
 import { Testimonials } from './components/testimonials';
 import { FAQ } from './components/faq';
 import { Footer } from './components/footer';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function BarmentechPage() {
   return (
-    <main className="min-h-screen">
-      <Header />
-      <Hero />
-      <Templates />
-      <Pricing />
-      <Features />
-      <Testimonials />
-      <FAQ />
-      <Footer />
-    </main>
+    <LanguageProvider>
+      <main className="min-h-screen">
+        <Header />
+        <Hero />
+        <Templates />
+        <Pricing />
+        <Features />
+        <Testimonials />
+        <FAQ />
+        <Footer />
+      </main>
+    </LanguageProvider>
   );
 }

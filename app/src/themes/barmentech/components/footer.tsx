@@ -1,10 +1,6 @@
 'use client';
 
-import { barmentechConfig } from '../theme.config';
-
 export function Footer() {
-  const colors = barmentechConfig.colors;
-
   return (
     <footer className="bg-slate-900 text-white" style={{ backgroundColor: '#0F172A' }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -13,8 +9,7 @@ export function Footer() {
           {/* About */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold"
-                style={{ backgroundColor: colors.primary }}>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-gradient-to-r from-blue-600 to-purple-600">
                 B
               </div>
               <span className="font-bold text-lg">Barmentech</span>

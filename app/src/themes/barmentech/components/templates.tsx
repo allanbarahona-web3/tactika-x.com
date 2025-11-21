@@ -1,9 +1,44 @@
 'use client';
 
-import { barmentechConfig } from '../theme.config';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Templates() {
-  const config = barmentechConfig.content;
+  const { t } = useLanguage();
+
+  const templates = [
+    {
+      id: 'amazon',
+      emoji: '🛒',
+      badge: 'Popular',
+      title: t.amazon,
+      description: t.amazonDesc,
+      tags: ['Responsive', 'Fast', 'SEO Ready']
+    },
+    {
+      id: 'minimal',
+      emoji: '⚡',
+      badge: 'Modern',
+      title: t.minimal,
+      description: t.minimalDesc,
+      tags: ['Minimal', 'Clean', 'Elegant']
+    },
+    {
+      id: 'vibrant',
+      emoji: '🎨',
+      badge: 'Trending',
+      title: t.vibrant,
+      description: t.vibrantDesc,
+      tags: ['Bold', 'Creative', 'Eye-catching']
+    },
+    {
+      id: 'digital',
+      emoji: '💻',
+      badge: 'New',
+      title: t.digital,
+      description: t.digitalDesc,
+      tags: ['Digital', 'Downloads', 'Courses']
+    },
+  ];
 
   const gradients = {
     amazon: 'from-amber-500 to-slate-900',
@@ -17,15 +52,15 @@ export function Templates() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold mb-4">Pick Your Perfect Template</h2>
+          <h2 className="text-5xl font-bold mb-4">{t.browseTemplates}</h2>
           <p className="text-xl text-slate-600">
-            Professional designs ready to launch. Every template is fully customizable with your logo, colors and brand.
+            {t.templateSubtitle}
           </p>
         </div>
 
         {/* Templates Grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {config.templates.map((template) => (
+          {templates.map((template) => (
             <div
               key={template.id}
               className="border-2 border-slate-200 rounded-2xl overflow-hidden hover:border-purple-500 hover:-translate-y-2 transition-all"
@@ -55,23 +90,12 @@ export function Templates() {
                 </div>
 
                 {/* Demo Link */}
-                <button className="w-full py-2 rounded-lg font-semibold transition"
-                  style={{
-                    backgroundColor: barmentechConfig.colors.primary,
-                    color: 'white'
-                  }}>
+                <button className="w-full py-2 rounded-lg font-semibold transition bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                   👁️ View Live Demo
                 </button>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Note */}
-        <div className="text-center mt-12">
-          <p className="text-slate-600">
-            All templates are fully responsive and customizable. Change colors, fonts and layout to match your brand.
-          </p>
         </div>
       </div>
     </section>

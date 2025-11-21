@@ -1,33 +1,77 @@
 'use client';
 
-import { barmentechConfig } from '../theme.config';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Pricing() {
-  const config = barmentechConfig.content;
+  const { t } = useLanguage();
+
+  const plans = [
+    {
+      id: 'starter',
+      name: t.starter,
+      price: 24.99,
+      description: t.starterDesc,
+      featured: false,
+      features: [
+        { name: 'Up to 50 products', included: true },
+        { name: 'Basic analytics', included: true },
+        { name: 'Email support', included: true },
+        { name: 'Custom domain', included: false },
+        { name: 'API access', included: false },
+      ]
+    },
+    {
+      id: 'professional',
+      name: t.professional,
+      price: 44.99,
+      description: t.professionalDesc,
+      featured: true,
+      features: [
+        { name: 'Unlimited products', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: 'Priority support', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'API access', included: false },
+      ]
+    },
+    {
+      id: 'enterprise',
+      name: t.enterprise,
+      price: 79.95,
+      description: t.enterpriseDesc,
+      featured: false,
+      features: [
+        { name: 'Unlimited products', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: '24/7 support', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'API access', included: true },
+      ]
+    },
+  ];
 
   return (
     <section id="pricing" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
+          <h2 className="text-5xl font-bold mb-4">{t.pricingTitle}</h2>
           <p className="text-xl text-slate-600">
-            Start free, upgrade as you grow. No hidden fees. Cancel anytime.
+            {t.pricingSubtitle}
           </p>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8">
-          {config.pricing.map((plan) => (
+          {plans.map((plan) => (
             <div
               key={plan.id}
               className={`rounded-2xl p-8 transition-all ${
                 plan.featured
-                  ? 'border-2 -translate-y-4 shadow-2xl'
+                  ? 'border-2 -translate-y-4 shadow-2xl border-blue-600'
                   : 'border-2 border-slate-200'
               }`}
               style={plan.featured ? {
-                borderColor: barmentechConfig.colors.primary,
                 backgroundColor: 'white'
               } : {
                 backgroundColor: 'white'
@@ -35,8 +79,7 @@ export function Pricing() {
             >
               {/* Badge */}
               {plan.featured && (
-                <div className="mb-4 inline-block px-4 py-1 rounded-full text-sm font-bold"
-                  style={{ backgroundColor: barmentechConfig.colors.secondary, color: 'white' }}>
+                <div className="mb-4 inline-block px-4 py-1 rounded-full text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                   Most Popular
                 </div>
               )}
@@ -53,10 +96,9 @@ export function Pricing() {
 
               {/* CTA Button */}
               <button
-                className="w-full py-3 rounded-lg font-semibold text-white transition hover:shadow-lg mb-8"
-                style={{ backgroundColor: barmentechConfig.colors.primary }}
+                className="w-full py-3 rounded-lg font-semibold text-white transition hover:shadow-lg mb-8 bg-gradient-to-r from-blue-600 to-purple-600"
               >
-                Start Free Trial
+                {t.cta}
               </button>
 
               {/* Features */}
