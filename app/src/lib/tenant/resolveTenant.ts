@@ -30,7 +30,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
     const tenantMap: Record<string, TenantInfo> = {
       // DESARROLLO
       'localhost:3000': {
-        id: 'tenant-1',
+        id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'localhost:3000',
         theme: 'armas',
@@ -39,7 +39,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       'commerce.localhost:3000': {
-        id: 'tenant-0',
+        id: 'tenant-1',
         name: 'Barmentech Commerce',
         domain: 'commerce.localhost:3000',
         theme: 'barmentech',
@@ -48,9 +48,9 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       
-      // PRODUCCIÓN - TACTIKA-X
+      // PRODUCCIÓN - TENANT 2: TACTIKA-X
       'tactika-x.com': {
-        id: 'tenant-1',
+        id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'tactika-x.com',
         theme: 'armas',
@@ -59,7 +59,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       'tactika-x-app.vercel.app': {
-        id: 'tenant-1',
+        id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'tactika-x-app.vercel.app',
         theme: 'armas',
@@ -68,9 +68,9 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       
-      // PRODUCCIÓN - BARMENTECH COMMERCE
+      // PRODUCCIÓN - TENANT 1: BARMENTECH COMMERCE
       'commerce.barmentech.com': {
-        id: 'tenant-0',
+        id: 'tenant-1',
         name: 'Barmentech Commerce',
         domain: 'commerce.barmentech.com',
         theme: 'barmentech',
@@ -79,7 +79,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       'barmentech-saas.vercel.app': {
-        id: 'tenant-0',
+        id: 'tenant-1',
         name: 'Barmentech Commerce',
         domain: 'barmentech-saas.vercel.app',
         theme: 'barmentech',
@@ -88,9 +88,9 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         },
       },
       
-      // PRODUCCIÓN - STORE TECH
+      // FUTURO - TENANT 3: STORE TECH
       'store.barmentech.com': {
-        id: 'tenant-2',
+        id: 'tenant-3',
         name: 'TechStore',
         domain: 'store.barmentech.com',
         theme: 'store',
@@ -118,8 +118,8 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
       if (tenant) return tenant;
     }
 
-    // Default: TACTIKA-X
-    return tenantMap['localhost:3000'];
+    // Default: BARMENTECH (TENANT 1)
+    return tenantMap['commerce.localhost:3000'] || tenantMap['commerce.barmentech.com'];
   } catch (error) {
     console.error('Error resolving tenant:', error);
     return null;
