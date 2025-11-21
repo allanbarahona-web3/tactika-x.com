@@ -20,6 +20,16 @@ const config: Config = {
         display: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
+        'gradient-hero': 'linear-gradient(135deg, #667EEA 0%, #764BA2 50%, #F093FB 100%)',
+      },
+      boxShadow: {
+        'sm': '0 2px 8px rgba(0, 0, 0, 0.1)',
+        'md': '0 4px 16px rgba(0, 0, 0, 0.15)',
+        'lg': '0 10px 40px rgba(0, 0, 0, 0.2)',
+        'xl': '0 20px 60px rgba(0, 0, 0, 0.3)',
+      },
     },
   },
   plugins: [],
