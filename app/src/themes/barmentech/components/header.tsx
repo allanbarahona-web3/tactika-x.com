@@ -58,11 +58,11 @@ export function Header() {
             {/* Logo */}
             <a href="#" className="flex items-center">
               <img 
-                src="/themes/barmentech/logo.svg" 
+                src="/themes/barmentech/logo_barmentech.png" 
                 alt="Barmentech" 
-                width={180}
-                height={45}
-                className="h-12 w-auto"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
               />
             </a>
 
