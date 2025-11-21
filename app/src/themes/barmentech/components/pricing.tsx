@@ -66,10 +66,10 @@ export function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`rounded-2xl p-8 transition-all ${
+              className={`rounded-2xl p-8 transition-all duration-300 cursor-pointer hover:shadow-2xl ${
                 plan.featured
-                  ? 'border-2 -translate-y-4 shadow-2xl border-blue-600'
-                  : 'border-2 border-slate-200'
+                  ? 'border-2 -translate-y-4 shadow-2xl border-blue-600 hover:-translate-y-6'
+                  : 'border-2 border-slate-200 hover:border-blue-600 hover:-translate-y-2'
               }`}
               style={plan.featured ? {
                 backgroundColor: 'white'
@@ -96,7 +96,7 @@ export function Pricing() {
 
               {/* CTA Button */}
               <button
-                className="w-full py-3 rounded-lg font-semibold text-white transition hover:shadow-lg mb-8 bg-gradient-to-r from-blue-600 to-purple-600"
+                className="w-full py-3 rounded-lg font-semibold text-white transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 mb-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
                 {t.cta}
               </button>

@@ -60,7 +60,7 @@ export function Footer() {
         {/* Divider */}
         <div className="border-t border-slate-700 pt-8">
           <p className="text-center text-slate-400 text-sm">
-            © {new Date().getFullYear()} Barmentech. {t.footerCopyright}.
+            © {new Date().getFullYear()} Barmentech Web Design. {t.footerCopyright}.
           </p>
         </div>
       </div>
