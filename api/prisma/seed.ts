@@ -12,9 +12,13 @@ async function main() {
   await prisma.order.deleteMany();
   await prisma.product.deleteMany();
   await prisma.customer.deleteMany();
+  await prisma.tenantDomain.deleteMany();
   await prisma.authSession.deleteMany();
   await prisma.tenantUser.deleteMany();
   await prisma.tenant.deleteMany();
+
+  // Resetear secuencias de autoincrement
+  await prisma.$executeRaw`ALTER SEQUENCE tenants_id_seq RESTART WITH 1`;
 
   // Crear tenants de ejemplo
   const tenant1 = await prisma.tenant.create({

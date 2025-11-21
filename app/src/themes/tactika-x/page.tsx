@@ -5,14 +5,14 @@ import { Product, categories, products } from '@/src/lib/api/data/products';
 import LoginModalContent from '@/src/components/auth/LoginModalContent';
 
 import {
-  ArmasHeader,
-  ArmasFooter,
-  ArmasHero,
-  ArmasProductCard,
-  armasThemeConfig,
+  TactikaXHeader,
+  TactikaXFooter,
+  TactikaXHero,
+  TactikaXProductCard,
+  tactikaXThemeConfig,
 } from './index';
 
-export default function ArmasPage() {
+export default function TactikaXPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [cart, setCart] = useState<(Product & { quantity: number })[]>([]);
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -73,7 +73,7 @@ export default function ArmasPage() {
   return (
     <>
       <main>
-        <ArmasHeader
+        <TactikaXHeader
           cartCount={cartCount}
           onCartClick={() => setShowCart(true)}
           onLoginClick={() => setShowLogin(true)}
@@ -98,12 +98,12 @@ export default function ArmasPage() {
           </div>
         </nav>
 
-        <ArmasHero onCategoryClick={handleCategoryClick} />
+        <TactikaXHero onCategoryClick={handleCategoryClick} />
 
         <section className="features">
           <div className="container">
             <div className="features-grid">
-              {armasThemeConfig.features.map((feature, index) => (
+              {tactikaXThemeConfig.features.map((feature, index) => (
                 <div className="feature-card" key={index}>
                   <div className="feature-icon">{feature.icon}</div>
                   <h3>{feature.title}</h3>
@@ -161,7 +161,7 @@ export default function ArmasPage() {
                 <p className="no-results">No se encontraron productos.</p>
               ) : (
                 filteredProducts.map((product) => (
-                  <ArmasProductCard
+                  <TactikaXProductCard
                     key={product.id}
                     product={product}
                     onAddToCart={addToCart}
@@ -176,7 +176,7 @@ export default function ArmasPage() {
           </div>
         </section>
 
-        <ArmasFooter />
+        <TactikaXFooter />
 
         {showCart && (
           <div className="modal" style={{ display: 'block' }}>
@@ -285,7 +285,7 @@ export default function ArmasPage() {
       </main>
 
       <a
-        href={`https://wa.me/${armasThemeConfig.contact.whatsapp}?text=Hola%20quiero%20información%20de%20productos%20TACTIKA-X`}
+        href={`https://wa.me/${tactikaXThemeConfig.contact.whatsapp}?text=Hola%20quiero%20información%20de%20productos%20TACTIKA-X`}
         className="whatsapp-float whatsapp-bounce"
         target="_blank"
         rel="noopener noreferrer"

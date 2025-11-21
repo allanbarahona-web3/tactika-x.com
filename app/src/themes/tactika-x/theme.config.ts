@@ -1,11 +1,11 @@
 /**
- * THEME CONFIG: ARMAS / TACTICAL
+ * THEME CONFIG: TACTIKA-X / TACTICAL
  * Configuración visual y de marca para la tienda de equipamiento táctico
  */
 
-export const armasThemeConfig = {
+export const tactikaXThemeConfig = {
   // Identificación
-  id: 'armas',
+  id: 'tactika-x',
   name: 'TACTIKA-X',
   tagline: 'Equipamiento Profesional',
   
@@ -97,4 +97,4 @@ export const armasThemeConfig = {
   },
 } as const;
 
-export type ArmasThemeConfig = typeof armasThemeConfig;
+export type TactikaXThemeConfig = typeof tactikaXThemeConfig;

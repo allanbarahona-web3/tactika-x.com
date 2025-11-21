@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 // Importar componentes dinámicamente
-const ArmasPage = dynamic(() => import('@/src/themes/armas/page'), {
+const TactikaXPage = dynamic(() => import('@/src/themes/tactika-x/page'), {
   loading: () => <div>Loading...</div>,
 });
 
@@ -41,6 +41,6 @@ export default function StorefrontPage() {
     return <div>Store tenant coming soon...</div>;
   }
 
-  // Default: ARMAS
-  return <ArmasPage />;
+  // Default: TACTIKA-X
+  return <TactikaXPage />;
 }

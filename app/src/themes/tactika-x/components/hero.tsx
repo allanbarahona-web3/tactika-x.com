@@ -1,13 +1,13 @@
 'use client';
 
-import { armasThemeConfig } from '../theme.config';
+import { tactikaXThemeConfig } from '../theme.config';
 
 interface HeroProps {
   onCategoryClick?: (category: string) => void;
 }
 
-export function ArmasHero({}: HeroProps) {
-  const { hero } = armasThemeConfig;
+export function TactikaXHero({}: HeroProps) {
+  const { hero } = tactikaXThemeConfig;
 
   return (
     <section className="hero">

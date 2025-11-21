@@ -8,7 +8,7 @@ interface ProductCardProps {
   categoryLabel?: string;
 }
 
-export function ArmasProductCard({ product, onAddToCart, categoryLabel }: ProductCardProps) {
+export function TactikaXProductCard({ product, onAddToCart, categoryLabel }: ProductCardProps) {
   return (
     <div className="product-card">
       <div className="product-image">

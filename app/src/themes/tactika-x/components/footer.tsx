@@ -1,9 +1,9 @@
 'use client';
 
-import { armasThemeConfig } from '../theme.config';
+import { tactikaXThemeConfig } from '../theme.config';
 
-export function ArmasFooter() {
-  const { name, footer, contact, social } = armasThemeConfig;
+export function TactikaXFooter() {
+  const { name, footer, contact, social } = tactikaXThemeConfig;
 
   return (
     <footer>

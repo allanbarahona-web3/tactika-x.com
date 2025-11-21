@@ -1,6 +1,6 @@
 'use client';
 
-import { armasThemeConfig } from '../theme.config';
+import { tactikaXThemeConfig } from '../theme.config';
 
 interface HeaderProps {
   cartCount: number;
@@ -8,8 +8,8 @@ interface HeaderProps {
   onLoginClick: () => void;
 }
 
-export function ArmasHeader({ cartCount, onCartClick, onLoginClick }: HeaderProps) {
-  const { name, tagline, contact, social } = armasThemeConfig;
+export function TactikaXHeader({ cartCount, onCartClick, onLoginClick }: HeaderProps) {
+  const { name, tagline, contact, social } = tactikaXThemeConfig;
 
   return (
     <header>

@@ -7,7 +7,7 @@ export interface TenantInfo {
   id: string;
   name: string;
   domain: string;
-  theme: 'armas' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
+  theme: 'tactika-x' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
   config: {
     apiUrl: string;
     logoUrl?: string;
@@ -33,7 +33,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'localhost:3000',
-        theme: 'armas',
+        theme: 'tactika-x',
         config: {
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },
@@ -53,7 +53,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'tactika-x.com',
-        theme: 'armas',
+        theme: 'tactika-x',
         config: {
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },
@@ -62,7 +62,7 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
         id: 'tenant-2',
         name: 'TACTIKA-X',
         domain: 'tactika-x-app.vercel.app',
-        theme: 'armas',
+        theme: 'tactika-x',
         config: {
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },

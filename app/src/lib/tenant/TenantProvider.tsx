@@ -5,7 +5,7 @@ import { TenantInfo } from './resolveTenant';
 
 interface TenantContextType {
   tenant: TenantInfo | null;
-  theme: 'armas' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
+  theme: 'tactika-x' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
 }
 
 const TenantContext = createContext<TenantContextType | undefined>(undefined);
@@ -16,7 +16,7 @@ interface TenantProviderProps {
 }
 
 export function TenantProvider({ tenant, children }: TenantProviderProps) {
-  const theme = tenant?.theme || 'armas';
+  const theme = tenant?.theme || 'tactika-x';
 
   return (
     <TenantContext.Provider value={{ tenant, theme }}>
