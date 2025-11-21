@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 export function Pricing() {
   const { t } = useLanguage();
 
-  const plans = [
+  const getPlans = () => [
     {
       id: 'starter',
       name: t.starter,
@@ -13,11 +13,11 @@ export function Pricing() {
       description: t.starterDesc,
       featured: false,
       features: [
-        { name: 'Up to 50 products', included: true },
-        { name: 'Basic analytics', included: true },
-        { name: 'Email support', included: true },
-        { name: 'Custom domain', included: false },
-        { name: 'API access', included: false },
+        { name: t.featureUp50, included: true },
+        { name: t.featureBasicAnalytics, included: true },
+        { name: t.featureEmailSupport, included: true },
+        { name: t.featureCustomDomain, included: false },
+        { name: t.featureAPIAccess, included: false },
       ]
     },
     {
@@ -27,11 +27,11 @@ export function Pricing() {
       description: t.professionalDesc,
       featured: true,
       features: [
-        { name: 'Unlimited products', included: true },
-        { name: 'Advanced analytics', included: true },
-        { name: 'Priority support', included: true },
-        { name: 'Custom domain', included: true },
-        { name: 'API access', included: false },
+        { name: t.featureUnlimited, included: true },
+        { name: t.featureAdvancedAnalytics, included: true },
+        { name: t.featurePrioritySupport, included: true },
+        { name: t.featureCustomDomain, included: true },
+        { name: t.featureAPIAccess, included: false },
       ]
     },
     {
@@ -41,14 +41,16 @@ export function Pricing() {
       description: t.enterpriseDesc,
       featured: false,
       features: [
-        { name: 'Unlimited products', included: true },
-        { name: 'Advanced analytics', included: true },
-        { name: '24/7 support', included: true },
-        { name: 'Custom domain', included: true },
-        { name: 'API access', included: true },
+        { name: t.featureUnlimited, included: true },
+        { name: t.featureAdvancedAnalytics, included: true },
+        { name: t.feature247Support, included: true },
+        { name: t.featureCustomDomain, included: true },
+        { name: t.featureAPIAccess, included: true },
       ]
     },
   ];
+
+  const plans = getPlans();
 
   return (
     <section id="pricing" className="py-20 bg-slate-50">
