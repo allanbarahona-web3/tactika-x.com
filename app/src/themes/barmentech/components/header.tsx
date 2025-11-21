@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { barmentechConfig } from '../theme.config';
 
 export function Header() {
