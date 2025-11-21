@@ -52,7 +52,7 @@ export function Header() {
       </div>
 
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-[1000]">
+      <header className="!bg-white !shadow-sm sticky top-0 z-[1000]">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
@@ -68,17 +68,17 @@ export function Header() {
             </a>
 
             {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-9">
-              <a href="#templates" className="text-slate-600 font-semibold text-sm hover:text-blue-600 transition">
+            <nav className="!bg-transparent hidden md:flex items-center gap-9">
+              <a href="#templates" className="!text-slate-600 font-semibold text-sm hover:!text-blue-600 transition">
                 {t.templates}
               </a>
-              <a href="#pricing" className="text-slate-600 font-semibold text-sm hover:text-blue-600 transition">
+              <a href="#pricing" className="!text-slate-600 font-semibold text-sm hover:!text-blue-600 transition">
                 {t.pricing}
               </a>
-              <a href="#features" className="text-slate-600 font-semibold text-sm hover:text-blue-600 transition">
+              <a href="#features" className="!text-slate-600 font-semibold text-sm hover:!text-blue-600 transition">
                 {t.features}
               </a>
-              <a href="#faq" className="text-slate-600 font-semibold text-sm hover:text-blue-600 transition">
+              <a href="#faq" className="!text-slate-600 font-semibold text-sm hover:!text-blue-600 transition">
                 {t.faq}
               </a>
             </nav>
