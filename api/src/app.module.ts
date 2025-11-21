@@ -12,6 +12,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { TenantDomainsModule } from './modules/tenant-domains/tenant-domains.module';
+import { EmailModule } from './modules/email/email.module';
 import { HostExtractionMiddleware } from './common/middleware/host-extraction.middleware';
 import { TenantContextMiddleware } from './common/middleware/tenant-context.middleware';
 
@@ -47,6 +48,7 @@ import { TenantContextMiddleware } from './common/middleware/tenant-context.midd
     OrdersModule,
     PaymentsModule,
     TenantDomainsModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
