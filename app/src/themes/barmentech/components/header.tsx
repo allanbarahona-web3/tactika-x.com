@@ -28,7 +28,7 @@ export function Header() {
   return (
     <>
       {/* Language Switcher */}
-      <div className="fixed top-6 right-6 z-50 flex gap-1.5 bg-white border border-slate-300 rounded-full p-1.5 shadow-lg">
+      <div className="fixed top-6 right-6 z-[9999] flex gap-1.5 bg-white border border-slate-300 rounded-full p-1.5 shadow-lg">
         <button
           onClick={() => setLanguage('es')}
           className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
