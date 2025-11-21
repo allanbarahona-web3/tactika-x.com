@@ -60,10 +60,10 @@ export function Header() {
               <Image 
                 src="/themes/barmentech/logo_barmentech.png" 
                 alt="Barmentech" 
-                width={160}
-                height={40}
+                width={220}
+                height={55}
                 priority
-                className="h-10 w-auto"
+                className="h-14 w-auto"
               />
             </a>
 
