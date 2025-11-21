@@ -1,0 +1,39 @@
+/* Override globals.css for Barmentech tenant */
+
+/* Remove dark background from nav */
+nav {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.nav-item {
+  padding: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* Override header styles */
+header {
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.header-top {
+  display: none !important;
+}
+
+/* Hide ARMAS-specific elements */
+.whatsapp-float {
+  display: none !important;
+}
