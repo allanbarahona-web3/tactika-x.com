@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { barmentechConfig } from '../theme.config';
+import Image from 'next/image';
 
 export function Header() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
@@ -28,26 +28,26 @@ export function Header() {
   return (
     <>
       {/* Language Switcher */}
-      <div className="fixed top-5 right-5 z-[2000] flex gap-1 bg-white border border-slate-200 rounded-full p-1 shadow-md">
+      <div className="fixed top-6 right-6 z-50 flex gap-1.5 bg-white border border-slate-300 rounded-full p-1.5 shadow-lg">
         <button
           onClick={() => setLanguage('es')}
-          className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+          className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
             language === 'es'
-              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-              : 'text-slate-600 hover:bg-slate-50'
+              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+              : 'text-slate-700 hover:bg-slate-100'
           }`}
         >
-          🇪🇸 ES
+          ES
         </button>
         <button
           onClick={() => setLanguage('en')}
-          className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+          className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
             language === 'en'
-              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-              : 'text-slate-600 hover:bg-slate-50'
+              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+              : 'text-slate-700 hover:bg-slate-100'
           }`}
         >
-          🇺🇸 EN
+          EN
         </button>
       </div>
 
@@ -57,11 +57,12 @@ export function Header() {
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
             <a href="#" className="flex items-center">
-              <img 
+              <Image 
                 src="/themes/barmentech/logo_barmentech.png" 
                 alt="Barmentech" 
                 width={160}
                 height={40}
+                priority
                 className="h-10 w-auto"
               />
             </a>
