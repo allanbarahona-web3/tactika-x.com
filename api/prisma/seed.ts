@@ -19,34 +19,73 @@ async function main() {
   // Crear tenants de ejemplo
   const tenant1 = await prisma.tenant.create({
     data: {
-      name: 'Tienda Demo',
-      slug: 'tienda-demo',
+      name: 'Barmentech',
+      slug: 'barmentech',
       status: 'active',
       billingStatus: 'ok',
-      industry: 'Tecnología',
+      industry: 'SaaS Platform',
     },
   });
 
   const tenant2 = await prisma.tenant.create({
     data: {
-      name: 'Mi Tienda Online',
-      slug: 'mi-tienda-online',
+      name: 'ARMAS / TACTIKA-X',
+      slug: 'armas',
       status: 'active',
       billingStatus: 'ok',
-      industry: 'Retail',
+      industry: 'Tactical Equipment',
     },
   });
 
   console.log(`✅ Created tenants: ${tenant1.name}, ${tenant2.name}`);
+
+  // Crear dominios para cada tenant
+  const domain1 = await prisma.tenantDomain.create({
+    data: {
+      tenantId: tenant1.id,
+      domain: 'commerce.barmentech.com',
+      isPrimary: true,
+      isActive: true,
+    },
+  });
+
+  const domain1Vercel = await prisma.tenantDomain.create({
+    data: {
+      tenantId: tenant1.id,
+      domain: 'barmentech-saas.vercel.app',
+      isPrimary: false,
+      isActive: true,
+    },
+  });
+
+  const domain2 = await prisma.tenantDomain.create({
+    data: {
+      tenantId: tenant2.id,
+      domain: 'tactika-x.com',
+      isPrimary: true,
+      isActive: true,
+    },
+  });
+
+  const domain2Vercel = await prisma.tenantDomain.create({
+    data: {
+      tenantId: tenant2.id,
+      domain: 'tactika-x-app.vercel.app',
+      isPrimary: false,
+      isActive: true,
+    },
+  });
+
+  console.log(`✅ Created domains: ${domain1.domain}, ${domain2.domain}`);
 
   // Crear usuarios internos (TenantUser)
   const hashedPassword = await bcrypt.hash('password123', 10);
 
   const adminUser = await prisma.tenantUser.create({
     data: {
-      email: 'admin@tiendademo.com',
+      email: 'admin@barmentech.com',
       passwordHash: hashedPassword,
-      name: 'Admin Demo',
+      name: 'Admin Barmentech',
       role: TenantUserRole.owner,
       tenantId: tenant1.id,
       status: 'active',
@@ -55,11 +94,11 @@ async function main() {
 
   const managerUser = await prisma.tenantUser.create({
     data: {
-      email: 'manager@tiendademo.com',
+      email: 'admin@armas.com',
       passwordHash: hashedPassword,
-      name: 'Manager Demo',
-      role: TenantUserRole.manager,
-      tenantId: tenant1.id,
+      name: 'Admin ARMAS',
+      role: TenantUserRole.owner,
+      tenantId: tenant2.id,
       status: 'active',
     },
   });
@@ -206,16 +245,19 @@ async function main() {
 
   console.log('🎉 Seeding completed!');
   console.log('\n📊 Summary:');
-  console.log(`  - Tenants: 2`);
+  console.log(`  - Tenants: 2 (Barmentech, ARMAS)`);
   console.log(`  - Tenant Users: 2`);
   console.log(`  - Customers: 2`);
   console.log(`  - Products: ${products.length}`);
   console.log(`  - Orders: 1`);
   console.log(`  - Payments: 1`);
   console.log('\n🔐 Login credentials:');
-  console.log(`  Email: admin@tiendademo.com`);
+  console.log(`  Barmentech - Email: admin@barmentech.com`);
+  console.log(`  ARMAS - Email: admin@armas.com`);
   console.log(`  Password: password123`);
-  console.log(`  Tenant ID: ${tenant1.id}`);
+  console.log('\n🌐 Domains:');
+  console.log(`  Barmentech: commerce.barmentech.com (ID: ${tenant1.id})`);
+  console.log(`  ARMAS: tactika-x.com (ID: ${tenant2.id})`);
 }
 
 main()
