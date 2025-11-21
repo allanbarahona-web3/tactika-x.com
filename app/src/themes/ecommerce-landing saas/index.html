@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Online Store in Minutes | TechStore Platform</title>
+    <meta name="description" content="Launch your online store in minutes. No technical skills needed. Choose from professional templates, integrated payments, and powerful tools.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Brand Colors */
+            --primary-blue: #2563EB;
+            --primary-purple: #7C3AED;
+            --primary-pink: #EC4899;
+            --success-green: #10B981;
+            --warning-orange: #F59E0B;
+            
+            /* Backgrounds */
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --bg-light: #F8FAFC;
+            --card-bg: #1E293B;
+            --card-light: #FFFFFF;
+            
+            /* Text */
+            --text-dark: #0F172A;
+            --text-light: #F8FAFC;
+            --text-gray: #64748B;
+            --text-muted: #94A3B8;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            --gradient-hero: linear-gradient(135deg, #667EEA 0%, #764BA2 50%, #F093FB 100%);
+            --gradient-success: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
+            
+            /* Typography */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        /* ========== LANGUAGE SWITCHER ========== */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            gap: 5px;
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .lang-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+        }
+        
+        .lang-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background: #F1F5F9;
+        }
+        
+        /* ========== HEADER ========== */
+        header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid #E2E8F0;
+        }
+        
+        .btn-secondary:hover {
+            background: #F8FAFC;
+            border-color: var(--primary-blue);
+        }
+        
+        /* ========== HERO ========== */
+        .hero {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 68px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* ========== TEMPLATES SHOWCASE ========== */
+        .templates {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+        
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .template-card {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-purple);
+        }
+        
+        .template-preview {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .template-preview.amazon {
+            background: linear-gradient(135deg, #FF9900 0%, #232F3E 100%);
+        }
+        
+        .template-preview.minimal {
+            background: linear-gradient(135deg, #F8F8F8 0%, #E8E8E8 100%);
+            color: #000;
+        }
+        
+        .template-preview.vibrant {
+            background: linear-gradient(135deg, #9D4EDD 0%, #00D9FF 100%);
+        }
+        
+        .template-preview.digital {
+            background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+        }
+        
+        .template-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .template-info {
+            padding: 30px;
+        }
+        
+        .template-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .template-desc {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .template-features {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
+        .feature-tag {
+            padding: 6px 14px;
+            background: #F1F5F9;
+            color: var(--text-gray);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-demo {
+            flex: 1;
+            padding: 12px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* ========== PRICING ========== */
+        .pricing {
+            padding: 100px 0;
+            background: #F8FAFC;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-purple);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-purple);
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+        }
+        
+        .pricing-header h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-header p {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-price {
+            margin-bottom: 30px;
+        }
+        
+        .price-amount {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        
+        .price-period {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 14px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features i {
+            color: var(--success-green);
+            font-size: 18px;
+        }
+        
+        .pricing-features .unavailable {
+            color: var(--text-muted);
+        }
+        
+        .pricing-features .unavailable i {
+            color: var(--text-muted);
+        }
+        
+        .btn-select {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-select:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* ========== FEATURES ========== */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+        
+        /* ========== TESTIMONIALS ========== */
+        .testimonials {
+            padding: 100px 0;
+            background: #F8FAFC;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-purple);
+        }
+        
+        .testimonial-stars {
+            color: #F59E0B;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-text {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+        
+        /* ========== FAQ ========== */
+        .faq {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary-purple);
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 17px;
+            user-select: none;
+        }
+        
+        .faq-question:hover {
+            background: #F8FAFC;
+        }
+        
+        .faq-question i {
+            font-size: 20px;
+            color: var(--primary-purple);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 30px 25px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* ========== CTA ========== */
+        .cta {
+            padding: 100px 0;
+            background: var(--gradient-hero);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 80px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-about h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-about p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+        
+        .footer-column h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .section-header h2 {
+                font-size: 36px;
+            }
+            
+            .cta h2 {
+                font-size: 36px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LANGUAGE SWITCHER -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="es" onclick="switchLanguage('es')">
+            🇪🇸 ES
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">
+            🇺🇸 EN
+        </button>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" data-i18n="siteName">TechStore Platform</a>
+                
+                <nav>
+                    <a href="#templates" data-i18n="navTemplates">Templates</a>
+                    <a href="#pricing" data-i18n="navPricing">Pricing</a>
+                    <a href="#features" data-i18n="navFeatures">Features</a>
+                    <a href="#faq" data-i18n="navFAQ">FAQ</a>
+                </nav>
+                
+                <a href="#pricing" class="btn btn-primary" data-i18n="navCTA">Start Free Trial</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge" data-i18n="heroBadge">🚀 No Credit Card Required</div>
+                <h1 data-i18n="heroTitle">Launch Your Online Store in Minutes</h1>
+                <p data-i18n="heroSubtitle">
+                    No technical skills needed. Choose from professional templates, 
+                    integrated payments, and powerful tools to grow your business.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn btn-primary" style="font-size: 18px; padding: 18px 40px;" data-i18n="heroMainCTA">
+                        Start Free Trial
+                    </a>
+                    <a href="#templates" class="btn btn-secondary" style="font-size: 18px; padding: 18px 40px; color: white; border-color: rgba(255,255,255,0.3);" data-i18n="heroSecondaryCTA">
+                        View Demos
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2,500+</span>
+                        <span class="stat-label" data-i18n="statStores">Active Stores</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$5M+</span>
+                        <span class="stat-label" data-i18n="statSales">Sales Processed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label" data-i18n="statUptime">Uptime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEMPLATES SHOWCASE -->
+    <section class="templates" id="templates">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="templatesTitle">Choose Your Perfect Template</h2>
+                <p data-i18n="templatesSubtitle">
+                    Professional designs ready to launch. Each template is fully customizable 
+                    with your logo, colors, and branding.
+                </p>
+            </div>
+            
+            <div class="templates-grid">
+                <!-- Amazon Style -->
+                <div class="template-card">
+                    <div class="template-preview amazon">
+                        <span class="template-badge" data-i18n="templatePopular">Most Popular</span>
+                        🛒
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-title" data-i18n="templateAmazonTitle">E-Commerce Classic</h3>
+                        <p class="template-desc" data-i18n="templateAmazonDesc">
+                            Amazon-style template. Perfect for selling any type of product. 
+                            Trusted, professional, and conversion-optimized.
+                        </p>
+                        <div class="template-features">
+                            <span class="feature-tag" data-i18n="tagGeneral">General Purpose</span>
+                            <span class="feature-tag" data-i18n="tagTrusted">Trusted Design</span>
+                            <span class="feature-tag" data-i18n="tagEasy">Easy to Use</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="techstore.html" target="_blank" class="btn-demo" data-i18n="btnViewDemo">
+                                <i class="fas fa-eye"></i> View Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Minimalist -->
+                <div class="template-card">
+                    <div class="template-preview minimal">
+                        <span class="template-badge" data-i18n="templatePremium">Premium</span>
+                        ✨
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-title" data-i18n="templateMinimalTitle">Modern Minimalist</h3>
+                        <p class="template-desc" data-i18n="templateMinimalDesc">
+                            Clean and elegant design. Ideal for fashion, art, design, 
+                            and premium lifestyle products.
+                        </p>
+                        <div class="template-features">
+                            <span class="feature-tag" data-i18n="tagElegant">Elegant</span>
+                            <span class="feature-tag" data-i18n="tagPremium">Premium Feel</span>
+                            <span class="feature-tag" data-i18n="tagMinimal">Minimalist</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="template-minimalist.html" target="_blank" class="btn-demo" data-i18n="btnViewDemo">
+                                <i class="fas fa-eye"></i> View Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vibrant -->
+                <div class="template-card">
+                    <div class="template-preview vibrant">
+                        <span class="template-badge" data-i18n="templateNew">New</span>
+                        🎮
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-title" data-i18n="templateVibrantTitle">Bold & Vibrant</h3>
+                        <p class="template-desc" data-i18n="templateVibrantDesc">
+                            High-energy design with neon colors. Perfect for gaming, 
+                            tech gadgets, and young audiences.
+                        </p>
+                        <div class="template-features">
+                            <span class="feature-tag" data-i18n="tagGaming">Gaming</span>
+                            <span class="feature-tag" data-i18n="tagModern">Modern</span>
+                            <span class="feature-tag" data-i18n="tagYoung">Young Vibe</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="template-vibrant.html" target="_blank" class="btn-demo" data-i18n="btnViewDemo">
+                                <i class="fas fa-eye"></i> View Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Digital -->
+                <div class="template-card">
+                    <div class="template-preview digital">
+                        <span class="template-badge" data-i18n="templateSpecial">Special</span>
+                        ⚡
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-title" data-i18n="templateDigitalTitle">Digital Products</h3>
+                        <p class="template-desc" data-i18n="templateDigitalDesc">
+                            Specialized for digital codes, subscriptions, and instant delivery. 
+                            Netflix, Spotify, gaming codes, gift cards.
+                        </p>
+                        <div class="template-features">
+                            <span class="feature-tag" data-i18n="tagInstant">Instant Delivery</span>
+                            <span class="feature-tag" data-i18n="tagDigital">Digital</span>
+                            <span class="feature-tag" data-i18n="tagCodes">Codes & Licenses</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="template-digital.html" target="_blank" class="btn-demo" data-i18n="btnViewDemo">
+                                <i class="fas fa-eye"></i> View Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: var(--text-gray); margin-bottom: 20px;" data-i18n="templatesNote">
+                    All templates are fully responsive and customizable. Change colors, fonts, and layout to match your brand.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="pricingTitle">Simple, Transparent Pricing</h2>
+                <p data-i18n="pricingSubtitle">
+                    Start free, upgrade as you grow. No hidden fees. Cancel anytime.
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 data-i18n="planBasicName">Starter</h3>
+                        <p data-i18n="planBasicDesc">Perfect for testing and small stores</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">$24.99</span>
+                        <span class="price-period" data-i18n="priceMonth">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature1">Up to 50 products</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature2">1 template included</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature3">Payment gateway included</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature4">4% transaction fee</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature5">Basic analytics</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature6">Email support</span></li>
+                        <li class="unavailable"><i class="fas fa-times"></i> <span data-i18n="feature7">Custom domain</span></li>
+                        <li class="unavailable"><i class="fas fa-times"></i> <span data-i18n="feature8">API access</span></li>
+                    </ul>
+                    <button class="btn-select" onclick="selectPlan('basic')" data-i18n="btnStart">Start Free Trial</button>
+                </div>
+                
+                <!-- Professional -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge" data-i18n="planFeatured">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 data-i18n="planProName">Professional</h3>
+                        <p data-i18n="planProDesc">For growing online businesses</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">$44.99</span>
+                        <span class="price-period" data-i18n="priceMonth">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro1">Up to 200 products</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro2">All 4 templates</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro3">Payment gateway OR your own</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro4">2.5% transaction fee</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro5">Advanced analytics</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro6">Priority support</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro7">Custom domain</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featurePro8">Logistics API</span></li>
+                    </ul>
+                    <button class="btn-select" onclick="selectPlan('professional')" data-i18n="btnStart">Start Free Trial</button>
+                </div>
+                
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 data-i18n="planEnterName">Enterprise</h3>
+                        <p data-i18n="planEnterDesc">For high-volume stores</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">$79.95</span>
+                        <span class="price-period" data-i18n="priceMonth">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt1">Unlimited products</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt2">All templates + custom design</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt3">Your own payment gateway</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt4">1.5% transaction fee</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt5">Full analytics + exports</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt6">24/7 dedicated support</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt7">Multiple custom domains</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="featureEnt8">Full API access</span></li>
+                    </ul>
+                    <button class="btn-select" onclick="selectPlan('enterprise')" data-i18n="btnStart">Start Free Trial</button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: var(--text-gray); font-size: 15px;" data-i18n="pricingNote">
+                    ✨ 14-day free trial on all plans. No credit card required. Cancel anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="featuresTitle">Everything You Need to Succeed</h2>
+                <p data-i18n="featuresSubtitle">Powerful tools to launch, manage, and grow your online store.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 data-i18n="featureCard1Title">Instant Setup</h3>
+                    <p data-i18n="featureCard1Desc">Launch your store in minutes. No coding required. Just choose a template, add products, and go live.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3 data-i18n="featureCard2Title">Integrated Payments</h3>
+                    <p data-i18n="featureCard2Desc">Accept credit cards, PayPal, and more. Or connect your own Stripe account for lower fees.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 data-i18n="featureCard3Title">Mobile Optimized</h3>
+                    <p data-i18n="featureCard3Desc">All templates are fully responsive. Your store looks perfect on desktop, tablet, and mobile.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3 data-i18n="featureCard4Title">Logistics API</h3>
+                    <p data-i18n="featureCard4Desc">Integrate with couriers for automatic shipping labels and tracking. Save time and money.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-i18n="featureCard5Title">Analytics Dashboard</h3>
+                    <p data-i18n="featureCard5Desc">Track sales, visitors, and performance. Make data-driven decisions to grow your business.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 data-i18n="featureCard6Title">Secure & Reliable</h3>
+                    <p data-i18n="featureCard6Desc">SSL encryption, secure payments, and 99.9% uptime. Your store is always safe and available.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="testimonialsTitle">Trusted by Entrepreneurs</h2>
+                <p data-i18n="testimonialsSubtitle">See what our customers say about TechStore Platform</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="testimonial1Text">
+                        "I launched my store in less than 1 hour. The templates are beautiful 
+                        and everything just works. Best decision for my business!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4 data-i18n="testimonial1Name">María Rodríguez</h4>
+                            <p data-i18n="testimonial1Role">Fashion Store Owner</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="testimonial2Text">
+                        "The payment integration is seamless. I love that I can use my own 
+                        Stripe account. Customer support is also excellent!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4 data-i18n="testimonial2Name">Juan Carlos</h4>
+                            <p data-i18n="testimonial2Role">Tech Gadgets Seller</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="testimonial3Text">
+                        "I went from $0 to $5,000/month in 3 months. The platform is 
+                        reliable, fast, and the templates convert really well."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SP</div>
+                        <div class="author-info">
+                            <h4 data-i18n="testimonial3Name">Sofia Pérez</h4>
+                            <p data-i18n="testimonial3Role">Digital Products Store</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq1Q">Do I need technical knowledge to use the platform?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq1A">
+                            No! Our platform is designed for everyone. Choose a template, add your products, 
+                            and customize colors and text. It's as easy as using social media.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq2Q">Can I use my own domain name?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq2A">
+                            Yes! On the Professional and Enterprise plans, you can connect your own domain 
+                            (mystore.com). We provide step-by-step instructions to set it up.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq3Q">What payment methods do you support?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq3A">
+                            We include integrated payment processing for credit/debit cards and PayPal. 
+                            On Professional and Enterprise plans, you can also connect your own Stripe 
+                            or PayPal account for lower fees.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq4Q">What happens if I don't pay my subscription?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq4A">
+                            Your store will be suspended after 5 days of non-payment. Your data is kept 
+                            safe for 30 days, giving you time to update your payment method. After 30 days, 
+                            the store and data will be permanently deleted.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq5Q">Can I change templates after launching?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq5A">
+                            Yes! You can change templates anytime. Your products and data are preserved. 
+                            Just pick a new template, adjust colors, and publish. Takes only minutes.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq6Q">Is there a free trial?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-i18n="faq6A">
+                            Yes! All plans include a 14-day free trial. No credit card required. 
+                            Test all features, add products, and see if it's right for you. Cancel anytime.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-i18n="ctaTitle">Ready to Launch Your Store?</h2>
+                <p data-i18n="ctaSubtitle">
+                    Join thousands of entrepreneurs selling online. Start your free trial today.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#pricing" class="btn btn-primary" style="font-size: 18px; padding: 20px 50px; background: white; color: var(--primary-purple);" data-i18n="ctaMain">
+                        Start Free Trial
+                    </a>
+                    <a href="#templates" class="btn btn-secondary" style="font-size: 18px; padding: 20px 50px; border-color: rgba(255,255,255,0.3); color: white;" data-i18n="ctaSecondary">
+                        View Templates
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>TechStore Platform</h3>
+                    <p data-i18n="footerDesc">
+                        The easiest way to create your online store. Professional templates, 
+                        integrated payments, and powerful tools to grow your business.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerProductTitle">Product</h4>
+                    <ul>
+                        <li><a href="#templates" data-i18n="footerTemplates">Templates</a></li>
+                        <li><a href="#pricing" data-i18n="footerPricing">Pricing</a></li>
+                        <li><a href="#features" data-i18n="footerFeatures">Features</a></li>
+                        <li><a href="#" data-i18n="footerRoadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerSupportTitle">Support</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footerHelp">Help Center</a></li>
+                        <li><a href="#faq" data-i18n="footerFAQ">FAQ</a></li>
+                        <li><a href="#" data-i18n="footerContact">Contact</a></li>
+                        <li><a href="#" data-i18n="footerStatus">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerLegalTitle">Legal</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footerTerms">Terms</a></li>
+                        <li><a href="#" data-i18n="footerPrivacy">Privacy</a></li>
+                        <li><a href="#" data-i18n="footerCookies">Cookies</a></li>
+                        <li><a href="#" data-i18n="footerLicenses">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 TechStore Platform. <span data-i18n="footerRights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== TRANSLATIONS ==========
+        const translations = {
+            en: {
+                siteName: "TechStore Platform",
+                navTemplates: "Templates",
+                navPricing: "Pricing",
+                navFeatures: "Features",
+                navFAQ: "FAQ",
+                navCTA: "Start Free Trial",
+                heroBadge: "🚀 No Credit Card Required",
+                heroTitle: "Launch Your Online Store in Minutes",
+                heroSubtitle: "No technical skills needed. Choose from professional templates, integrated payments, and powerful tools to grow your business.",
+                heroMainCTA: "Start Free Trial",
+                heroSecondaryCTA: "View Demos",
+                statStores: "Active Stores",
+                statSales: "Sales Processed",
+                statUptime: "Uptime",
+                templatesTitle: "Choose Your Perfect Template",
+                templatesSubtitle: "Professional designs ready to launch. Each template is fully customizable with your logo, colors, and branding.",
+                templatePopular: "Most Popular",
+                templatePremium: "Premium",
+                templateNew: "New",
+                templateSpecial: "Special",
+                templateAmazonTitle: "E-Commerce Classic",
+                templateAmazonDesc: "Amazon-style template. Perfect for selling any type of product. Trusted, professional, and conversion-optimized.",
+                templateMinimalTitle: "Modern Minimalist",
+                templateMinimalDesc: "Clean and elegant design. Ideal for fashion, art, design, and premium lifestyle products.",
+                templateVibrantTitle: "Bold & Vibrant",
+                templateVibrantDesc: "High-energy design with neon colors. Perfect for gaming, tech gadgets, and young audiences.",
+                templateDigitalTitle: "Digital Products",
+                templateDigitalDesc: "Specialized for digital codes, subscriptions, and instant delivery. Netflix, Spotify, gaming codes, gift cards.",
+                tagGeneral: "General Purpose",
+                tagTrusted: "Trusted Design",
+                tagEasy: "Easy to Use",
+                tagElegant: "Elegant",
+                tagPremium: "Premium Feel",
+                tagMinimal: "Minimalist",
+                tagGaming: "Gaming",
+                tagModern: "Modern",
+                tagYoung: "Young Vibe",
+                tagInstant: "Instant Delivery",
+                tagDigital: "Digital",
+                tagCodes: "Codes & Licenses",
+                btnViewDemo: "View Live Demo",
+                templatesNote: "All templates are fully responsive and customizable. Change colors, fonts, and layout to match your brand.",
+                pricingTitle: "Simple, Transparent Pricing",
+                pricingSubtitle: "Start free, upgrade as you grow. No hidden fees. Cancel anytime.",
+                planBasicName: "Starter",
+                planBasicDesc: "Perfect for testing and small stores",
+                planProName: "Professional",
+                planProDesc: "For growing online businesses",
+                planEnterName: "Enterprise",
+                planEnterDesc: "For high-volume stores",
+                planFeatured: "Most Popular",
+                priceMonth: "/month",
+                feature1: "Up to 50 products",
+                feature2: "1 template included",
+                feature3: "Payment gateway included",
+                feature4: "4% transaction fee",
+                feature5: "Basic analytics",
+                feature6: "Email support",
+                feature7: "Custom domain",
+                feature8: "API access",
+                featurePro1: "Up to 200 products",
+                featurePro2: "All 4 templates",
+                featurePro3: "Payment gateway OR your own",
+                featurePro4: "2.5% transaction fee",
+                featurePro5: "Advanced analytics",
+                featurePro6: "Priority support",
+                featurePro7: "Custom domain",
+                featurePro8: "Logistics API",
+                featureEnt1: "Unlimited products",
+                featureEnt2: "All templates + custom design",
+                featureEnt3: "Your own payment gateway",
+                featureEnt4: "1.5% transaction fee",
+                featureEnt5: "Full analytics + exports",
+                featureEnt6: "24/7 dedicated support",
+                featureEnt7: "Multiple custom domains",
+                featureEnt8: "Full API access",
+                btnStart: "Start Free Trial",
+                pricingNote: "✨ 14-day free trial on all plans. No credit card required. Cancel anytime.",
+                featuresTitle: "Everything You Need to Succeed",
+                featuresSubtitle: "Powerful tools to launch, manage, and grow your online store.",
+                featureCard1Title: "Instant Setup",
+                featureCard1Desc: "Launch your store in minutes. No coding required. Just choose a template, add products, and go live.",
+                featureCard2Title: "Integrated Payments",
+                featureCard2Desc: "Accept credit cards, PayPal, and more. Or connect your own Stripe account for lower fees.",
+                featureCard3Title: "Mobile Optimized",
+                featureCard3Desc: "All templates are fully responsive. Your store looks perfect on desktop, tablet, and mobile.",
+                featureCard4Title: "Logistics API",
+                featureCard4Desc: "Integrate with couriers for automatic shipping labels and tracking. Save time and money.",
+                featureCard5Title: "Analytics Dashboard",
+                featureCard5Desc: "Track sales, visitors, and performance. Make data-driven decisions to grow your business.",
+                featureCard6Title: "Secure & Reliable",
+                featureCard6Desc: "SSL encryption, secure payments, and 99.9% uptime. Your store is always safe and available.",
+                testimonialsTitle: "Trusted by Entrepreneurs",
+                testimonialsSubtitle: "See what our customers say about TechStore Platform",
+                testimonial1Text: "I launched my store in less than 1 hour. The templates are beautiful and everything just works. Best decision for my business!",
+                testimonial1Name: "María Rodríguez",
+                testimonial1Role: "Fashion Store Owner",
+                testimonial2Text: "The payment integration is seamless. I love that I can use my own Stripe account. Customer support is also excellent!",
+                testimonial2Name: "Juan Carlos",
+                testimonial2Role: "Tech Gadgets Seller",
+                testimonial3Text: "I went from $0 to $5,000/month in 3 months. The platform is reliable, fast, and the templates convert really well.",
+                testimonial3Name: "Sofia Pérez",
+                testimonial3Role: "Digital Products Store",
+                faqTitle: "Frequently Asked Questions",
+                faq1Q: "Do I need technical knowledge to use the platform?",
+                faq1A: "No! Our platform is designed for everyone. Choose a template, add your products, and customize colors and text. It's as easy as using social media.",
+                faq2Q: "Can I use my own domain name?",
+                faq2A: "Yes! On the Professional and Enterprise plans, you can connect your own domain (mystore.com). We provide step-by-step instructions to set it up.",
+                faq3Q: "What payment methods do you support?",
+                faq3A: "We include integrated payment processing for credit/debit cards and PayPal. On Professional and Enterprise plans, you can also connect your own Stripe or PayPal account for lower fees.",
+                faq4Q: "What happens if I don't pay my subscription?",
+                faq4A: "Your store will be suspended after 5 days of non-payment. Your data is kept safe for 30 days, giving you time to update your payment method. After 30 days, the store and data will be permanently deleted.",
+                faq5Q: "Can I change templates after launching?",
+                faq5A: "Yes! You can change templates anytime. Your products and data are preserved. Just pick a new template, adjust colors, and publish. Takes only minutes.",
+                faq6Q: "Is there a free trial?",
+                faq6A: "Yes! All plans include a 14-day free trial. No credit card required. Test all features, add products, and see if it's right for you. Cancel anytime.",
+                ctaTitle: "Ready to Launch Your Store?",
+                ctaSubtitle: "Join thousands of entrepreneurs selling online. Start your free trial today.",
+                ctaMain: "Start Free Trial",
+                ctaSecondary: "View Templates",
+                footerDesc: "The easiest way to create your online store. Professional templates, integrated payments, and powerful tools to grow your business.",
+                footerProductTitle: "Product",
+                footerTemplates: "Templates",
+                footerPricing: "Pricing",
+                footerFeatures: "Features",
+                footerRoadmap: "Roadmap",
+                footerSupportTitle: "Support",
+                footerHelp: "Help Center",
+                footerFAQ: "FAQ",
+                footerContact: "Contact",
+                footerStatus: "Status",
+                footerLegalTitle: "Legal",
+                footerTerms: "Terms",
+                footerPrivacy: "Privacy",
+                footerCookies: "Cookies",
+                footerLicenses: "Licenses",
+                footerRights: "All rights reserved."
+            },
+            es: {
+                siteName: "TechStore Platform",
+                navTemplates: "Plantillas",
+                navPricing: "Precios",
+                navFeatures: "Características",
+                navFAQ: "FAQ",
+                navCTA: "Empezar Gratis",
+                heroBadge: "🚀 Sin Tarjeta de Crédito",
+                heroTitle: "Lanza Tu Tienda Online en Minutos",
+                heroSubtitle: "Sin conocimientos técnicos. Elige entre plantillas profesionales, pagos integrados y herramientas poderosas para hacer crecer tu negocio.",
+                heroMainCTA: "Empezar Prueba Gratis",
+                heroSecondaryCTA: "Ver Demos",
+                statStores: "Tiendas Activas",
+                statSales: "Ventas Procesadas",
+                statUptime: "Disponibilidad",
+                templatesTitle: "Elige Tu Plantilla Perfecta",
+                templatesSubtitle: "Diseños profesionales listos para lanzar. Cada plantilla es totalmente personalizable con tu logo, colores y marca.",
+                templatePopular: "Más Popular",
+                templatePremium: "Premium",
+                templateNew: "Nuevo",
+                templateSpecial: "Especial",
+                templateAmazonTitle: "E-Commerce Clásico",
+                templateAmazonDesc: "Plantilla estilo Amazon. Perfecta para vender cualquier tipo de producto. Confiable, profesional y optimizada para conversión.",
+                templateMinimalTitle: "Minimalista Moderno",
+                templateMinimalDesc: "Diseño limpio y elegante. Ideal para moda, arte, diseño y productos de estilo de vida premium.",
+                templateVibrantTitle: "Vibrante y Audaz",
+                templateVibrantDesc: "Diseño de alta energía con colores neón. Perfecto para gaming, gadgets tech y audiencias jóvenes.",
+                templateDigitalTitle: "Productos Digitales",
+                templateDigitalDesc: "Especializado en códigos digitales, suscripciones y entrega instantánea. Netflix, Spotify, códigos gaming, tarjetas regalo.",
+                tagGeneral: "Uso General",
+                tagTrusted: "Diseño Confiable",
+                tagEasy: "Fácil de Usar",
+                tagElegant: "Elegante",
+                tagPremium: "Sensación Premium",
+                tagMinimal: "Minimalista",
+                tagGaming: "Gaming",
+                tagModern: "Moderno",
+                tagYoung: "Onda Joven",
+                tagInstant: "Entrega Instantánea",
+                tagDigital: "Digital",
+                tagCodes: "Códigos y Licencias",
+                btnViewDemo: "Ver Demo en Vivo",
+                templatesNote: "Todas las plantillas son totalmente responsivas y personalizables. Cambia colores, fuentes y diseño para que coincida con tu marca.",
+                pricingTitle: "Precios Simples y Transparentes",
+                pricingSubtitle: "Empieza gratis, mejora conforme creces. Sin tarifas ocultas. Cancela cuando quieras.",
+                planBasicName: "Inicial",
+                planBasicDesc: "Perfecto para probar y tiendas pequeñas",
+                planProName: "Profesional",
+                planProDesc: "Para negocios online en crecimiento",
+                planEnterName: "Enterprise",
+                planEnterDesc: "Para tiendas de alto volumen",
+                planFeatured: "Más Popular",
+                priceMonth: "/mes",
+                feature1: "Hasta 50 productos",
+                feature2: "1 plantilla incluida",
+                feature3: "Pasarela de pago incluida",
+                feature4: "4% comisión por transacción",
+                feature5: "Análisis básico",
+                feature6: "Soporte por email",
+                feature7: "Dominio personalizado",
+                feature8: "Acceso API",
+                featurePro1: "Hasta 200 productos",
+                featurePro2: "Las 4 plantillas",
+                featurePro3: "Pasarela incluida O la tuya",
+                featurePro4: "2.5% comisión por transacción",
+                featurePro5: "Análisis avanzado",
+                featurePro6: "Soporte prioritario",
+                featurePro7: "Dominio personalizado",
+                featurePro8: "API de logística",
+                featureEnt1: "Productos ilimitados",
+                featureEnt2: "Todas las plantillas + diseño custom",
+                featureEnt3: "Tu propia pasarela de pago",
+                featureEnt4: "1.5% comisión por transacción",
+                featureEnt5: "Análisis completo + exportaciones",
+                featureEnt6: "Soporte dedicado 24/7",
+                featureEnt7: "Múltiples dominios personalizados",
+                featureEnt8: "Acceso completo API",
+                btnStart: "Empezar Prueba Gratis",
+                pricingNote: "✨ Prueba gratis de 14 días en todos los planes. Sin tarjeta de crédito. Cancela cuando quieras.",
+                featuresTitle: "Todo Lo Que Necesitas Para Triunfar",
+                featuresSubtitle: "Herramientas poderosas para lanzar, gestionar y hacer crecer tu tienda online.",
+                featureCard1Title: "Configuración Instantánea",
+                featureCard1Desc: "Lanza tu tienda en minutos. Sin código. Solo elige una plantilla, agrega productos y publica.",
+                featureCard2Title: "Pagos Integrados",
+                featureCard2Desc: "Acepta tarjetas de crédito, PayPal y más. O conecta tu propia cuenta Stripe para comisiones más bajas.",
+                featureCard3Title: "Optimizado Para Móviles",
+                featureCard3Desc: "Todas las plantillas son totalmente responsivas. Tu tienda se ve perfecta en desktop, tablet y móvil.",
+                featureCard4Title: "API de Logística",
+                featureCard4Desc: "Integra con couriers para etiquetas de envío y tracking automáticos. Ahorra tiempo y dinero.",
+                featureCard5Title: "Panel de Análisis",
+                featureCard5Desc: "Rastrea ventas, visitantes y rendimiento. Toma decisiones basadas en datos para hacer crecer tu negocio.",
+                featureCard6Title: "Seguro y Confiable",
+                featureCard6Desc: "Encriptación SSL, pagos seguros y 99.9% de disponibilidad. Tu tienda siempre está segura y disponible.",
+                testimonialsTitle: "Confiado Por Emprendedores",
+                testimonialsSubtitle: "Mira lo que dicen nuestros clientes sobre TechStore Platform",
+                testimonial1Text: "Lancé mi tienda en menos de 1 hora. Las plantillas son hermosas y todo simplemente funciona. ¡La mejor decisión para mi negocio!",
+                testimonial1Name: "María Rodríguez",
+                testimonial1Role: "Dueña de Tienda de Moda",
+                testimonial2Text: "La integración de pagos es perfecta. Me encanta que puedo usar mi propia cuenta Stripe. ¡El soporte también es excelente!",
+                testimonial2Name: "Juan Carlos",
+                testimonial2Role: "Vendedor de Gadgets Tech",
+                testimonial3Text: "Pasé de $0 a $5,000/mes en 3 meses. La plataforma es confiable, rápida y las plantillas convierten muy bien.",
+                testimonial3Name: "Sofia Pérez",
+                testimonial3Role: "Tienda de Productos Digitales",
+                faqTitle: "Preguntas Frecuentes",
+                faq1Q: "¿Necesito conocimientos técnicos para usar la plataforma?",
+                faq1A: "¡No! Nuestra plataforma está diseñada para todos. Elige una plantilla, agrega tus productos y personaliza colores y texto. Es tan fácil como usar redes sociales.",
+                faq2Q: "¿Puedo usar mi propio nombre de dominio?",
+                faq2A: "¡Sí! En los planes Profesional y Enterprise, puedes conectar tu propio dominio (mitienda.com). Te proporcionamos instrucciones paso a paso para configurarlo.",
+                faq3Q: "¿Qué métodos de pago soportan?",
+                faq3A: "Incluimos procesamiento de pagos integrado para tarjetas de crédito/débito y PayPal. En los planes Profesional y Enterprise, también puedes conectar tu propia cuenta Stripe o PayPal para comisiones más bajas.",
+                faq4Q: "¿Qué pasa si no pago mi suscripción?",
+                faq4A: "Tu tienda será suspendida después de 5 días de no pago. Tus datos se mantienen seguros por 30 días, dándote tiempo para actualizar tu método de pago. Después de 30 días, la tienda y los datos se eliminarán permanentemente.",
+                faq5Q: "¿Puedo cambiar de plantilla después de lanzar?",
+                faq5A: "¡Sí! Puedes cambiar de plantilla en cualquier momento. Tus productos y datos se preservan. Solo elige una nueva plantilla, ajusta colores y publica. Toma solo minutos.",
+                faq6Q: "¿Hay una prueba gratuita?",
+                faq6A: "¡Sí! Todos los planes incluyen una prueba gratis de 14 días. Sin tarjeta de crédito requerida. Prueba todas las funciones, agrega productos y ve si es adecuado para ti. Cancela cuando quieras.",
+                ctaTitle: "¿Listo Para Lanzar Tu Tienda?",
+                ctaSubtitle: "Únete a miles de emprendedores vendiendo online. Empieza tu prueba gratis hoy.",
+                ctaMain: "Empezar Prueba Gratis",
+                ctaSecondary: "Ver Plantillas",
+                footerDesc: "La forma más fácil de crear tu tienda online. Plantillas profesionales, pagos integrados y herramientas poderosas para hacer crecer tu negocio.",
+                footerProductTitle: "Producto",
+                footerTemplates: "Plantillas",
+                footerPricing: "Precios",
+                footerFeatures: "Características",
+                footerRoadmap: "Roadmap",
+                footerSupportTitle: "Soporte",
+                footerHelp: "Centro de Ayuda",
+                footerFAQ: "FAQ",
+                footerContact: "Contacto",
+                footerStatus: "Estado",
+                footerLegalTitle: "Legal",
+                footerTerms: "Términos",
+                footerPrivacy: "Privacidad",
+                footerCookies: "Cookies",
+                footerLicenses: "Licencias",
+                footerRights: "Todos los derechos reservados."
+            }
+        };
+
+        let currentLang = 'es';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        function selectPlan(plan) {
+            alert(currentLang === 'en' 
+                ? `Starting ${plan} plan trial! Redirecting to signup...` 
+                : `¡Iniciando prueba del plan ${plan}! Redirigiendo a registro...`);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

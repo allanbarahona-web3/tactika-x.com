@@ -7,33 +7,37 @@ import type { NextRequest } from 'next/server';
  */
 
 export function middleware(request: NextRequest) {
-  const hostname = request.headers.get('host') || 'localhost:3000';
-  
-  // Log para debugging
-  console.log('🌐 Middleware - Hostname:', hostname);
+  try {
+    const hostname = request.headers.get('host') || 'localhost:3000';
+    
+    console.log('🌐 Middleware - Hostname:', hostname);
 
-  // Clonar headers y agregar tenant info
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-hostname', hostname);
-  
-  // TODO: Aquí podrías hacer un fetch al backend para resolver el tenant
-  // Por ahora usamos mapeo simple
-  let tenantId = 'tenant-1'; // Default: TACTIKA-X
-  
-  if (hostname.includes('farmacia')) {
-    tenantId = 'tenant-2';
-  } else if (hostname.includes('zapateria')) {
-    tenantId = 'tenant-3';
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('x-hostname', hostname);
+    
+    // Mapeo de dominios a tenants
+    let tenantId = 'armas'; // Default: TACTIKA-X
+    
+    if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech-saas.vercel.app')) {
+      tenantId = 'barmentech';
+    } else if (hostname.includes('store.barmentech.com')) {
+      tenantId = 'store';
+    } else if (hostname.includes('tactika-x.com') || hostname.includes('tactika-x-app.vercel.app')) {
+      tenantId = 'armas';
+    }
+    
+    requestHeaders.set('x-tenant-id', tenantId);
+    
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  } catch (error) {
+    console.error('❌ Middleware Error:', error);
+    // En caso de error, retornar respuesta segura
+    return NextResponse.next();
   }
-  
-  requestHeaders.set('x-tenant-id', tenantId);
-  
-  // Continuar con la request
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
 }
 
 // Configuración: aplicar middleware a todas las rutas excepto archivos estáticos

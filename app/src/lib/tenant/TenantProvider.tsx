@@ -5,7 +5,7 @@ import { TenantInfo } from './resolveTenant';
 
 interface TenantContextType {
   tenant: TenantInfo | null;
-  theme: 'armas' | 'farmacia' | 'zapateria';
+  theme: 'armas' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
 }
 
 const TenantContext = createContext<TenantContextType | undefined>(undefined);

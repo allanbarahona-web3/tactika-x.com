@@ -7,7 +7,7 @@ export interface TenantInfo {
   id: string;
   name: string;
   domain: string;
-  theme: 'armas' | 'farmacia' | 'zapateria';
+  theme: 'armas' | 'farmacia' | 'zapateria' | 'barmentech' | 'store';
   config: {
     apiUrl: string;
     logoUrl?: string;
@@ -26,8 +26,9 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
     // const data = await response.json();
     // return data;
 
-    // Mock temporal - mapeo hardcoded
+    // Mapeo de dominios a tenants
     const tenantMap: Record<string, TenantInfo> = {
+      // DESARROLLO
       'localhost:3000': {
         id: 'tenant-1',
         name: 'TACTIKA-X',
@@ -37,20 +38,62 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },
       },
-      'tactika-x.vercel.app': {
+      'commerce.localhost:3000': {
+        id: 'tenant-0',
+        name: 'Barmentech Commerce',
+        domain: 'commerce.localhost:3000',
+        theme: 'barmentech',
+        config: {
+          apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
+        },
+      },
+      
+      // PRODUCCIÓN - TACTIKA-X
+      'tactika-x.com': {
         id: 'tenant-1',
         name: 'TACTIKA-X',
-        domain: 'tactika-x.vercel.app',
+        domain: 'tactika-x.com',
         theme: 'armas',
         config: {
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },
       },
-      'farmacia.ejemplo.com': {
+      'tactika-x-app.vercel.app': {
+        id: 'tenant-1',
+        name: 'TACTIKA-X',
+        domain: 'tactika-x-app.vercel.app',
+        theme: 'armas',
+        config: {
+          apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
+        },
+      },
+      
+      // PRODUCCIÓN - BARMENTECH COMMERCE
+      'commerce.barmentech.com': {
+        id: 'tenant-0',
+        name: 'Barmentech Commerce',
+        domain: 'commerce.barmentech.com',
+        theme: 'barmentech',
+        config: {
+          apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
+        },
+      },
+      'barmentech-saas.vercel.app': {
+        id: 'tenant-0',
+        name: 'Barmentech Commerce',
+        domain: 'barmentech-saas.vercel.app',
+        theme: 'barmentech',
+        config: {
+          apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
+        },
+      },
+      
+      // PRODUCCIÓN - STORE TECH
+      'store.barmentech.com': {
         id: 'tenant-2',
-        name: 'Farmacia Salud',
-        domain: 'farmacia.ejemplo.com',
-        theme: 'farmacia',
+        name: 'TechStore',
+        domain: 'store.barmentech.com',
+        theme: 'store',
         config: {
           apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1',
         },
@@ -58,10 +101,24 @@ export async function resolveTenantFromDomain(hostname: string): Promise<TenantI
     };
 
     // Buscar por hostname exacto
-    const tenant = tenantMap[hostname];
+    let tenant = tenantMap[hostname];
     if (tenant) return tenant;
 
-    // Si no encuentra, usar default (TACTIKA-X)
+    // Buscar por patrón si no encuentra exacto
+    if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech-saas.vercel.app')) {
+      tenant = tenantMap['commerce.barmentech.com'];
+      if (tenant) return tenant;
+    }
+    if (hostname.includes('store.barmentech.com')) {
+      tenant = tenantMap['store.barmentech.com'];
+      if (tenant) return tenant;
+    }
+    if (hostname.includes('tactika-x.com') || hostname.includes('tactika-x-app.vercel.app')) {
+      tenant = tenantMap['tactika-x.com'];
+      if (tenant) return tenant;
+    }
+
+    // Default: TACTIKA-X
     return tenantMap['localhost:3000'];
   } catch (error) {
     console.error('Error resolving tenant:', error);
