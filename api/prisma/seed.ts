@@ -29,8 +29,8 @@ async function main() {
 
   const tenant2 = await prisma.tenant.create({
     data: {
-      name: 'ARMAS / TACTIKA-X',
-      slug: 'armas',
+      name: 'Tactika-X',
+      slug: 'tactika-x',
       status: 'active',
       billingStatus: 'ok',
       industry: 'Tactical Equipment',
@@ -94,9 +94,9 @@ async function main() {
 
   const managerUser = await prisma.tenantUser.create({
     data: {
-      email: 'admin@armas.com',
+      email: 'admin@tactika-x.com',
       passwordHash: hashedPassword,
-      name: 'Admin ARMAS',
+      name: 'Admin Tactika-X',
       role: TenantUserRole.owner,
       tenantId: tenant2.id,
       status: 'active',
@@ -245,7 +245,7 @@ async function main() {
 
   console.log('🎉 Seeding completed!');
   console.log('\n📊 Summary:');
-  console.log(`  - Tenants: 2 (Barmentech, ARMAS)`);
+  console.log(`  - Tenants: 2 (Barmentech, Tactika-X)`);
   console.log(`  - Tenant Users: 2`);
   console.log(`  - Customers: 2`);
   console.log(`  - Products: ${products.length}`);
@@ -253,11 +253,11 @@ async function main() {
   console.log(`  - Payments: 1`);
   console.log('\n🔐 Login credentials:');
   console.log(`  Barmentech - Email: admin@barmentech.com`);
-  console.log(`  ARMAS - Email: admin@armas.com`);
+  console.log(`  Tactika-X - Email: admin@tactika-x.com`);
   console.log(`  Password: password123`);
   console.log('\n🌐 Domains:');
   console.log(`  Barmentech: commerce.barmentech.com (ID: ${tenant1.id})`);
-  console.log(`  ARMAS: tactika-x.com (ID: ${tenant2.id})`);
+  console.log(`  Tactika-X: tactika-x.com (ID: ${tenant2.id})`);
 }
 
 main()

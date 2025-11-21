@@ -24,7 +24,7 @@ export default function StorefrontPage() {
     } else if (hostname.includes('store.barmentech.com')) {
       setTenantTheme('store');
     } else {
-      setTenantTheme('armas'); // Default
+      setTenantTheme('tactika-x'); // Default
     }
   }, []);
 

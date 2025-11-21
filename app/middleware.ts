@@ -16,14 +16,14 @@ export function middleware(request: NextRequest) {
     requestHeaders.set('x-hostname', hostname);
     
     // Mapeo de dominios a tenants
-    let tenantId = 'armas'; // Default: TACTIKA-X
+    let tenantId = 'tactika-x'; // Default: Tactika-X
     
     if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech-saas.vercel.app')) {
       tenantId = 'barmentech';
     } else if (hostname.includes('store.barmentech.com')) {
       tenantId = 'store';
     } else if (hostname.includes('tactika-x.com') || hostname.includes('tactika-x-app.vercel.app')) {
-      tenantId = 'armas';
+      tenantId = 'tactika-x';
     }
     
     requestHeaders.set('x-tenant-id', tenantId);
