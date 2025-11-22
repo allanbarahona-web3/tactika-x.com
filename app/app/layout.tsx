@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import '../src/styles/tailwind.css';
 import '../src/styles/globals.css';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export const metadata: Metadata = {
   title: 'Táctica-X | SaaS Multi-Tenant eCommerce',
@@ -32,7 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

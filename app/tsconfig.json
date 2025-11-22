@@ -32,11 +32,17 @@
       "@/src/*": [
         "./src/*"
       ],
+      "@/contexts/*": [
+        "./src/contexts/*"
+      ],
       "@/themes/*": [
         "./src/themes/*"
       ],
       "@/lib/*": [
         "./src/lib/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
       ]
     },
     "allowJs": true,
