@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { productsApi, categoriesApi } from '@/lib/api/client';
-import Link from 'next/link';
 
 interface Product {
   id: string;
