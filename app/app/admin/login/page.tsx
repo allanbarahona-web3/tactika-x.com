@@ -8,15 +8,18 @@ export default function AdminLoginPage() {
   const router = useRouter();
   const { login, isLoading } = useAuth();
   const [formData, setFormData] = useState({
-    email: 'demo@barmentech.com',
-    password: 'demo123',
-    tenantId: 'tenant_1',
+    email: 'admin@barmentech.com',
+    password: 'password123',
+    tenantId: 1,
   });
   const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'tenantId' ? parseInt(value) || 0 : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,9 +27,12 @@ export default function AdminLoginPage() {
     setError('');
 
     try {
-      await login(formData.email, formData.password, formData.tenantId);
+      console.log('Attempting login with:', { email: formData.email, tenantId: formData.tenantId });
+      await login(formData.email, formData.password, formData.tenantId.toString());
+      console.log('Login successful, redirecting...');
       router.push('/admin/dashboard');
     } catch (err) {
+      console.error('Login error:', err);
       setError(err instanceof Error ? err.message : 'Login failed');
     }
   };
@@ -91,7 +97,7 @@ export default function AdminLoginPage() {
                 Tenant ID
               </label>
               <input
-                type="text"
+                type="number"
                 id="tenantId"
                 name="tenantId"
                 value={formData.tenantId}

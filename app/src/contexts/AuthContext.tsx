@@ -28,12 +28,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Restore token from localStorage on mount
   useEffect(() => {
-    const storedToken = localStorage.getItem('auth_token');
-    const storedUser = localStorage.getItem('auth_user');
-    
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem('auth_token');
+      const storedUser = localStorage.getItem('auth_user');
+      
+      if (storedToken && storedUser) {
+        setToken(storedToken);
+        setUser(JSON.parse(storedUser));
+      }
     }
     setIsLoading(false);
   }, []);
@@ -44,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, tenantId }),
+        body: JSON.stringify({ email, password, tenantId: parseInt(tenantId) }),
       });
 
       if (!response.ok) {
@@ -57,18 +59,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setToken(access_token);
       setUser(userData);
-      localStorage.setItem('auth_token', access_token);
-      localStorage.setItem('auth_user', JSON.stringify(userData));
-    } finally {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('auth_token', access_token);
+        localStorage.setItem('auth_user', JSON.stringify(userData));
+      }
+      // Force a state update para que React se dé cuenta del cambio
       setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      throw err;
     }
   };
 
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_user');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+    }
   };
 
   return (

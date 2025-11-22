@@ -30,13 +30,19 @@ export default function AdminLayout({
     setMounted(true);
   }, []);
 
+  // Si estamos en la página de login, no verificar autenticación
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
+  // Si no está autenticado y no está cargando, redirigir al login
   useEffect(() => {
     if (mounted && !isLoading && !isAuthenticated) {
       router.push('/admin/login');
     }
   }, [mounted, isLoading, isAuthenticated, router]);
 
-  if (!mounted || isLoading || !isAuthenticated) {
+  if (!mounted || isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
@@ -45,6 +51,10 @@ export default function AdminLayout({
         </div>
       </div>
     );
+  }
+
+  if (!isAuthenticated) {
+    return null; // Will redirect in the useEffect above
   }
 
   const handleLogout = () => {
@@ -120,7 +130,7 @@ export default function AdminLayout({
             </h2>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <div className="text-right">
               <p className="text-sm font-medium text-gray-900">{user?.email}</p>
               <p className="text-xs text-gray-500 capitalize mt-1">{user?.role}</p>
@@ -128,6 +138,12 @@ export default function AdminLayout({
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 font-semibold text-sm">
               {user?.email?.charAt(0).toUpperCase()}
             </div>
+            <button
+              onClick={handleLogout}
+              className="ml-4 px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors border border-gray-200"
+            >
+              Logout
+            </button>
           </div>
         </header>
 

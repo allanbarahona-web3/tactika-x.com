@@ -61,6 +61,8 @@ export class AuthService {
   async login(loginDto: LoginDto, ipAddress?: string, userAgent?: string) {
     const { email, password, tenantId } = loginDto;
 
+    console.log('🔐 LOGIN ATTEMPT:', { email, tenantId, ipAddress });
+
     // Buscar usuario
     const user = await this.prisma.tenantUser.findUnique({
       where: {
@@ -71,23 +73,32 @@ export class AuthService {
       },
     });
 
+    console.log('👤 USER FOUND:', user ? `${user.email} (${user.role})` : 'NOT FOUND');
+
     if (!user) {
+      console.log('❌ Invalid credentials - user not found');
       throw new UnauthorizedException('Invalid credentials');
     }
 
     // Verificar password
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    console.log('🔑 PASSWORD VALID:', isPasswordValid);
+    
     if (!isPasswordValid) {
+      console.log('❌ Invalid credentials - password mismatch');
       throw new UnauthorizedException('Invalid credentials');
     }
 
     // Verificar que el usuario esté activo
     if (user.status !== 'active') {
+      console.log('❌ User not active, status:', user.status);
       throw new UnauthorizedException('User is not active');
     }
 
     // Generar tokens
     const { accessToken, refreshToken } = await this.generateTokens(user, ipAddress, userAgent);
+
+    console.log('✅ LOGIN SUCCESSFUL:', { userId: user.id, email: user.email });
 
     return {
       accessToken,

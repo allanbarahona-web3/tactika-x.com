@@ -17,7 +17,7 @@ export class AuthController {
   }
 
   @Post('login')
-  @Throttle({ default: { limit: 5, ttl: 900000 } })   // 5 requests per 15 minutes
+  @Throttle({ default: { limit: 100, ttl: 60000 } })   // 100 requests per minute (development)
   login(@Body() loginDto: LoginDto, @Request() req) {
     const ipAddress = req.ip || req.connection?.remoteAddress;
     const userAgent = req.headers['user-agent'];
