@@ -14,6 +14,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
 import { TenantDomainsModule } from './modules/tenant-domains/tenant-domains.module';
 import { EmailModule } from './modules/email/email.module';
 import { MediaModule } from './modules/media/media.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 import { HostExtractionMiddleware } from './common/middleware/host-extraction.middleware';
 import { TenantContextMiddleware } from './common/middleware/tenant-context.middleware';
 
@@ -51,6 +52,7 @@ import { TenantContextMiddleware } from './common/middleware/tenant-context.midd
     TenantDomainsModule,
     EmailModule,
     MediaModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
