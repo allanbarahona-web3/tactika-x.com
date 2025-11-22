@@ -35,7 +35,7 @@ export const tactikaXThemeConfig = {
   
   // Hero section
   hero: {
-    badge: '🔥 PRODUCTOS CERTIFICADOS Y LEGALES',
+    badge: '🔥 VERSIÓN ACTUALIZADA - PRODUCTOS CERTIFICADOS Y LEGALES',
     title: 'Equipamiento <span>Táctico</span> y<br/>Defensa Personal Profesional',
     subtitle: 'Equípate con lo mejor en defensa no letal, equipamiento táctico y accesorios outdoor. Calidad certificada, envíos rápidos y asesoría especializada.',
     ctaPrimary: {
