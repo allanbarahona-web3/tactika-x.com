@@ -6,6 +6,7 @@
  */
 
 import { Injectable, Logger, BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CryptoService } from '../../common/services/crypto.service';
@@ -33,6 +34,7 @@ export class EmailService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cryptoService: CryptoService,
+    private readonly configService: ConfigService,
   ) {}
 
   /**
@@ -51,7 +53,8 @@ export class EmailService {
       }
 
       // 2. Validar que existe configuración de email
-      const emailConfig = tenant.config?.email;
+      const currentConfig = (tenant.config as Record<string, any>) || {};
+      const emailConfig = currentConfig.email;
       if (!emailConfig || !emailConfig.isActive) {
         throw new BadRequestException(
           `Email not configured for tenant ${options.tenantId}`,
@@ -115,19 +118,19 @@ export class EmailService {
 
     switch (emailConfig.provider) {
       case 'smtp':
-        transporter = this.createSmtpTransporter(emailConfig);
+        transporter = await this.createSmtpTransporter(emailConfig);
         break;
 
       case 'sendgrid':
-        transporter = this.createSendGridTransporter(emailConfig);
+        transporter = await this.createSendGridTransporter(emailConfig);
         break;
 
       case 'mailgun':
-        transporter = this.createMailgunTransporter(emailConfig);
+        transporter = await this.createMailgunTransporter(emailConfig);
         break;
 
       case 'aws-ses':
-        transporter = this.createAwsSesTransporter(emailConfig);
+        transporter = await this.createAwsSesTransporter(emailConfig);
         break;
 
       default:
@@ -150,14 +153,15 @@ export class EmailService {
   /**
    * Crea transporter SMTP estándar
    */
-  private createSmtpTransporter(config: any): nodemailer.Transporter {
+  private async createSmtpTransporter(config: any): Promise<nodemailer.Transporter> {
     if (!config.host || !config.port) {
       throw new BadRequestException('SMTP host and port required');
     }
 
     // Desencriptar password si está encriptado
+    const secret = this.configService.get<string>('JWT_SECRET');
     const password = config.auth?.pass.startsWith('encrypted:')
-      ? this.cryptoService.decrypt(config.auth.pass)
+      ? await this.cryptoService.decrypt(config.auth.pass.replace('encrypted:', ''), secret)
       : config.auth?.pass;
 
     return nodemailer.createTransport({
@@ -174,13 +178,14 @@ export class EmailService {
   /**
    * Crea transporter SendGrid
    */
-  private createSendGridTransporter(config: any): nodemailer.Transporter {
+  private async createSendGridTransporter(config: any): Promise<nodemailer.Transporter> {
     if (!config.apiKey) {
       throw new BadRequestException('SendGrid API key required');
     }
 
+    const secret = this.configService.get<string>('JWT_SECRET');
     const apiKey = config.apiKey.startsWith('encrypted:')
-      ? this.cryptoService.decrypt(config.apiKey)
+      ? await this.cryptoService.decrypt(config.apiKey.replace('encrypted:', ''), secret)
       : config.apiKey;
 
     return nodemailer.createTransport({
@@ -197,13 +202,14 @@ export class EmailService {
   /**
    * Crea transporter Mailgun
    */
-  private createMailgunTransporter(config: any): nodemailer.Transporter {
+  private async createMailgunTransporter(config: any): Promise<nodemailer.Transporter> {
     if (!config.apiKey || !config.domain) {
       throw new BadRequestException('Mailgun API key and domain required');
     }
 
+    const secret = this.configService.get<string>('JWT_SECRET');
     const apiKey = config.apiKey.startsWith('encrypted:')
-      ? this.cryptoService.decrypt(config.apiKey)
+      ? await this.cryptoService.decrypt(config.apiKey.replace('encrypted:', ''), secret)
       : config.apiKey;
 
     return nodemailer.createTransport({
@@ -221,7 +227,7 @@ export class EmailService {
    * Crea transporter AWS SES
    * Requiere AWS SDK v3
    */
-  private createAwsSesTransporter(config: any): nodemailer.Transporter {
+  private async createAwsSesTransporter(config: any): Promise<nodemailer.Transporter> {
     // TODO: Implementar AWS SES
     throw new BadRequestException('AWS SES not yet implemented');
   }
@@ -236,11 +242,12 @@ export class EmailService {
         select: { config: true },
       });
 
-      if (!tenant?.config?.email) {
+      const currentConfig = (tenant?.config as Record<string, any>) || {};
+      if (!currentConfig.email) {
         return false;
       }
 
-      const transporter = await this.getOrCreateTransporter(tenantId, tenant.config.email);
+      const transporter = await this.getOrCreateTransporter(tenantId, currentConfig.email);
       await transporter.verify();
 
       this.logger.log(`SMTP config verified for tenant ${tenantId}`);

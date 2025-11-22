@@ -23,6 +23,7 @@ import { EmailService, EmailOptions } from './email.service';
 import { SmtpConfig } from '../tenants/dto/tenant-config.dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CryptoService } from '../../common/services/crypto.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('email')
 export class EmailController {
@@ -30,6 +31,7 @@ export class EmailController {
     private readonly emailService: EmailService,
     private readonly prisma: PrismaService,
     private readonly cryptoService: CryptoService,
+    private readonly configService: ConfigService,
   ) {}
 
   /**
@@ -62,22 +64,26 @@ export class EmailController {
 
     // Encriptar datos sensibles
     const encryptedConfig = { ...smtpConfig };
+    const secret = this.configService.get<string>('JWT_SECRET');
 
     if (encryptedConfig.auth?.pass && !encryptedConfig.auth.pass.startsWith('encrypted:')) {
-      encryptedConfig.auth.pass = `encrypted:${this.cryptoService.encrypt(
+      encryptedConfig.auth.pass = `encrypted:${await this.cryptoService.encrypt(
         encryptedConfig.auth.pass,
+        secret,
       )}`;
     }
 
     if (encryptedConfig.apiKey && !encryptedConfig.apiKey.startsWith('encrypted:')) {
-      encryptedConfig.apiKey = `encrypted:${this.cryptoService.encrypt(
+      encryptedConfig.apiKey = `encrypted:${await this.cryptoService.encrypt(
         encryptedConfig.apiKey,
+        secret,
       )}`;
     }
 
     // Actualizar config del tenant
+    const currentConfig = (tenant.config as Record<string, any>) || {};
     const updatedConfig = {
-      ...tenant.config,
+      ...currentConfig,
       email: encryptedConfig,
     };
 
@@ -115,7 +121,8 @@ export class EmailController {
       select: { config: true },
     });
 
-    if (!tenant?.config?.email) {
+    const currentConfig = (tenant?.config as Record<string, any>) || {};
+    if (!currentConfig.email) {
       return {
         configured: false,
         message: 'No email configuration found',
@@ -123,7 +130,7 @@ export class EmailController {
     }
 
     // Ocultar datos sensibles
-    const config = { ...tenant.config.email };
+    const config = { ...currentConfig.email };
     if (config.auth?.pass) {
       config.auth.pass = '***';
     }
@@ -244,14 +251,15 @@ export class EmailController {
       select: { config: true },
     });
 
-    if (!tenant?.config?.email) {
+    const currentConfig = (tenant?.config as Record<string, any>) || {};
+    if (!currentConfig.email) {
       throw new BadRequestException('No email configuration found');
     }
 
     const updatedConfig = {
-      ...tenant.config,
+      ...currentConfig,
       email: {
-        ...tenant.config.email,
+        ...currentConfig.email,
         isActive: false,
       },
     };
