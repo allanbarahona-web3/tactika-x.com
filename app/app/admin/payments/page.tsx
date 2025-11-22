@@ -38,16 +38,6 @@ export default function PaymentsPage() {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    const colors: Record<string, string> = {
-      pending: 'bg-yellow-100 text-yellow-800',
-      paid: 'bg-green-100 text-green-800',
-      failed: 'bg-red-100 text-red-800',
-      refunded: 'bg-gray-100 text-gray-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
-  };
-
   const handleMarkPaid = async (id: string) => {
     if (!token) return;
     try {
@@ -70,100 +60,90 @@ export default function PaymentsPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Payments</h1>
+      <h1 className="text-2xl font-semibold text-gray-900">Payments</h1>
+      <p className="text-sm text-gray-500 mt-1 mb-8">Track and manage payments</p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-          {error}
+        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 mb-6">
+          <p className="text-red-700 text-sm font-medium">{error}</p>
         </div>
       )}
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading payments...</p>
+            <div className="w-12 h-12 rounded-full border-2 border-gray-200 border-t-gray-900 animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600 text-sm font-medium">Loading payments</p>
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
           {payments.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
-              <p className="text-lg">No payments yet</p>
+            <div className="p-12 text-center">
+              <svg className="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+              <p className="text-sm font-medium text-gray-900">No payments</p>
             </div>
           ) : (
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Transaction ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Order ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Amount
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Method
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                    Actions
-                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">ID</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Order</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Amount</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Method</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {payments.map((payment) => (
                   <tr key={payment.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 text-sm text-gray-900 font-mono">
+                    <td className="px-6 py-4 text-xs text-gray-900 font-mono">
                       {payment.transactionId || '—'}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-xs text-gray-600">
                       {payment.orderId}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-xs font-semibold text-gray-900">
                       ${(payment.amount / 100).toFixed(2)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600 capitalize">
+                    <td className="px-6 py-4 text-xs text-gray-600 capitalize">
                       {payment.paymentMethod}
                     </td>
-                    <td className="px-6 py-4 text-sm">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                          payment.status
-                        )}`}
-                      >
+                    <td className="px-6 py-4 text-xs">
+                      <span className={`px-2.5 py-1 rounded text-xs font-medium ${
+                        payment.status === 'paid'
+                          ? 'bg-green-50 text-green-700'
+                          : payment.status === 'failed'
+                          ? 'bg-red-50 text-red-700'
+                          : 'bg-yellow-50 text-yellow-700'
+                      }`}>
                         {payment.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-xs text-gray-600">
                       {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 text-sm space-x-2">
+                    <td className="px-6 py-4 text-xs space-x-2">
                       {payment.status === 'pending' && (
                         <>
                           <button
                             onClick={() => handleMarkPaid(payment.id)}
                             className="text-green-600 hover:text-green-700 font-medium"
                           >
-                            ✓ Mark Paid
+                            Paid
                           </button>
                           <button
                             onClick={() => handleMarkFailed(payment.id)}
                             className="text-red-600 hover:text-red-700 font-medium"
                           >
-                            ✗ Mark Failed
+                            Failed
                           </button>
                         </>
                       )}
                       {payment.status !== 'pending' && (
-                        <span className="text-gray-500">—</span>
+                        <span className="text-gray-400">—</span>
                       )}
                     </td>
                   </tr>

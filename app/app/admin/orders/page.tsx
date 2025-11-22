@@ -45,44 +45,36 @@ export default function OrdersPage() {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    const colors: Record<string, string> = {
-      pending: 'bg-yellow-100 text-yellow-800',
-      processing: 'bg-blue-100 text-blue-800',
-      completed: 'bg-green-100 text-green-800',
-      cancelled: 'bg-red-100 text-red-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
-  };
-
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Orders</h1>
+      <h1 className="text-2xl font-semibold text-gray-900">Orders</h1>
+      <p className="text-sm text-gray-500 mt-1 mb-8">Manage customer orders</p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-          {error}
+        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 mb-6">
+          <p className="text-red-700 text-sm font-medium">{error}</p>
         </div>
       )}
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading orders...</p>
+            <div className="w-12 h-12 rounded-full border-2 border-gray-200 border-t-gray-900 animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600 text-sm font-medium">Loading orders</p>
           </div>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {orders.length === 0 ? (
-            <div className="bg-white rounded-lg shadow p-12 text-center text-gray-500">
-              <p className="text-lg">No orders yet</p>
+            <div className="bg-white border border-gray-200 rounded-lg p-12 text-center">
+              <svg className="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              <p className="text-sm font-medium text-gray-900">No orders</p>
             </div>
           ) : (
             orders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors"
               >
                 <button
                   onClick={() =>
@@ -94,10 +86,10 @@ export default function OrdersPage() {
                     <div className="flex-1">
                       <div className="flex items-center gap-4">
                         <div>
-                          <p className="font-medium text-gray-900">
+                          <p className="font-semibold text-gray-900">
                             Order #{order.orderNumber}
                           </p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-xs text-gray-500 mt-1">
                             {new Date(order.createdAt).toLocaleDateString()}
                           </p>
                         </div>
@@ -110,14 +102,18 @@ export default function OrdersPage() {
                           ${(order.total / 100).toFixed(2)}
                         </p>
                         <span
-                          className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                            order.status
-                          )}`}
+                          className={`inline-block px-2.5 py-1 rounded text-xs font-medium mt-1 ${
+                            order.status === 'pending'
+                              ? 'bg-yellow-50 text-yellow-700'
+                              : order.status === 'completed'
+                              ? 'bg-green-50 text-green-700'
+                              : 'bg-red-50 text-red-700'
+                          }`}
                         >
                           {order.status}
                         </span>
                       </div>
-                      <div className="text-gray-400 text-xl">
+                      <div className="text-gray-400 text-lg">
                         {expandedId === order.id ? '▼' : '▶'}
                       </div>
                     </div>
@@ -126,7 +122,7 @@ export default function OrdersPage() {
 
                 {expandedId === order.id && (
                   <div className="border-t border-gray-200 p-6 bg-gray-50">
-                    <h3 className="font-medium text-gray-900 mb-4">Items</h3>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-4">Items</h3>
                     <div className="space-y-2">
                       {order.items.map((item) => (
                         <div
