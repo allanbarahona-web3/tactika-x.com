@@ -117,16 +117,6 @@ export default function AdminLoginPage() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-
-          {/* Demo Credentials */}
-          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-            <p className="text-xs font-medium text-gray-900 mb-3">Demo Credentials</p>
-            <div className="space-y-2 text-xs text-gray-600 font-mono">
-              <p><span className="text-gray-900 font-medium">Email:</span> {formData.email}</p>
-              <p><span className="text-gray-900 font-medium">Password:</span> {formData.password}</p>
-              <p><span className="text-gray-900 font-medium">Tenant:</span> {formData.tenantId}</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
