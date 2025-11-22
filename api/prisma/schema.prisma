@@ -91,6 +91,8 @@ model Tenant {
   payments    Payment[]
   sessions    AuthSession[]
   domains     TenantDomain[]
+  categories  Category[]
+  media       Media[]
 
   @@map("tenants")
 }
@@ -144,12 +146,70 @@ model Customer {
 }
 
 // ========================================
+// CATEGORÍAS (Para organizar productos)
+// ========================================
+
+model Category {
+  id          String   @id @default(uuid())
+  tenantId    Int
+  name        String
+  slug        String
+  description String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  products Product[]
+  media    Media[]
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@index([tenantId, isActive])
+  @@map("categories")
+}
+
+// ========================================
+// MEDIA (Imágenes para todas las entidades)
+// ========================================
+
+model Media {
+  id        String   @id @default(uuid())
+  tenantId  Int
+  
+  // Campo genérico para relacionar con cualquier entidad
+  entityType  String  // "category", "product", "tenant_branding", "hero"
+  entityId    String  // ID de la categoría, producto, etc
+  
+  // Path relativo en DO Spaces
+  path      String   // "tenants/2/categories/defensa-personal.jpg"
+  alt       String?
+  order     Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [entityId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([entityType])
+  @@index([entityId])
+  @@index([tenantId, entityType])
+  @@map("media")
+}
+
+// ========================================
 // PRODUCTOS
 // ========================================
 
 model Product {
   id          String      @id @default(uuid())
   tenantId    Int
+  categoryId  String?
   name        String
   slug        String
   description String?
@@ -164,10 +224,12 @@ model Product {
 
   // Relaciones
   tenant     Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   orderItems OrderItem[]
 
   @@unique([tenantId, slug])
   @@index([tenantId])
+  @@index([categoryId])
   @@map("products")
 }
 
