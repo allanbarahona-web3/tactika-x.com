@@ -32,25 +32,28 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
-            Admin Panel
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-2">
+            Tactika-X
           </h1>
-          <p className="text-center text-gray-600 mb-8">
-            Tactika-X / Barmentech
-          </p>
+          <p className="text-gray-500 text-sm">Admin Panel</p>
+        </div>
 
+        {/* Form Card */}
+        <div className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-              {error}
+            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+              <p className="text-red-700 text-sm font-medium">{error}</p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
                 Email
               </label>
               <input
@@ -59,14 +62,15 @@ export default function AdminLoginPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                 required
                 disabled={isLoading}
               />
             </div>
 
+            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
                 Password
               </label>
               <input
@@ -75,14 +79,15 @@ export default function AdminLoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                 required
                 disabled={isLoading}
               />
             </div>
 
+            {/* Tenant ID */}
             <div>
-              <label htmlFor="tenantId" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="tenantId" className="block text-sm font-medium text-gray-900 mb-2">
                 Tenant ID
               </label>
               <input
@@ -91,31 +96,30 @@ export default function AdminLoginPage() {
                 name="tenantId"
                 value={formData.tenantId}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                 required
                 disabled={isLoading}
               />
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              className="w-full px-4 py-3 bg-gray-900 hover:bg-black disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors text-sm mt-8"
             >
-              {isLoading ? 'Logging in...' : 'Login'}
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-600 text-center">
-              Demo Credentials:
-              <br />
-              Email: demo@barmentech.com
-              <br />
-              Password: demo123
-              <br />
-              Tenant: tenant_1
-            </p>
+          {/* Demo Credentials */}
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <p className="text-xs font-medium text-gray-900 mb-3">Demo Credentials</p>
+            <div className="space-y-2 text-xs text-gray-600 font-mono">
+              <p><span className="text-gray-900 font-medium">Email:</span> {formData.email}</p>
+              <p><span className="text-gray-900 font-medium">Password:</span> {formData.password}</p>
+              <p><span className="text-gray-900 font-medium">Tenant:</span> {formData.tenantId}</p>
+            </div>
           </div>
         </div>
       </div>

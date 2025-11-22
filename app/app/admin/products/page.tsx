@@ -118,45 +118,49 @@ export default function ProductsPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Products</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
+          <p className="text-sm text-gray-500 mt-1">Manage your product catalog</p>
+        </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-gray-900 hover:bg-black text-white rounded-lg font-medium text-sm transition-colors"
         >
-          <span>➕</span>
-          <span>Add Product</span>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+          <span>New Product</span>
         </button>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-          {error}
+        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 mb-6">
+          <p className="text-red-700 text-sm font-medium">{error}</p>
         </div>
       )}
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading products...</p>
+            <div className="w-12 h-12 rounded-full border-2 border-gray-200 border-t-gray-900 animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600 text-sm font-medium">Loading products</p>
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
           {products.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
-              <p className="text-lg">No products yet</p>
-              <p className="text-sm mt-1">Click "Add Product" to create your first product</p>
+            <div className="p-12 text-center">
+              <svg className="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m0 0L4 7m8 4v10l8-4v-10L12 11m0 0L4 7" /></svg>
+              <p className="text-sm font-medium text-gray-900">No products</p>
+              <p className="text-xs text-gray-500 mt-1">Create your first product to get started</p>
             </div>
           ) : (
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Name</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Category</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Price</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Stock</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Product</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Stock</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wide">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -164,29 +168,29 @@ export default function ProductsPage() {
                   <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">
                       <div>
-                        <p className="font-medium text-gray-900">{product.name}</p>
-                        <p className="text-sm text-gray-500">{product.slug}</p>
+                        <p className="text-sm font-medium text-gray-900">{product.name}</p>
+                        <p className="text-xs text-gray-500 font-mono">{product.slug}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {product.category?.name || '—'}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-semibold text-gray-900">
                       ${(product.price / 100).toFixed(2)}
                     </td>
                     <td className="px-6 py-4 text-sm">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      <span className={`px-2.5 py-1 rounded text-xs font-medium ${
                         product.stock > 0
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-green-50 text-green-700'
+                          : 'bg-red-50 text-red-700'
                       }`}>
                         {product.stock}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm">
+                    <td className="px-6 py-4 text-sm space-x-3">
                       <button
                         onClick={() => handleEdit(product)}
-                        className="text-blue-600 hover:text-blue-700 font-medium mr-4"
+                        className="text-gray-600 hover:text-gray-900 font-medium"
                       >
                         Edit
                       </button>
@@ -207,17 +211,17 @@ export default function ProductsPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
             <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-gray-900">
-                {editingId ? 'Edit Product' : 'Add Product'}
+              <h2 className="text-lg font-semibold text-gray-900">
+                {editingId ? 'Edit Product' : 'New Product'}
               </h2>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-6 space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Product Name
                 </label>
                 <input
@@ -225,13 +229,13 @@ export default function ProductsPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Slug
                 </label>
                 <input
@@ -239,20 +243,20 @@ export default function ProductsPage() {
                   name="slug"
                   value={formData.slug}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Category
                 </label>
                 <select
                   name="categoryId"
                   value={formData.categoryId}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                 >
                   <option value="">Select a category</option>
                   {categories.map((cat) => (
@@ -264,7 +268,7 @@ export default function ProductsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Price (USD)
                 </label>
                 <input
@@ -274,13 +278,13 @@ export default function ProductsPage() {
                   onChange={handleInputChange}
                   step="0.01"
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Stock
                 </label>
                 <input
@@ -289,13 +293,13 @@ export default function ProductsPage() {
                   value={formData.stock}
                   onChange={handleInputChange}
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Description
                 </label>
                 <textarea
@@ -303,7 +307,7 @@ export default function ProductsPage() {
                   value={formData.description}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
                 />
               </div>
 
@@ -311,13 +315,13 @@ export default function ProductsPage() {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                  className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-gray-900 hover:bg-black text-white rounded-lg font-medium text-sm transition-colors"
                 >
                   {editingId ? 'Update' : 'Create'}
                 </button>
