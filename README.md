@@ -1,11 +1,11 @@
-# 🏪 TACTIKA-X | SaaS Multi-Tenant eCommerce Platform
+# 🏪 BARMENTECH ECOMMERCE | SaaS Multi-Tenant eCommerce Platform
 
-Plataforma ecommerce SaaS multi-tenant para vender equipamiento táctico y defensa personal. Sistema completo con backend NestJS (95%+ producción) y frontend Next.js con App Router.
+Enterprise-grade multi-tenant eCommerce SaaS platform for tactical equipment and personal defense gear sales. Complete system with production-ready NestJS backend (95%+) and Next.js frontend with App Router.
 
-## 🏗️ Arquitetura General
+## 🏗️ General Architecture
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    TACTIKA-X Platform                   │
+│                BARMENTECH ECOMMERCE Platform             │
 ├─────────────────────────────────────────────────────────┤
 │                                                           │
 │  Frontend (Next.js 16 + App Router)     Backend (NestJS) │
@@ -16,42 +16,42 @@ Plataforma ecommerce SaaS multi-tenant para vender equipamiento táctico y defen
 │  └─ Auth (Login/Register)               └─ 32+ Endpoints │
 │                                                           │
 │  Stack: NestJS + Prisma + PostgreSQL + Next.js           │
-│  Multi-tenant isolation con Row-Level Security (RLS)     │
-│  Autenticación JWT con revocación JTI                    │
+│  Multi-tenant isolation with Row-Level Security (RLS)    │
+│  JWT Authentication with JTI revocation                  │
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 🚀 Estado Actual del Proyecto
+## 🚀 Project Status
 
-### Backend (✅ 95%+ Listo)
+### Backend (✅ 95%+ Production Ready)
 - ✅ NestJS + Prisma ORM
-- ✅ Multi-tenancy con TenantDomains
-- ✅ HostExtraction middleware para routing
-- ✅ Row-Level Security (RLS) - 32+ políticas activas
+- ✅ Multi-tenancy with TenantDomains
+- ✅ HostExtraction middleware for routing
+- ✅ Row-Level Security (RLS) - 32+ active policies
 - ✅ JWT + JTI revocation
-- ✅ Rate limiting configurado
-- ✅ 32+ endpoints implementados
-- ✅ Validación completa
-- ⏳ Tests (parcialmente completados)
+- ✅ Rate limiting configured
+- ✅ 32+ endpoints implemented
+- ✅ Complete validation
+- ⏳ Tests (partially completed)
 
-### Frontend (✅ App Router Completo)
-- ✅ Migración Pages Router → App Router
-- ✅ Página de storefront con 50 productos
-- ✅ Panel admin responsivo (Apple-style design)
-- ✅ Sistema de carrito funcional
-- ✅ Modal de login con autenticación JWT
-- ✅ 1,500+ líneas de CSS reutilizado
-- ✅ TypeScript con path aliases
-- ✅ Integración completa con backend API
-- ✅ SSR hydration y multi-tenant support
+### Frontend (✅ App Router Complete)
+- ✅ Pages Router → App Router migration
+- ✅ Storefront page with 50 products
+- ✅ Responsive admin panel (Apple-style design)
+- ✅ Functional cart system
+- ✅ JWT authentication modal
+- ✅ 1,500+ lines of reusable CSS
+- ✅ TypeScript with path aliases
+- ✅ Complete backend API integration
+- ✅ SSR hydration and multi-tenant support
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-### Carpeta `/api` - Backend (NestJS + Prisma)
+### `/api` Folder - Backend (NestJS + Prisma)
 ```
 api/
 ├── src/
-│   ├── common/                      # Decoradores, guards, interceptors
+│   ├── common/                      # Decorators, guards, interceptors
 │   │   ├── decorators/              # @CurrentTenant, @CurrentUser, @Roles
 │   │   ├── guards/                  # RolesGuard, AuthGuard
 │   │   ├── middleware/              # HostExtraction, TenantContext
@@ -59,16 +59,16 @@ api/
 │   │
 │   ├── modules/
 │   │   ├── auth/                    # Login, register, JWT, refresh
-│   │   ├── tenants/                 # Gestión de tenants
-│   │   ├── tenant-domains/          # Mapeo de dominios a tenants
-│   │   ├── tenant-users/            # Usuarios por tenant
-│   │   ├── products/                # Gestión de productos
-│   │   ├── categories/              # Categorías
-│   │   ├── orders/                  # Órdenes de compra
-│   │   ├── payments/                # Procesamiento de pagos
-│   │   └── ...otros módulos
+│   │   ├── tenants/                 # Tenant management
+│   │   ├── tenant-domains/          # Domain to tenant mapping
+│   │   ├── tenant-users/            # Tenant users
+│   │   ├── products/                # Product management
+│   │   ├── categories/              # Categories
+│   │   ├── orders/                  # Purchase orders
+│   │   ├── payments/                # Payment processing
+│   │   └── ...other modules
 │   │
-│   ├── prisma/                      # ORM y migraciones
+│   ├── prisma/                      # ORM and migrations
 │   │   ├── schema.prisma
 │   │   └── migrations/
 │   │
@@ -78,45 +78,45 @@ api/
 │   └── main.ts                      # Entry point
 │
 ├── prisma/
-│   ├── schema.prisma                # Definición del schema
-│   ├── enable-rls.sql              # Políticas Row-Level Security
-│   └── seed.ts                      # Datos iniciales
+│   ├── schema.prisma                # Schema definition
+│   ├── enable-rls.sql              # Row-Level Security policies
+│   └── seed.ts                      # Seed data
 │
-├── test/                            # Tests e2e
-├── nest-cli.json                    # Configuración NestJS
+├── test/                            # E2E tests
+├── nest-cli.json                    # NestJS configuration
 ├── tsconfig.json                    # TypeScript config
-└── package.json                     # Dependencias y scripts
+└── package.json                     # Dependencies and scripts
 ```
 
-### Carpeta `/app` - Frontend (Next.js 16 + App Router)
+### `/app` Folder - Frontend (Next.js 16 + App Router)
 ```
 app/
 ├── app/                             # App Router structure (Next.js 13+)
-│   ├── (storefront)/                # Rutas públicas
-│   │   ├── page.tsx                 # Home - tienda con 50 productos
+│   ├── (storefront)/                # Public routes
+│   │   ├── page.tsx                 # Home - store with 50 products
 │   │   ├── layout.tsx
-│   │   └── ...rutas públicas
+│   │   └── ...public routes
 │   │
-│   ├── (platform)/                  # Rutas plataforma
+│   ├── (platform)/                  # Platform routes
 │   │   ├── layout.tsx
-│   │   └── ...páginas
+│   │   └── ...pages
 │   │
-│   ├── (tenant-admin)/              # Admin panel multitenancy
-│   │   ├── layout.tsx               # Con sidebar + topbar
+│   ├── (tenant-admin)/              # Admin panel for multi-tenancy
+│   │   ├── layout.tsx               # With sidebar + topbar
 │   │   ├── dashboard/
 │   │   │   └── page.tsx             # Dashboard overview
 │   │   ├── products/
-│   │   │   └── page.tsx             # Gestión productos
+│   │   │   └── page.tsx             # Product management
 │   │   ├── categories/
-│   │   │   └── page.tsx             # Gestión categorías
+│   │   │   └── page.tsx             # Category management
 │   │   ├── orders/
-│   │   │   └── page.tsx             # Órdenes
+│   │   │   └── page.tsx             # Orders
 │   │   ├── payments/
-│   │   │   └── page.tsx             # Pagos
+│   │   │   └── page.tsx             # Payments
 │   │   ├── media/
-│   │   │   └── page.tsx             # Gestor de medios
+│   │   │   └── page.tsx             # Media manager
 │   │   └── settings/
-│   │       └── page.tsx             # Configuración
+│   │       └── page.tsx             # Settings
 │   │
 │   ├── layout.tsx                   # Root layout
 │   ├── globals.css                  # Global styles (Apple-design)
@@ -125,9 +125,9 @@ app/
 ├── src/
 │   ├── components/
 │   │   ├── auth/
-│   │   │   └── LoginModal.tsx       # Modal de autenticación
+│   │   │   └── LoginModal.tsx       # Authentication modal
 │   │   └── shared/
-│   │       └── ...componentes
+│   │       └── ...components
 │   │
 │   ├── contexts/
 │   │   └── AuthContext.tsx          # Auth state management
@@ -140,72 +140,72 @@ app/
 │   │
 │   ├── lib/
 │   │   ├── api.ts                   # HTTP client wrapper
-│   │   ├── config.ts                # API config y endpoints
+│   │   ├── config.ts                # API config and endpoints
 │   │   ├── tenant/
 │   │   │   └── tenant.ts            # Tenant utilities
 │   │   └── utils/
 │   │       └── ...utility functions
 │   │
 │   └── styles/
-│       ├── globals.css              # 1,500+ líneas CSS
+│       ├── globals.css              # 1,500+ lines of CSS
 │       └── tailwind.css             # Tailwind imports
 │
 ├── public/
 │   ├── manifest.json
-│   └── themes/                      # Assets por tema
+│   └── themes/                      # Theme assets
 │       ├── armas/
 │       ├── barmentech/
-│       └── ...temas
+│       └── ...themes
 │
-├── .env.local                       # Env variables
+├── .env.local                       # Environment variables
 ├── next.config.js                   # Next.js config
 ├── tailwind.config.ts               # Tailwind config
 ├── tsconfig.json                    # TypeScript config
-└── package.json                     # Scripts y dependencias
+└── package.json                     # Scripts and dependencies
 ```
 
-## 🛠️ Instalación y Configuración
+## 🛠️ Installation & Setup
 
-### Requisitos Previos
+### Prerequisites
 - Node.js 18+
-- pnpm (gestor de paquetes)
+- pnpm (package manager)
 - PostgreSQL 14+
-- Docker (opcional, para base de datos)
+- Docker (optional, for database)
 
 ### 1. Backend Setup (NestJS + Prisma)
 
 ```bash
 cd api
 
-# Instalar dependencias
+# Install dependencies
 pnpm install
 
-# Copiar archivo de entorno
+# Copy environment file
 cp .env.example .env.local
 
-# Generar cliente de Prisma
+# Generate Prisma client
 pnpm prisma:generate
 
-# Ejecutar migraciones
+# Run migrations
 pnpm prisma:migrate
 
-# Iniciar servidor en modo desarrollo
+# Start development server
 pnpm dev
 ```
 
-**URL Backend:** `http://localhost:3000`
-**Documentación API:** `http://localhost:3000/api/docs`
+**Backend URL:** `http://localhost:3000`
+**API Documentation:** `http://localhost:3000/api/docs`
 
-**Scripts disponibles:**
+**Available scripts:**
 ```bash
-pnpm dev                    # Desarrollo
-pnpm build                  # Build producción
-pnpm start:prod             # Iniciar producción
-pnpm prisma:generate        # Generar cliente Prisma
-pnpm prisma:migrate         # Crear/aplicar migraciones
-pnpm prisma:studio          # Abrir Prisma Studio
-pnpm test                   # Ejecutar tests
-pnpm test:cov               # Tests con cobertura
+pnpm dev                    # Development
+pnpm build                  # Production build
+pnpm start:prod             # Start production
+pnpm prisma:generate        # Generate Prisma client
+pnpm prisma:migrate         # Create/apply migrations
+pnpm prisma:studio          # Open Prisma Studio
+pnpm test                   # Run tests
+pnpm test:cov               # Tests with coverage
 pnpm lint                   # ESLint
 pnpm format                 # Prettier
 ```
@@ -215,62 +215,62 @@ pnpm format                 # Prettier
 ```bash
 cd app
 
-# Instalar dependencias
+# Install dependencies
 pnpm install
 
-# Crear archivo de entorno
+# Create environment file
 cat > .env.local << EOF
 NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
 PORT=3001
 EOF
 
-# Iniciar servidor de desarrollo
+# Start development server
 pnpm dev -p 3001
 ```
 
-**URL Frontend:** `http://localhost:3001`
+**Frontend URL:** `http://localhost:3001`
 
-**Scripts disponibles:**
+**Available scripts:**
 ```bash
-pnpm dev                    # Desarrollo
-pnpm build                  # Build optimizado
-pnpm start                  # Servidor producción
+pnpm dev                    # Development
+pnpm build                  # Optimized build
+pnpm start                  # Production server
 pnpm test                   # Tests
 pnpm test:e2e               # E2E tests
 pnpm lint                   # ESLint
 ```
 
-## 📖 Guía de Uso
+## 📖 Usage Guide
 
-### Frontend - Para Desarrolladores / Usuarios
+### Frontend - For Developers / Users
 
-#### Acceder a la tienda
+#### Access the store
 ```
 http://localhost:3001/
 ```
-- Ver 50 productos con filtrado por categoría
-- Agregar productos al carrito
-- Abrir modal de login
-- Admin panel en `/admin`
+- View 50 products with category filtering
+- Add products to cart
+- Open login modal
+- Admin panel at `/admin`
 
 #### Admin Dashboard
 ```
 http://localhost:3001/admin
 ```
-- Dashboard: Overview con resumen
-- Products: CRUD de productos
-- Categories: Gestión de categorías
-- Orders: Historial de órdenes
-- Payments: Procesamiento de pagos
-- Media: Gestor de archivos
-- Settings: Configuración de tenant
+- Dashboard: Overview summary
+- Products: Product CRUD operations
+- Categories: Category management
+- Orders: Order history
+- Payments: Payment processing
+- Media: File manager
+- Settings: Tenant configuration
 
-**Credenciales de prueba:**
-- Email: `admin@barmentech.com`
-- Password: `password123`
-- Tenant ID: `1`
+**Test Credentials:**
+- Email: `admin@xxxxxx.com`
+- Password: `xxxxxxxxx`
+- Tenant ID: `x`
 
-#### Usar los hooks personalizados en React/Next.js
+#### Using custom React/Next.js hooks
 
 ```tsx
 import { useAuth } from '@/hooks/useAuth';
@@ -285,17 +285,17 @@ export default function MyComponent() {
   return (
     <>
       {isAuthenticated ? (
-        <p>Bienvenido {user?.email}</p>
+        <p>Welcome {user?.email}</p>
       ) : (
         <button onClick={() => login()}>Login</button>
       )}
-      {/* Tu código aquí */}
+      {/* Your code here */}
     </>
   );
 }
 ```
 
-#### Conectar con backend API desde frontend
+#### Connect to backend API from frontend
 
 ```tsx
 import { apiClient } from '@/lib/api';
@@ -312,185 +312,185 @@ const order = await apiClient.post(
   }
 );
 
-// Con autenticación automática (usa token del localStorage)
+// With automatic authentication (uses token from localStorage)
 ```
 
-### Backend - Para Desarrolladores de API
+### Backend - For API Developers
 
-#### Endpoints principales
+#### Main Endpoints
 
 **Health & System**
 ```
-GET    /health                      - Estado del servidor
+GET    /health                      - Server status
 ```
 
-**Autenticación**
+**Authentication**
 ```
-POST   /auth/login                  - Login con email/password + tenantId
-POST   /auth/register               - Crear cuenta
+POST   /auth/login                  - Login with email/password + tenantId
+POST   /auth/register               - Create account
 POST   /auth/logout                 - Logout
-POST   /auth/refresh                - Refrescar token JWT
+POST   /auth/refresh                - Refresh JWT token
 ```
 
-**Productos (Multi-tenant)**
+**Products (Multi-tenant)**
 ```
-GET    /products                    - Listar productos del tenant
-GET    /products/:id                - Detalle producto
-POST   /products                    - Crear producto (admin)
-PUT    /products/:id                - Editar producto (admin)
-DELETE /products/:id                - Eliminar producto (admin)
-```
-
-**Categorías**
-```
-GET    /categories                  - Listar categorías
-POST   /categories                  - Crear categoría (admin)
-PUT    /categories/:id              - Editar categoría (admin)
-DELETE /categories/:id              - Eliminar categoría (admin)
+GET    /products                    - List tenant products
+GET    /products/:id                - Product detail
+POST   /products                    - Create product (admin)
+PUT    /products/:id                - Update product (admin)
+DELETE /products/:id                - Delete product (admin)
 ```
 
-**Órdenes (Multi-tenant)**
+**Categories**
 ```
-GET    /orders                      - Mis órdenes
-POST   /orders                      - Crear orden
-GET    /orders/:id                  - Detalle orden
+GET    /categories                  - List categories
+POST   /categories                  - Create category (admin)
+PUT    /categories/:id              - Update category (admin)
+DELETE /categories/:id              - Delete category (admin)
 ```
 
-**Pagos**
+**Orders (Multi-tenant)**
 ```
-GET    /payments                    - Listar pagos
-POST   /payments                    - Procesar pago
-GET    /payments/:id                - Detalle pago
+GET    /orders                      - My orders
+POST   /orders                      - Create order
+GET    /orders/:id                  - Order detail
+```
+
+**Payments**
+```
+GET    /payments                    - List payments
+POST   /payments                    - Process payment
+GET    /payments/:id                - Payment detail
 ```
 
 **Admin - Tenant Management**
 ```
-GET    /tenants                     - Listar mis tenants (super-admin)
-POST   /tenants                     - Crear tenant (super-admin)
-GET    /tenants/:id                 - Detalle tenant
-PATCH  /tenants/:id                 - Actualizar tenant
+GET    /tenants                     - List my tenants (super-admin)
+POST   /tenants                     - Create tenant (super-admin)
+GET    /tenants/:id                 - Tenant detail
+PATCH  /tenants/:id                 - Update tenant
 ```
 
-#### Ejemplo de request autenticado
+#### Example authenticated request
 
 ```bash
 # Login
 curl -X POST http://localhost:3000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "admin@barmentech.com",
-    "password": "password123",
-    "tenantId": 1
+    "email": "xxxxx",
+    "password": "xxxxxxxxx",
+    "tenantId": x
   }'
 
-# Response incluye access_token
-# Usar token en siguiente request:
+# Response includes access_token
+# Use token in next request:
 
 curl -X GET http://localhost:3000/api/v1/products \
   -H "Authorization: Bearer <access_token>"
 ```
 
-## 🔄 Arquitectura Multi-Tenant
+## 🔄 Multi-Tenant Architecture
 
-### Flujo de Aislamiento de Datos
+### Data Isolation Flow
 
-1. **Cliente accede:** `cliente1.tactika-x.com`
-2. **HostExtraction middleware:** Extrae hostname
-3. **Lookup en TenantDomains:** Busca tenant_id del dominio
-4. **TenantContext:** Se inyecta tenantId en cada request
-5. **Row-Level Security (RLS):** PostgreSQL aplica políticas automáticas
-6. **Response:** Solo datos del tenant solicitado
+1. **Client accesses:** `client1.barmentech.com`
+2. **HostExtraction middleware:** Extracts hostname
+3. **TenantDomains lookup:** Finds tenant_id for domain
+4. **TenantContext:** Injects tenantId in each request
+5. **Row-Level Security (RLS):** PostgreSQL applies policies automatically
+6. **Response:** Only requested tenant data returned
 
-### Seguridad Multi-Tenant
+### Multi-Tenant Security
 
-**RLS (Row-Level Security) en PostgreSQL:**
+**RLS (Row-Level Security) in PostgreSQL:**
 ```sql
--- Ejemplo de política para tabla products:
+-- Example policy for products table:
 CREATE POLICY "enable_read_for_tenant" ON products
   FOR SELECT
   USING (tenant_id = current_tenant_id);
 
--- 32+ políticas en total para todas las tablas
+-- 32+ policies total for all tables
 ```
 
-**Aislamiento en Backend:**
-- Decoradores: `@CurrentTenant()`, `@CurrentUser()`, `@Roles()`
-- Guards: Valida autenticación y autorización
-- Middleware: Inyecta tenantId en contexto
-- JWT: Incluye `tenantId` y `userId` en payload
+**Backend Isolation:**
+- Decorators: `@CurrentTenant()`, `@CurrentUser()`, `@Roles()`
+- Guards: Validates authentication and authorization
+- Middleware: Injects tenantId in context
+- JWT: Includes `tenantId` and `userId` in payload
 
-**Flujo de Token:**
+**Token Flow:**
 ```
-Login → JTI generado → Token con tenantId + userId
+Login → JTI generated → Token with tenantId + userId
   ↓
-Request con Authorization header
+Request with Authorization header
   ↓
-Passport valida JWT + JTI (revocación)
+Passport validates JWT + JTI (revocation)
   ↓
-Decoradores extraen tenantId del token
+Decorators extract tenantId from token
   ↓
-RLS en PostgreSQL filtra datos automáticamente
+RLS in PostgreSQL filters data automatically
 ```
 
-## 📊 Base de Datos
+## 📊 Database
 
 ### Stack
-- **Motor:** PostgreSQL 14+
+- **Engine:** PostgreSQL 14+
 - **ORM:** Prisma
-- **Versionado:** Prisma Migrations
-- **Seguridad:** Row-Level Security (RLS)
+- **Versioning:** Prisma Migrations
+- **Security:** Row-Level Security (RLS)
 
-### Schema Principal
+### Main Schema
 
-**Tablas Multi-Tenant:**
+**Multi-Tenant Tables:**
 ```
-tenants              - Información de cada tienda virtual
+tenants              - Virtual store information
 ├─ id (PK)
 ├─ name
 ├─ slug
 └─ settings (JSON)
 
-tenant_domains       - Mapeo de dominios a tenants
+tenant_domains       - Domain to tenant mapping
 ├─ id (PK)
 ├─ tenant_id (FK)
 └─ domain
 
-users                - Usuarios (admin + customers)
+users                - Users (admin + customers)
 ├─ id (PK)
 ├─ tenant_id (FK)
 ├─ email
 ├─ password (hash)
 ├─ role (ADMIN|CUSTOMER|SUPER_ADMIN)
-└─ RLS: solo acceso a propio tenant
+└─ RLS: access own tenant only
 
-products             - Catálogo de productos
+products             - Product catalog
 ├─ id (PK)
 ├─ tenant_id (FK)
 ├─ name
 ├─ price
 ├─ category_id
-└─ RLS: solo ver productos del tenant
+└─ RLS: view tenant products only
 
-categories           - Categorías de productos
+categories           - Product categories
 ├─ id (PK)
 ├─ tenant_id (FK)
 ├─ name
-└─ RLS: solo del tenant
+└─ RLS: tenant only
 
-orders               - Órdenes de compra
+orders               - Purchase orders
 ├─ id (PK)
 ├─ tenant_id (FK)
 ├─ user_id (FK)
 ├─ total
 ├─ status
-└─ RLS: solo órdenes del tenant
+└─ RLS: tenant orders only
 
-order_items          - Detalles de órdenes
+order_items          - Order details
 ├─ id (PK)
 ├─ order_id (FK)
 └─ product_id (FK)
 
-cart_items           - Carrito temporal
+cart_items           - Temporary cart
 ├─ id (PK)
 ├─ tenant_id (FK)
 ├─ user_id (FK)
@@ -498,48 +498,48 @@ cart_items           - Carrito temporal
 └─ quantity
 ```
 
-### Migraciones
+### Migrations
 
 ```bash
-# Crear nueva migración
-pnpm prisma migrate dev --name nombre_migracion
+# Create new migration
+pnpm prisma migrate dev --name migration_name
 
-# Aplicar migraciones en producción
+# Apply migrations in production
 pnpm prisma migrate deploy
 
-# Resetear BD (solo desarrollo)
+# Reset database (development only)
 pnpm prisma migrate reset
 
-# Ver estado de migraciones
+# Check migration status
 pnpm prisma migrate status
 ```
 
-### Generar datos de prueba
+### Seed test data
 
 ```bash
-# Seed script populate base de datos
+# Seed script populates database
 pnpm prisma db seed
 ```
 
-## 🔐 Seguridad
+## 🔐 Security
 
-- ✅ JWT con JTI para revocación
-- ✅ Row-Level Security (RLS) en PostgreSQL
-- ✅ Rate limiting en endpoints
-- ✅ CORS configurado
-- ✅ Validación de input (pipes NestJS)
+- ✅ JWT with JTI for revocation
+- ✅ Row-Level Security (RLS) in PostgreSQL
+- ✅ Rate limiting on endpoints
+- ✅ CORS configured
+- ✅ Input validation (NestJS pipes)
 - ✅ Password hashing (bcrypt)
-- ✅ OTP para 2FA
+- ✅ OTP for 2FA
 
-## 📦 Variables de Entorno
+## 📦 Environment Variables
 
 ### Backend - `/api/.env.local`
 ```env
-# Base de datos
-DATABASE_URL=postgresql://user:password@localhost:5432/tactika_x
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/xxxxxxxx
 DATABASE_SSL=false
 
-# JWT & Autenticación
+# JWT & Authentication
 JWT_SECRET=your-super-secret-key-change-in-production
 JWT_EXPIRATION=7d
 
@@ -550,7 +550,7 @@ CORS_ORIGIN=http://localhost:3001
 PORT=3000
 NODE_ENV=development
 
-# Rate Limiting (opcional)
+# Rate Limiting (optional)
 RATE_LIMIT_TTL=900000
 RATE_LIMIT_MAX=100
 ```
@@ -564,7 +564,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
 PORT=3001
 ```
 
-Ver `.env.example` en cada carpeta para referencias completas.
+See `.env.example` in each folder for complete references.
 
 ## 🧪 Testing
 
@@ -572,16 +572,16 @@ Ver `.env.example` en cada carpeta para referencias completas.
 ```bash
 cd api
 
-# Tests unitarios
+# Unit tests
 pnpm test
 
-# Tests en modo watch
+# Tests in watch mode
 pnpm test:watch
 
-# Tests con cobertura
+# Tests with coverage
 pnpm test:cov
 
-# Tests e2e
+# E2E tests
 pnpm test:e2e
 ```
 
@@ -589,13 +589,13 @@ pnpm test:e2e
 ```bash
 cd app
 
-# Tests con Vitest
+# Tests with Vitest
 pnpm test
 
-# Tests en modo watch
+# Tests in watch mode
 pnpm test:watch
 
-# E2E tests con Playwright
+# E2E tests with Playwright
 pnpm test:e2e
 
 # E2E tests UI mode
@@ -604,63 +604,63 @@ pnpm test:e2e:ui
 
 ### Debugging
 
-**Backend - Backend logs con debug:**
+**Backend - Logs with debug:**
 ```bash
 DEBUG=nestjs:* pnpm dev
 ```
 
 **Frontend - Browser DevTools:**
 ```
-F12 → Network tab para ver requests a API
-Console tab para AuthContext logs
-Storage tab para ver tokens en localStorage
+F12 → Network tab to see API requests
+Console tab for AuthContext logs
+Storage tab to view tokens in localStorage
 ```
 
 ## 🚧 Roadmap
 
-### Fase 1: Optimización Actual (En Progreso)
-- [ ] Completar tests (unitarios + e2e)
-- [ ] Optimizar performance del admin panel
-- [ ] Agregar paginación en listados
-- [ ] Implementar búsqueda de productos
+### Phase 1: Current Optimization (In Progress)
+- [ ] Complete tests (unit + e2e)
+- [ ] Optimize admin panel performance
+- [ ] Add pagination to lists
+- [ ] Implement product search
 
-### Fase 2: Pagos & Checkout
-- [ ] Página de checkout completa
-- [ ] Integración Stripe / PayPal
-- [ ] Email de confirmación
-- [ ] Tracking de órdenes
+### Phase 2: Payments & Checkout
+- [ ] Complete checkout page
+- [ ] Stripe / PayPal integration
+- [ ] Confirmation email
+- [ ] Order tracking
 
-### Fase 3: User Dashboard
-- [ ] Perfil de usuario
-- [ ] Historial de órdenes
+### Phase 3: User Dashboard
+- [ ] User profile
+- [ ] Order history
 - [ ] Wishlist
-- [ ] Direcciones guardadas
-- [ ] Reviews de productos
+- [ ] Saved addresses
+- [ ] Product reviews
 
-### Fase 4: Advanced Features
-- [ ] Analytics y reportes
-- [ ] Gestión de inventario
-- [ ] Sistema de cupones y promociones
+### Phase 4: Advanced Features
+- [ ] Analytics and reports
+- [ ] Inventory management
+- [ ] Coupon system
 - [ ] Email marketing tools
 - [ ] Customer support ticketing
 - [ ] Multi-currency support
 
-## 🔐 Seguridad
+## 🔐 Implementation Security
 
-**Implementado:**
-- ✅ JWT con JTI para revocación de tokens
-- ✅ Row-Level Security (RLS) en PostgreSQL
-- ✅ Rate limiting en endpoints
-- ✅ CORS configurado
-- ✅ Validación de input (NestJS pipes)
+**Implemented:**
+- ✅ JWT with JTI for token revocation
+- ✅ Row-Level Security (RLS) in PostgreSQL
+- ✅ Rate limiting on endpoints
+- ✅ CORS configured
+- ✅ Input validation (NestJS pipes)
 - ✅ Password hashing (bcrypt)
 - ✅ Multi-tenant data isolation
 - ✅ HTTPS ready
 
-**Credenciales:** 
-Todos los secretos y credenciales DEBEN estar en archivos `.env.local`, NUNCA en código o git.
+**Credentials:** 
+All secrets and credentials MUST be in `.env.local` files, NEVER in code or git.
 
 ---
 
-**Última actualización:** Noviembre 2024
-**Versión:** 1.0.0
+**Last updated:** November 2025
+**Version:** 1.0.0
