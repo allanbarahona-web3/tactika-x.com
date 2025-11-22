@@ -6,6 +6,9 @@ import { ROLES_KEY } from '../decorators/roles.decorator';
 /**
  * Guard para verificar que el usuario tiene los roles necesarios
  * Se usa junto con el decorador @Roles()
+ * 
+ * ESPECIAL: El rol 'admin' (superadmin) tiene acceso a TODO
+ * sin necesidad de validación adicional
  */
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -25,6 +28,11 @@ export class RolesGuard implements CanActivate {
     
     if (!user) {
       return false;
+    }
+
+    // Admin (superadmin global) tiene acceso a TODO
+    if (user.role === 'admin') {
+      return true;
     }
 
     return requiredRoles.some((role) => user.role === role);

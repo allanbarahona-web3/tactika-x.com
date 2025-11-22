@@ -14,6 +14,10 @@ export class CreateProductDto {
   @IsOptional()
   description?: string;
 
+  @IsString()
+  @IsOptional()
+  categoryId?: string; // ID de la categoría
+
   @IsEnum(ProductKind)
   @IsOptional()
   productKind?: ProductKind;

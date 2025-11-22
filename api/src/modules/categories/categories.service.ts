@@ -10,9 +10,15 @@ export class CategoriesService {
   /**
    * Crear una categoría
    */
-  async create(createCategoryDto: CreateCategoryDto) {
+  async create(createCategoryDto: CreateCategoryDto & { tenantId: number }) {
     return this.prisma.category.create({
-      data: createCategoryDto,
+      data: {
+        tenantId: createCategoryDto.tenantId,
+        name: createCategoryDto.name,
+        slug: createCategoryDto.slug,
+        description: createCategoryDto.description,
+        isActive: createCategoryDto.isActive ?? true,
+      },
     });
   }
 

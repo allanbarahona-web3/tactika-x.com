@@ -7,62 +7,143 @@ import {
   Param,
   Delete,
   UseGuards,
-  Request,
+  BadRequestException,
 } from '@nestjs/common';
 import { Throttle, SkipThrottle } from '@nestjs/throttler';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { CurrentTenant } from '../../common/decorators/current-tenant.decorator';
 
 @Controller('products')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  /**
+   * Crear producto
+   * POST /products
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Post()
-  @Throttle({ default: { limit: 50, ttl: 60000 } })  // 50 creates per minute
-  create(@Request() req, @Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(req.user.tenantId, createProductDto);
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 50, ttl: 60000 } })
+  create(
+    @Body() createProductDto: CreateProductDto,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.create(tenantId, createProductDto);
   }
 
+  /**
+   * Listar todos los productos del tenant
+   * GET /products
+   * Requiere: Autenticado
+   */
   @Get()
-  @SkipThrottle()  // Allow frequent reads
-  findAll(@Request() req) {
-    return this.productsService.findAllByTenant(req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'admin')
+  @SkipThrottle()
+  findAll(@CurrentTenant() tenantId?: number) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.findAllByTenant(tenantId);
   }
 
+  /**
+   * Obtener producto por slug
+   * GET /products/slug/:slug
+   * Requiere: Autenticado
+   */
   @Get('slug/:slug')
-  @SkipThrottle()  // Allow frequent reads
-  findBySlug(@Request() req, @Param('slug') slug: string) {
-    return this.productsService.findBySlug(slug, req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'admin')
+  @SkipThrottle()
+  findBySlug(
+    @Param('slug') slug: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.findBySlug(slug, tenantId);
   }
 
+  /**
+   * Obtener producto por ID
+   * GET /products/:id
+   * Requiere: Autenticado
+   */
   @Get(':id')
-  @SkipThrottle()  // Allow frequent reads
-  findOne(@Request() req, @Param('id') id: string) {
-    return this.productsService.findOne(id, req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'admin')
+  @SkipThrottle()
+  findOne(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.findOne(id, tenantId);
   }
 
+  /**
+   * Actualizar producto
+   * PATCH /products/:id
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Patch(':id')
-  @Throttle({ default: { limit: 30, ttl: 60000 } })  // 30 updates per minute
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 30, ttl: 60000 } })
   update(
-    @Request() req,
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
+    @CurrentTenant() tenantId?: number,
   ) {
-    return this.productsService.update(id, req.user.tenantId, updateProductDto);
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.update(id, tenantId, updateProductDto);
   }
 
+  /**
+   * Desactivar producto
+   * PATCH /products/:id/deactivate
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Patch(':id/deactivate')
-  @Throttle({ default: { limit: 20, ttl: 60000 } })  // 20 deactivations per minute
-  deactivate(@Request() req, @Param('id') id: string) {
-    return this.productsService.deactivate(id, req.user.tenantId);
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
+  deactivate(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.deactivate(id, tenantId);
   }
 
+  /**
+   * Eliminar producto
+   * DELETE /products/:id
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Delete(':id')
-  @Throttle({ default: { limit: 20, ttl: 60000 } })  // 20 deletes per minute
-  remove(@Request() req, @Param('id') id: string) {
-    return this.productsService.remove(id, req.user.tenantId);
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
+  remove(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.productsService.remove(id, tenantId);
   }
 }

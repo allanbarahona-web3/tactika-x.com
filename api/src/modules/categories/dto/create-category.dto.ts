@@ -1,8 +1,9 @@
 import { IsString, IsInt, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateCategoryDto {
+  @IsOptional()
   @IsInt()
-  tenantId: number;
+  tenantId?: number; // Optional - viene del JWT
 
   @IsString()
   name: string;

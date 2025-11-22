@@ -6,62 +6,144 @@ import {
   Patch,
   Param,
   UseGuards,
-  Request,
+  BadRequestException,
 } from '@nestjs/common';
 import { Throttle, SkipThrottle } from '@nestjs/throttler';
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { CurrentTenant } from '../../common/decorators/current-tenant.decorator';
 
 @Controller('payments')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
+  /**
+   * Crear pago
+   * POST /payments
+   * Requiere: Autenticado
+   */
   @Post()
-  @Throttle({ default: { limit: 25, ttl: 60000 } })  // 25 payments per minute
-  create(@Request() req, @Body() createPaymentDto: CreatePaymentDto) {
-    return this.paymentsService.create(req.user.tenantId, createPaymentDto);
+  @Roles('owner', 'manager', 'staff', 'customer', 'admin')
+  @Throttle({ default: { limit: 25, ttl: 60000 } })
+  create(
+    @Body() createPaymentDto: CreatePaymentDto,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.create(tenantId, createPaymentDto);
   }
 
+  /**
+   * Listar todos los pagos del tenant
+   * GET /payments
+   * Requiere: Autenticado
+   */
   @Get()
-  @SkipThrottle()  // Allow frequent reads
-  findAll(@Request() req) {
-    return this.paymentsService.findAllByTenant(req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'customer', 'admin')
+  @SkipThrottle()
+  findAll(@CurrentTenant() tenantId?: number) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.findAllByTenant(tenantId);
   }
 
+  /**
+   * Obtener pagos por pedido
+   * GET /payments/order/:orderId
+   * Requiere: Autenticado
+   */
   @Get('order/:orderId')
-  @SkipThrottle()  // Allow frequent reads
-  findByOrder(@Request() req, @Param('orderId') orderId: string) {
-    return this.paymentsService.findAllByOrder(orderId, req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'customer', 'admin')
+  @SkipThrottle()
+  findByOrder(
+    @Param('orderId') orderId: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.findAllByOrder(orderId, tenantId);
   }
 
+  /**
+   * Obtener pago por ID
+   * GET /payments/:id
+   * Requiere: Autenticado
+   */
   @Get(':id')
-  @SkipThrottle()  // Allow frequent reads
-  findOne(@Request() req, @Param('id') id: string) {
-    return this.paymentsService.findOne(id, req.user.tenantId);
+  @Roles('owner', 'manager', 'staff', 'customer', 'admin')
+  @SkipThrottle()
+  findOne(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.findOne(id, tenantId);
   }
 
+  /**
+   * Actualizar pago
+   * PATCH /payments/:id
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Patch(':id')
-  @Throttle({ default: { limit: 20, ttl: 60000 } })  // 20 updates per minute
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   update(
-    @Request() req,
     @Param('id') id: string,
     @Body() updatePaymentDto: UpdatePaymentDto,
+    @CurrentTenant() tenantId?: number,
   ) {
-    return this.paymentsService.update(id, req.user.tenantId, updatePaymentDto);
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.update(id, tenantId, updatePaymentDto);
   }
 
+  /**
+   * Marcar pago como pagado
+   * PATCH /payments/:id/mark-paid
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Patch(':id/mark-paid')
-  @Throttle({ default: { limit: 15, ttl: 60000 } })  // 15 marks-paid per minute
-  markAsPaid(@Request() req, @Param('id') id: string, @Body('providerPaymentId') providerPaymentId?: string) {
-    return this.paymentsService.markAsPaid(id, req.user.tenantId, providerPaymentId);
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 15, ttl: 60000 } })
+  markAsPaid(
+    @Param('id') id: string,
+    @Body('providerPaymentId') providerPaymentId?: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.markAsPaid(id, tenantId, providerPaymentId);
   }
 
+  /**
+   * Marcar pago como fallido
+   * PATCH /payments/:id/mark-failed
+   * Requiere: Autenticado y ser owner/manager del tenant
+   */
   @Patch(':id/mark-failed')
-  @Throttle({ default: { limit: 15, ttl: 60000 } })  // 15 marks-failed per minute
-  markAsFailed(@Request() req, @Param('id') id: string) {
-    return this.paymentsService.markAsFailed(id, req.user.tenantId);
+  @Roles('owner', 'manager', 'admin')
+  @Throttle({ default: { limit: 15, ttl: 60000 } })
+  markAsFailed(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+    return this.paymentsService.markAsFailed(id, tenantId);
   }
 }

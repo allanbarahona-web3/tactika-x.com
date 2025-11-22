@@ -10,17 +10,24 @@ import {
   UploadedFile,
   UseInterceptors,
   Body,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MediaService } from './media.service';
 import { UpdateMediaDto } from './dto/update-media.dto';
+import { JwtAuthGuard } from '../../modules/auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { CurrentTenant } from '../../common/decorators/current-tenant.decorator';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 /**
  * Media Controller
- * Endpoints para gestión de imágenes
- * Requiere autenticación (agregar guards después)
+ * Endpoints para gestión de imágenes - Requiere autenticación
+ * Solo admins/owners del tenant pueden gestionar media
  */
 @Controller('admin/media')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
 
@@ -28,80 +35,126 @@ export class MediaController {
    * Upload de imagen
    * POST /admin/media/upload
    * Body: file (multipart/form-data)
-   * Query: entityType, entityId, tenantId, alt
+   * Query: entityType, entityId, alt
+   * Requiere: Autenticado y ser owner/manager del tenant
    */
   @Post('upload')
+  @Roles('owner', 'manager')
   @UseInterceptors(FileInterceptor('file'))
   async uploadMedia(
     @UploadedFile() file: Express.Multer.File,
     @Query('entityType') entityType: string,
     @Query('entityId') entityId: string,
-    @Query('tenantId') tenantId: string,
     @Query('alt') alt?: string,
+    @CurrentTenant() tenantId?: number,
   ) {
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    if (!entityType) {
+      throw new BadRequestException('Entity type is required');
+    }
+
     return this.mediaService.uploadMedia(
       file,
-      parseInt(tenantId),
+      tenantId,
       entityType,
-      entityId,
+      entityId || '',
       alt,
     );
   }
 
   /**
-   * Listar todas las imágenes de un tenant
-   * GET /admin/media?tenantId=1
+   * Listar todas las imágenes del tenant del usuario
+   * GET /admin/media
+   * Requiere: Autenticado
    */
   @Get()
-  async findByTenant(@Query('tenantId') tenantId: string) {
-    return this.mediaService.findByTenant(parseInt(tenantId));
+  @Roles('owner', 'manager', 'staff')
+  async findByTenant(@CurrentTenant() tenantId?: number) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return this.mediaService.findByTenant(tenantId);
   }
 
   /**
    * Listar imágenes de una entidad específica
-   * GET /admin/media/entity?tenantId=1&entityType=category&entityId=cat-123
+   * GET /admin/media/entity?entityType=category&entityId=cat-123
+   * Requiere: Autenticado
    */
   @Get('entity')
+  @Roles('owner', 'manager', 'staff')
   async findByEntity(
-    @Query('tenantId') tenantId: string,
     @Query('entityType') entityType: string,
     @Query('entityId') entityId: string,
+    @CurrentTenant() tenantId?: number,
   ) {
-    return this.mediaService.findByEntity(
-      parseInt(tenantId),
-      entityType,
-      entityId,
-    );
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return this.mediaService.findByEntity(tenantId, entityType, entityId);
   }
 
   /**
    * Obtener una imagen por ID
-   * GET /admin/media/:id?tenantId=1
+   * GET /admin/media/:id
+   * Requiere: Autenticado
    */
   @Get(':id')
-  async findOne(@Param('id') id: string, @Query('tenantId') tenantId: string) {
-    return this.mediaService.findOne(id, parseInt(tenantId));
+  @Roles('owner', 'manager', 'staff')
+  async findOne(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return this.mediaService.findOne(id, tenantId);
   }
 
   /**
    * Actualizar metadata de imagen (alt, order, etc)
-   * PATCH /admin/media/:id?tenantId=1
+   * PATCH /admin/media/:id
+   * Requiere: Autenticado y ser owner/manager del tenant
    */
   @Patch(':id')
+  @Roles('owner', 'manager')
   async update(
     @Param('id') id: string,
-    @Query('tenantId') tenantId: string,
     @Body() updateMediaDto: UpdateMediaDto,
+    @CurrentTenant() tenantId?: number,
   ) {
-    return this.mediaService.update(id, parseInt(tenantId), updateMediaDto);
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return this.mediaService.update(id, tenantId, updateMediaDto);
   }
 
   /**
    * Eliminar imagen
-   * DELETE /admin/media/:id?tenantId=1
+   * DELETE /admin/media/:id
+   * Requiere: Autenticado y ser owner/manager del tenant
    */
   @Delete(':id')
-  async remove(@Param('id') id: string, @Query('tenantId') tenantId: string) {
-    return this.mediaService.remove(id, parseInt(tenantId));
+  @Roles('owner', 'manager')
+  async remove(
+    @Param('id') id: string,
+    @CurrentTenant() tenantId?: number,
+  ) {
+    if (!tenantId) {
+      throw new BadRequestException('Tenant ID is required');
+    }
+
+    return this.mediaService.remove(id, tenantId);
   }
 }

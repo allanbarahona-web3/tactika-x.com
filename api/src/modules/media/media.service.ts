@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { StorageService } from '../../common/services/storage.service';
 import { DOSpacesService } from '../../common/services/do-spaces.service';
@@ -26,18 +27,21 @@ export class MediaService {
     // Generar nombre único
     const fileName = this.storageService.generateUniqueFileName(file.originalname);
     
-    // Generar path
-    const key = this.storageService.generateS3Key(tenantId, entityType, fileName);
+    // Generar path (ahora es async)
+    const key = await this.storageService.generateS3Key(tenantId, entityType, fileName);
 
     // Subir a DO Spaces
     const { path } = await this.doSpacesService.uploadFile(file, key);
 
     // Guardar en BD
+    // Para tenant_branding sin entidad específica, generar un UUID único
+    const finalEntityId = entityType === 'tenant_branding' && !entityId ? randomUUID() : entityId;
+    
     const media = await this.prisma.media.create({
       data: {
         tenantId,
         entityType,
-        entityId,
+        entityId: finalEntityId,
         path,
         alt: alt || file.originalname,
         order: 0,

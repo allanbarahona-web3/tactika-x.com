@@ -28,9 +28,11 @@ enum BillingStatus {
 }
 
 enum TenantUserRole {
-  owner
-  manager
-  staff
+  admin      // Superadmin global (Barmentech) - acceso a TODO
+  owner      // Owner del tenant - acceso solo a su tenant
+  manager    // Manager del tenant - acceso solo a su tenant
+  staff      // Personal del tenant - acceso de lectura a su tenant
+  customer   // Cliente final - acceso solo a sus órdenes/datos personales
 }
 
 enum UserStatus {

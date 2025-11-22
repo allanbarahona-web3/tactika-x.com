@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { PrismaService } from '../../prisma/prisma.service';
 
 /**
  * Storage Service
@@ -8,7 +9,10 @@ import { ConfigService } from '@nestjs/config';
  */
 @Injectable()
 export class StorageService {
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private prisma: PrismaService,
+  ) {}
 
   /**
    * Construye la URL completa de la imagen según ambiente
@@ -30,25 +34,35 @@ export class StorageService {
 
   /**
    * Genera el path relativo para guardar en BD
-   * Formato: tenants/{tenantId}/{entityType}/{filename}
+   * Formato: {tenantName}/{entityType}/{filename}
    */
-  generateMediaPath(
+  async generateMediaPath(
     tenantId: number,
     entityType: string,
     fileName: string,
-  ): string {
-    return `tenants/${tenantId}/${entityType}/${fileName}`;
+  ): Promise<string> {
+    const tenant = await this.prisma.tenant.findUnique({
+      where: { id: tenantId },
+      select: { name: true },
+    });
+    
+    if (!tenant) {
+      throw new Error(`Tenant ${tenantId} not found`);
+    }
+
+    // Usar el nombre del tenant como carpeta (ej: BarmentechSaaS, Tactika-X)
+    return `${tenant.name}/${entityType}/${fileName}`;
   }
 
   /**
    * Genera el S3 key (mismo que path relativo)
    * Este es el path que se usa en DO Spaces
    */
-  generateS3Key(
+  async generateS3Key(
     tenantId: number,
     entityType: string,
     fileName: string,
-  ): string {
+  ): Promise<string> {
     return this.generateMediaPath(tenantId, entityType, fileName);
   }
 

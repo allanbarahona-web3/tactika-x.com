@@ -32,7 +32,7 @@ export class DOSpacesService {
         accessKeyId,
         secretAccessKey,
       },
-      forcePathStyle: false, // DO Spaces usa virtual-hosted-style URLs
+      forcePathStyle: true, // Usar path-style URLs: https://endpoint/bucket/key
     });
 
     this.logger.log(`DO Spaces initialized: ${endpoint} (bucket: ${this.bucket})`);
