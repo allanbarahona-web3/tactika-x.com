@@ -24,6 +24,10 @@ const config: Config = {
         'gradient-primary': 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
         'gradient-hero': 'linear-gradient(135deg, #667EEA 0%, #764BA2 50%, #F093FB 100%)',
       },
+      zIndex: {
+        '60': '60',
+        '70': '70',
+      },
       boxShadow: {
         'sm': '0 2px 8px rgba(0, 0, 0, 0.1)',
         'md': '0 4px 16px rgba(0, 0, 0, 0.15)',
