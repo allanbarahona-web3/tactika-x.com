@@ -506,16 +506,16 @@ export function CRMLandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
-          <h2 className="text-4xl font-bold mb-4">{hero.cta_ready}</h2>
-          <p className="text-xl mb-8 text-blue-100">{hero.cta_join}</p>
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 sm:p-8 md:p-12 text-center text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 md:mb-4">{hero.cta_ready}</h2>
+          <p className="text-sm sm:text-base md:text-xl mb-6 sm:mb-8 text-blue-100">{hero.cta_join}</p>
           <Link
             href="/crm/signup"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:shadow-2xl"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-4 bg-white text-blue-600 font-semibold rounded-xl hover:shadow-2xl text-sm sm:text-base transition"
           >
             {hero.cta_signup}
-            <ArrowRight size={20} />
+            <ArrowRight size={18} className="sm:w-5 sm:h-5" />
           </Link>
         </div>
       </section>
