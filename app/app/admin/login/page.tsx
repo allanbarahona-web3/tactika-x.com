@@ -47,22 +47,22 @@ export default function AdminLoginPage() {
           <div className="px-8 pt-12 pb-8 text-center border-b border-gray-100/50">
             {/* Logo */}
             <div className="flex justify-center mb-6">
-              <div className="relative w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-3 shadow-lg">
+              <div className="relative w-32 h-32">
                 <Image 
                   src="/themes/barmentech/logo_barmentech.png" 
-                  alt="Barmentech CRM" 
-                  width={64}
-                  height={64}
-                  className="object-contain w-full h-full"
+                  alt="CRM Portal" 
+                  width={128}
+                  height={128}
+                  className="object-contain w-full h-full drop-shadow-lg"
                 />
               </div>
             </div>
             
             {/* Title */}
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-1">
-              Barmentech CRM
+              CRM Portal
             </h1>
-            <p className="text-sm text-gray-500 font-medium">Admin Portal</p>
+            <p className="text-sm text-gray-500 font-medium">Admin Panel</p>
           </div>
 
           {/* Form Section */}
