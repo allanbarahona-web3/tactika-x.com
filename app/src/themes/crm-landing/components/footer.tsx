@@ -131,21 +131,22 @@ export function Footer({ language }: FooterProps) {
               <Mail size={20} className="text-blue-500 mt-1" />
               <div>
                 <p className="text-gray-400 mb-1">{t.contactUs}</p>
-                <a href="mailto:soporte@barmentech.com" className="text-white hover:text-blue-400 transition">soporte@barmentech.com</a>
+                <a href="mailto:info@barmentech.com" className="text-white hover:text-blue-400 transition">info@barmentech.com</a>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Phone size={20} className="text-blue-500 mt-1" />
               <div>
-                <p className="text-gray-400 mb-1">WhatsApp</p>
-                <a href="https://wa.me/50688888888" className="text-white hover:text-blue-400 transition">+506 8888-8888</a>
+                <p className="text-gray-400 mb-1">Phone</p>
+                <a href="tel:+17863918722" className="text-white hover:text-blue-400 transition">+1 (786) 391-8722</a>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <MapPin size={20} className="text-blue-500 mt-1" />
               <div>
-                <p className="text-gray-400 mb-1">San José, Costa Rica</p>
-                <p className="text-white">Barrio Escalante</p>
+                <p className="text-gray-400 mb-1">Location</p>
+                <p className="text-white">Sheridan, Wyoming</p>
+                <p className="text-slate-400 text-sm">United States</p>
               </div>
             </div>
           </div>

@@ -12,6 +12,8 @@ import { Footer } from './components/footer';
 export function CRMLandingPage() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const whatsappNumber = '+17863918722';
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`;
 
   const heroTranslations = {
     es: {
@@ -73,11 +75,48 @@ export function CRMLandingPage() {
             </Link>
           </div>
 
-          <div className="w-full max-w-4xl mx-auto aspect-video bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 rounded-2xl shadow-2xl flex items-center justify-center border border-slate-200">
-            <BarChart3 size={80} className="text-slate-400" />
+          <div className="w-full max-w-4xl mx-auto aspect-video bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 rounded-2xl shadow-2xl flex items-center justify-center border border-blue-700/50 relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-10 left-10 w-40 h-40 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            </div>
+            <div className="relative z-10 text-center">
+              <BarChart3 size={80} className="text-blue-300 mx-auto mb-4" />
+              <p className="text-blue-200 font-semibold text-lg">
+                {language === 'es' ? 'Panel de Control Omnicanal' : 'Omnichannel Control Panel'}
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* WhatsApp Floating Button */}
+      <a
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-40 group"
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Animated background circles */}
+          <div className="absolute inset-0 bg-green-500 rounded-full animate-pulse opacity-75"></div>
+          <div className="absolute inset-1 bg-green-500 rounded-full animate-bounce" style={{animationDuration: '1.5s'}}></div>
+          
+          {/* Button */}
+          <div className="relative w-14 h-14 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300 cursor-pointer">
+            <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.116-4.867 5.51-4.867 8.902 0 3.666 2.25 6.966 6.215 8.316l.645.274 4.888-.959-.002-13.6c0-2.34-.571-4.545-1.222-6.368-.547-1.503-1.467-2.848-2.772-3.74a9.86 9.86 0 00-4.146-.953z"/>
+            </svg>
+          </div>
+        </div>
+        
+        {/* Tooltip */}
+        <div className="absolute bottom-full right-0 mb-3 bg-slate-900 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-700">
+          <p className="font-semibold text-sm">WhatsApp Support</p>
+          <p className="text-xs text-slate-300">+1 (786) 391-8722</p>
+        </div>
+      </a>
 
       {/* Features Section */}
       <Features language={language} />
