@@ -9,51 +9,23 @@ interface HeaderProps {
 
 export function Header({ language, onLanguageChange, onContactClick }: HeaderProps) {
   return (
-    <header className="fixed w-full top-0 z-60 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 backdrop-blur-md border-b border-slate-600 shadow-lg">
+    <header className="fixed w-full top-0 z-60 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 border-b border-slate-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
-            <div className="relative w-10 h-10">
+          <Link href="/" className="flex items-center hover:opacity-80 transition">
+            <div className="relative w-12 h-12">
               <Image 
                 src="/themes/barmentech/logo_barmentech.png" 
                 alt="Barmentech" 
-                width={40}
-                height={40}
+                width={48}
+                height={48}
                 className="object-contain"
               />
-            </div>
-            <div>
-              <span className="text-sm font-bold text-white">Barmentech</span>
-              <span className="text-xs text-slate-300 block">CRM Omnicanal</span>
             </div>
           </Link>
 
           <div className="flex items-center gap-3">
-            {/* Language Switcher */}
-            <div className="flex items-center gap-2 bg-slate-700/50 rounded-lg p-1 border border-slate-600">
-              <button
-                onClick={() => onLanguageChange('es')}
-                className={`px-3 py-1 rounded text-xs font-medium transition ${
-                  language === 'es'
-                    ? 'bg-slate-600 text-white shadow-md'
-                    : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                ES
-              </button>
-              <button
-                onClick={() => onLanguageChange('en')}
-                className={`px-3 py-1 rounded text-xs font-medium transition ${
-                  language === 'en'
-                    ? 'bg-slate-600 text-white shadow-md'
-                    : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                EN
-              </button>
-            </div>
-
             {/* Agenda Demo Button - Animated */}
             <a
               href="https://calendly.com/barmentech/consulta-exploratoria-b2b"
@@ -90,6 +62,30 @@ export function Header({ language, onLanguageChange, onContactClick }: HeaderPro
             >
               {language === 'es' ? 'Comenzar Gratis' : 'Get Started Free'}
             </Link>
+
+            {/* Language Switcher */}
+            <div className="flex items-center gap-2 bg-slate-700/50 rounded-lg p-1 border border-slate-600">
+              <button
+                onClick={() => onLanguageChange('es')}
+                className={`px-3 py-1 rounded text-xs font-medium transition ${
+                  language === 'es'
+                    ? 'bg-slate-600 text-white shadow-md'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                ES
+              </button>
+              <button
+                onClick={() => onLanguageChange('en')}
+                className={`px-3 py-1 rounded text-xs font-medium transition ${
+                  language === 'en'
+                    ? 'bg-slate-600 text-white shadow-md'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </div>
