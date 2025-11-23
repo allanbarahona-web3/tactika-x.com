@@ -46,32 +46,32 @@ export function CRMLandingPage() {
       <Header language={language} onLanguageChange={setLanguage} onContactClick={() => setIsContactOpen(true)} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">
+      <section className="pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-3 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30">
-            <CheckCircle2 size={16} className="text-white" />
-            <span className="text-sm font-bold text-white">{hero.badge}</span>
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-sm rounded-full mb-4 sm:mb-6 border border-white/30">
+            <CheckCircle2 size={14} className="text-white" />
+            <span className="text-xs sm:text-sm font-bold text-white">{hero.badge}</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 max-w-4xl mx-auto drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-4 sm:mb-6 max-w-4xl mx-auto drop-shadow-lg">
             {hero.title}
           </h1>
 
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-12">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto mb-8 sm:mb-12">
             {hero.subtitle}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16">
             <Link
               href="/crm/signup"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 font-bold rounded-xl hover:bg-gray-50 shadow-xl hover:shadow-2xl transition hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 font-bold rounded-xl hover:bg-gray-50 shadow-xl hover:shadow-2xl transition hover:scale-105 text-sm sm:text-base"
             >
               {hero.cta_signup}
               <ArrowRight size={20} />
             </Link>
             <Link
               href="/admin/login"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition backdrop-blur-sm"
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition backdrop-blur-sm text-sm sm:text-base"
             >
               {hero.cta_login}
             </Link>
