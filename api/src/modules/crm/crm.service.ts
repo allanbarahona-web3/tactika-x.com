@@ -366,4 +366,82 @@ export class CrmService {
       return false;
     }
   }
+
+  /**
+   * Recibir un mensaje entrante y guardarlo en la BD
+   */
+  async receiveMessage(data: {
+    tenantId: number;
+    conversationId: string;
+    direction: any;
+    content: string;
+    channel: ChannelType;
+    mediaUrl?: string;
+    externalId?: string;
+    metadata?: Record<string, any>;
+  }) {
+    try {
+      const message = await this.prisma.message.create({
+        data: {
+          tenantId: data.tenantId,
+          conversationId: data.conversationId,
+          direction: data.direction,
+          content: data.content,
+          channel: data.channel,
+          status: 'delivered',
+          mediaUrl: data.mediaUrl,
+          externalId: data.externalId,
+          metadata: data.metadata,
+        },
+      });
+
+      // Actualizar lastMessageAt en conversación
+      await this.prisma.conversation.update({
+        where: { id: data.conversationId },
+        data: { lastMessageAt: new Date() },
+      });
+
+      this.logger.log(`Received message ${message.id} on conversation ${data.conversationId}`);
+      return message;
+    } catch (error) {
+      this.logger.error('Error receiving message', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Obtener estadísticas de CRM del tenant
+   */
+  async getStats(tenantId: number) {
+    const [totalConversations, activeConversations, totalMessages, messagesByChannel] = 
+      await Promise.all([
+        this.prisma.conversation.count({
+          where: { tenantId },
+        }),
+        this.prisma.conversation.count({
+          where: { tenantId, isActive: true },
+        }),
+        this.prisma.message.count({
+          where: { tenantId },
+        }),
+        this.prisma.message.groupBy({
+          by: ['channel'],
+          where: { tenantId },
+          _count: true,
+        }),
+      ]);
+
+    const channelStats = messagesByChannel.map(stat => ({
+      channel: stat.channel,
+      count: stat._count,
+    }));
+
+    return {
+      totalConversations,
+      activeConversations,
+      inactiveConversations: totalConversations - activeConversations,
+      totalMessages,
+      channelStats,
+    };
+  }
 }

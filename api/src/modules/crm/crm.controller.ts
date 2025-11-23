@@ -147,47 +147,6 @@ export class CrmController {
     });
   }
 
-  // ========================================
-  // WEBHOOKS - Sin autenticación JWT
-  // ========================================
-
-  /**
-   * POST /crm/webhooks/:channel
-   * Webhook para recibir mensajes de canales (sin autenticación)
-   * Validar con tenant query param o header
-   */
-  @Post('webhooks/:channel')
-  async handleWebhook(
-    @Param('channel') channel: string,
-    @Query('tenantId') tenantIdQuery?: string,
-    @Body() payload?: any,
-  ) {
-    // Validar que el canal sea válido
-    const validChannels = Object.values(ChannelType);
-    if (!validChannels.includes(channel as ChannelType)) {
-      throw new BadRequestException(`Invalid channel: ${channel}`);
-    }
-
-    if (!tenantIdQuery) {
-      throw new BadRequestException('Missing tenantId query parameter');
-    }
-
-    const tenantId = parseInt(tenantIdQuery);
-    if (isNaN(tenantId)) {
-      throw new BadRequestException('Invalid tenantId');
-    }
-
-    return this.crmService.handleWebhook({
-      tenantId,
-      channel: channel as ChannelType,
-      payload,
-    });
-  }
-
-  // ========================================
-  // CANALES
-  // ========================================
-
   /**
    * POST /crm/channels/:channel/validate
    * Validar credenciales de un canal
@@ -224,5 +183,19 @@ export class CrmController {
 
     const isHealthy = await this.crmService.healthCheck(channel as ChannelType, tenantId);
     return { channel, isHealthy };
+  }
+
+  // ========================================
+  // ESTADÍSTICAS
+  // ========================================
+
+  /**
+   * GET /crm/stats
+   * Obtener estadísticas de CRM del tenant
+   */
+  @Get('stats')
+  @Roles(TenantUserRole.admin, TenantUserRole.owner, TenantUserRole.manager)
+  async getStats(@CurrentTenant() tenantId: number) {
+    return this.crmService.getStats(tenantId);
   }
 }
