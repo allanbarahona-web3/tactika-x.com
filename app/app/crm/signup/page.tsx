@@ -130,12 +130,12 @@ export default function CRMSignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 p-3 sm:p-4 md:p-6">
       {/* Language Switcher */}
-      <div className="absolute top-6 right-6 flex items-center gap-2 bg-white rounded-full p-1 shadow-sm">
+      <div className="absolute top-3 sm:top-6 right-3 sm:right-6 flex items-center gap-1 sm:gap-2 bg-white rounded-full p-0.5 sm:p-1 shadow-sm">
         <button
           onClick={() => setLanguage('es')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+          className={`px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition ${
             language === 'es'
               ? 'bg-blue-600 text-white'
               : 'text-gray-600 hover:bg-gray-100'
@@ -145,7 +145,7 @@ export default function CRMSignupPage() {
         </button>
         <button
           onClick={() => setLanguage('en')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+          className={`px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition ${
             language === 'en'
               ? 'bg-blue-600 text-white'
               : 'text-gray-600 hover:bg-gray-100'
@@ -155,14 +155,14 @@ export default function CRMSignupPage() {
         </button>
       </div>
 
-      <div className="w-full max-w-7xl grid md:grid-cols-2 gap-12 items-center">
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Left: Form */}
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md mx-auto md:mx-0">
           {/* Header */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="relative w-40 h-20">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <div className="relative w-32 sm:w-40 h-16 sm:h-20">
                 <Image 
                   src="/themes/barmentech/logo_barmentech.png" 
                   alt="Barmentech CRM" 
@@ -172,12 +172,12 @@ export default function CRMSignupPage() {
                 />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">{t.title}</h1>
-            <p className="text-gray-500 text-sm">{t.subtitle}</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">{t.title}</h1>
+            <p className="text-xs sm:text-sm text-gray-500">{t.subtitle}</p>
           </div>
 
           {/* Form Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+          <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
                 <p className="text-red-700 text-sm font-medium">{error}</p>
