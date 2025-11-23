@@ -37,44 +37,44 @@ export function CRMLandingPage() {
   const hero = heroTranslations[language];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
       <Header language={language} onLanguageChange={setLanguage} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6 border border-blue-100">
-            <CheckCircle2 size={16} className="text-blue-600" />
-            <span className="text-sm font-medium text-blue-600">{hero.badge}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full mb-6 border border-blue-300">
+            <CheckCircle2 size={16} className="text-blue-700" />
+            <span className="text-sm font-bold text-blue-700">{hero.badge}</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 max-w-4xl mx-auto">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto">
             {hero.title}
           </h1>
 
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-12">
             {hero.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
             <Link
               href="/crm/signup"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-2xl"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-2xl transition"
             >
               {hero.cta_signup}
               <ArrowRight size={20} />
             </Link>
             <Link
               href="/admin/login"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-xl hover:bg-gray-50"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-700 font-semibold rounded-xl hover:bg-slate-100 hover:border-slate-500 transition bg-white/50"
             >
               {hero.cta_login}
             </Link>
           </div>
 
-          <div className="w-full max-w-4xl mx-auto aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-2xl flex items-center justify-center">
-            <BarChart3 size={80} className="text-gray-400" />
+          <div className="w-full max-w-4xl mx-auto aspect-video bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 rounded-2xl shadow-2xl flex items-center justify-center border border-slate-200">
+            <BarChart3 size={80} className="text-slate-400" />
           </div>
         </div>
       </section>
@@ -89,10 +89,10 @@ export function CRMLandingPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
               {language === 'es' ? '¿Cómo Funciona?' : 'How It Works?'}
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-slate-600 text-lg">
               {language === 'es' 
                 ? 'Empieza a gestionar todas tus conversaciones en 4 simples pasos' 
                 : 'Start managing all your conversations in 4 simple steps'}
@@ -106,14 +106,14 @@ export function CRMLandingPage() {
                 <UserPlus size={32} className="text-white" />
               </div>
               <div className="mb-4">
-                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-bold mb-3">
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-3">
                   {language === 'es' ? 'Paso 1' : 'Step 1'}
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
                 {language === 'es' ? 'Crea tu Cuenta' : 'Create Your Account'}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-slate-600">
                 {language === 'es' 
                   ? 'Regístrate gratis en menos de 2 minutos. No necesitas tarjeta de crédito.' 
                   : 'Sign up for free in less than 2 minutes. No credit card required.'}
