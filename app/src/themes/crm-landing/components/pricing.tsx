@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
 interface PricingProps {
@@ -6,6 +7,7 @@ interface PricingProps {
 }
 
 export function Pricing({ language }: PricingProps) {
+  const [selectedPlan, setSelectedPlan] = useState(1); // Default: Professional (index 1)
   const plans =
     language === 'es'
       ? [
@@ -59,11 +61,16 @@ export function Pricing({ language }: PricingProps) {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {plans.map((plan, idx) => (
+          {plans.map((plan, idx) => {
+            const isSelected = selectedPlan === idx;
+            return (
             <div
               key={idx}
-              className={`p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:border-blue-600 ${
-                plan.featured ? 'border-2 border-blue-600 bg-white shadow-xl relative -mt-4' : 'border border-gray-200 bg-white shadow-lg'
+              onClick={() => setSelectedPlan(idx)}
+              className={`p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
+                isSelected 
+                  ? 'border-2 border-blue-600 bg-white shadow-2xl relative -mt-4' 
+                  : 'border border-gray-200 bg-white shadow-lg hover:border-blue-600'
               }`}
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
@@ -82,7 +89,7 @@ export function Pricing({ language }: PricingProps) {
               <Link
                 href="/crm/signup"
                 className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
-                  plan.featured
+                  isSelected
                     ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg'
                     : 'border border-gray-300 text-gray-900 bg-white hover:bg-blue-50 hover:border-blue-600 hover:text-blue-600'
                 }`}
@@ -90,7 +97,8 @@ export function Pricing({ language }: PricingProps) {
                 {language === 'es' ? 'Comenzar Ahora' : 'Get Started'}
               </Link>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
