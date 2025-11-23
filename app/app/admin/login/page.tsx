@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminLoginPage() {
@@ -38,85 +39,102 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
       <div className="w-full max-w-md">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-2">
-            Tactika-X
-          </h1>
-          <p className="text-gray-500 text-sm">Admin Panel</p>
-        </div>
-
-        {/* Form Card */}
-        <div className="space-y-6">
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-              <p className="text-red-700 text-sm font-medium">{error}</p>
+        {/* Apple-style Card */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 backdrop-blur-xl">
+          {/* Header Section */}
+          <div className="px-8 pt-12 pb-8 text-center border-b border-gray-100/50">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <div className="relative w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-3 shadow-lg">
+                <Image 
+                  src="/themes/barmentech/logo_barmentech.png" 
+                  alt="Barmentech CRM" 
+                  width={64}
+                  height={64}
+                  className="object-contain w-full h-full"
+                />
+              </div>
             </div>
-          )}
+            
+            {/* Title */}
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-1">
+              Barmentech CRM
+            </h1>
+            <p className="text-sm text-gray-500 font-medium">Admin Portal</p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
-                required
+          {/* Form Section */}
+          <div className="px-8 py-8 space-y-6">
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                <p className="text-red-700 text-sm font-medium">{error}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Email */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all text-sm"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              {/* Password */}
+              <div>
+                <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all text-sm"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              {/* Tenant ID */}
+              <div>
+                <label htmlFor="tenantId" className="block text-sm font-semibold text-gray-900 mb-2">
+                  Tenant ID
+                </label>
+                <input
+                  type="number"
+                  id="tenantId"
+                  name="tenantId"
+                  value={formData.tenantId}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all text-sm"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
                 disabled={isLoading}
-              />
-            </div>
-
-            {/* Password */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
-                required
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Tenant ID */}
-            <div>
-              <label htmlFor="tenantId" className="block text-sm font-medium text-gray-900 mb-2">
-                Tenant ID
-              </label>
-              <input
-                type="number"
-                id="tenantId"
-                name="tenantId"
-                value={formData.tenantId}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors text-sm"
-                required
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full px-4 py-3 bg-gray-900 hover:bg-black disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors text-sm mt-8"
-            >
-              {isLoading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
+                className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-400 text-white rounded-xl font-semibold transition-all text-sm mt-8 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                {isLoading ? 'Signing in...' : 'Sign In'}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
