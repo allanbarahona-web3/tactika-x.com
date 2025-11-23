@@ -230,39 +230,39 @@ export function CRMLandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
               {language === 'es' ? 'Lo Que Dicen Nuestros Clientes' : 'What Our Customers Say'}
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-xs sm:text-base md:text-lg">
               {language === 'es' 
                 ? 'Empresas de todo el mundo confían en Barmentech CRM' 
                 : 'Companies worldwide trust Barmentech CRM'}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="flex gap-1 mb-4">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
+              <div className="flex gap-0.5 sm:gap-1 mb-3 sm:mb-4">
                 {[1,2,3,4,5].map((i) => (
-                  <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />
+                  <Star key={i} size={16} className="text-yellow-400 fill-yellow-400 sm:w-[18px] sm:h-[18px]" />
                 ))}
               </div>
-              <p className="text-gray-600 mb-6 leading-relaxed italic">
+              <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed italic text-xs sm:text-base">
                 {language === 'es'
                   ? '"Barmentech CRM revolucionó nuestra atención al cliente. Ahora manejamos WhatsApp, Instagram y Facebook desde un solo lugar. ¡Increíble!"'
                   : '"Barmentech CRM revolutionized our customer service. Now we manage WhatsApp, Instagram and Facebook from one place. Amazing!"'}
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">MR</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-xs sm:text-base">MR</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">María Rodríguez</h4>
-                  <p className="text-sm text-gray-500">
+                  <h4 className="font-bold text-gray-900 text-sm sm:text-base">María Rodríguez</h4>
+                  <p className="text-xs sm:text-sm text-gray-500">
                     {language === 'es' ? 'Dueña, Tienda de Moda' : 'Owner, Fashion Store'}
                   </p>
                 </div>
@@ -270,24 +270,24 @@ export function CRMLandingPage() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="flex gap-1 mb-4">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
+              <div className="flex gap-0.5 sm:gap-1 mb-3 sm:mb-4">
                 {[1,2,3,4,5].map((i) => (
-                  <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />
+                  <Star key={i} size={16} className="text-yellow-400 fill-yellow-400 sm:w-[18px] sm:h-[18px]" />
                 ))}
               </div>
-              <p className="text-gray-600 mb-6 leading-relaxed italic">
+              <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed italic text-xs sm:text-base">
                 {language === 'es'
                   ? '"La integración con Meta es perfecta. No hemos tenido ningún problema de baneo. El soporte es excelente y siempre están disponibles."'
                   : '"The Meta integration is perfect. We haven\'t had any ban issues. Support is excellent and always available."'}
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">JC</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-xs sm:text-base">JC</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Juan Carlos</h4>
-                  <p className="text-sm text-gray-500">
+                  <h4 className="font-bold text-gray-900 text-sm sm:text-base">Juan Carlos</h4>
+                  <p className="text-xs sm:text-sm text-gray-500">
                     {language === 'es' ? 'CEO, Tech Gadgets' : 'CEO, Tech Gadgets'}
                   </p>
                 </div>
@@ -295,24 +295,24 @@ export function CRMLandingPage() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="flex gap-1 mb-4">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-lg transition border border-gray-100">
+              <div className="flex gap-0.5 sm:gap-1 mb-3 sm:mb-4">
                 {[1,2,3,4,5].map((i) => (
-                  <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />
+                  <Star key={i} size={16} className="text-yellow-400 fill-yellow-400 sm:w-[18px] sm:h-[18px]" />
                 ))}
               </div>
-              <p className="text-gray-600 mb-6 leading-relaxed italic">
+              <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed italic text-xs sm:text-base">
                 {language === 'es'
                   ? '"Pasamos de perder mensajes a tener todo organizado. La IA nos ayuda a responder más rápido. Nuestras ventas subieron 40%."'
                   : '"We went from losing messages to having everything organized. AI helps us respond faster. Our sales increased 40%."'}
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">SP</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-xs sm:text-base">SP</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Sofía Pérez</h4>
-                  <p className="text-sm text-gray-500">
+                  <h4 className="font-bold text-gray-900 text-sm sm:text-base">Sofía Pérez</h4>
+                  <p className="text-xs sm:text-sm text-gray-500">
                     {language === 'es' ? 'Gerente, E-commerce' : 'Manager, E-commerce'}
                   </p>
                 </div>
@@ -321,10 +321,10 @@ export function CRMLandingPage() {
           </div>
 
           {/* Trust Badge */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-blue-50 rounded-full border border-blue-200">
-              <CheckCircle2 size={24} className="text-blue-600" />
-              <span className="text-blue-900 font-semibold">
+          <div className="mt-8 sm:mt-12 md:mt-16 text-center">
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-blue-50 rounded-full border border-blue-200">
+              <CheckCircle2 size={20} className="text-blue-600 sm:w-6 sm:h-6 flex-shrink-0" />
+              <span className="text-blue-900 font-semibold text-xs sm:text-base">
                 {language === 'es' 
                   ? '+ de 500 empresas confían en Barmentech CRM' 
                   : '500+ companies trust Barmentech CRM'}
@@ -338,38 +338,38 @@ export function CRMLandingPage() {
       <Pricing language={language} />
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="faq" className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
               {language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-xs sm:text-base md:text-lg">
               {language === 'es' 
                 ? 'Resolvemos todas tus dudas sobre Barmentech CRM' 
                 : 'We answer all your questions about Barmentech CRM'}
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* FAQ 1 */}
             <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition">
               <button
                 onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50"
+                className="w-full px-4 sm:px-6 py-3 sm:py-5 text-left flex justify-between items-center hover:bg-gray-50"
               >
-                <span className="font-bold text-gray-900 text-lg">
+                <span className="font-bold text-gray-900 text-xs sm:text-base md:text-lg">
                   {language === 'es' 
                     ? '¿Necesito conocimientos técnicos para usar Barmentech CRM?' 
                     : 'Do I need technical knowledge to use Barmentech CRM?'}
                 </span>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-blue-600 transition-transform ${openFaq === 1 ? 'rotate-180' : ''}`} 
+                  size={20} 
+                  className={`text-blue-600 transition-transform flex-shrink-0 ml-2 sm:w-6 sm:h-6 ${openFaq === 1 ? 'rotate-180' : ''}`} 
                 />
               </button>
               {openFaq === 1 && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-5 text-gray-600 leading-relaxed text-xs sm:text-base">
                   {language === 'es'
                     ? 'No. Barmentech CRM está diseñado para ser intuitivo y fácil de usar. Nuestro equipo te ayuda con la configuración inicial de todos tus canales. Solo necesitas seguir unos simples pasos y estarás listo para empezar.'
                     : 'No. Barmentech CRM is designed to be intuitive and easy to use. Our team helps you with the initial setup of all your channels. You just need to follow a few simple steps and you\'ll be ready to start.'}
@@ -381,20 +381,20 @@ export function CRMLandingPage() {
             <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition">
               <button
                 onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50"
+                className="w-full px-4 sm:px-6 py-3 sm:py-5 text-left flex justify-between items-center hover:bg-gray-50"
               >
-                <span className="font-bold text-gray-900 text-lg">
+                <span className="font-bold text-gray-900 text-xs sm:text-base md:text-lg">
                   {language === 'es' 
                     ? '¿Puedo conectar mis cuentas de WhatsApp Business, Instagram y Facebook?' 
                     : 'Can I connect my WhatsApp Business, Instagram and Facebook accounts?'}
                 </span>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-blue-600 transition-transform ${openFaq === 2 ? 'rotate-180' : ''}`} 
+                  size={20} 
+                  className={`text-blue-600 transition-transform flex-shrink-0 ml-2 sm:w-6 sm:h-6 ${openFaq === 2 ? 'rotate-180' : ''}`} 
                 />
               </button>
               {openFaq === 2 && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-5 text-gray-600 leading-relaxed text-xs sm:text-base">
                   {language === 'es'
                     ? 'Sí, absolutamente. Barmentech CRM se integra directamente con Meta (Facebook) para conectar WhatsApp Business API, Instagram Direct y Facebook Messenger. También soportamos Telegram, TikTok y Email. Todas tus conversaciones en un solo lugar.'
                     : 'Yes, absolutely. Barmentech CRM integrates directly with Meta (Facebook) to connect WhatsApp Business API, Instagram Direct and Facebook Messenger. We also support Telegram, TikTok and Email. All your conversations in one place.'}
@@ -406,20 +406,20 @@ export function CRMLandingPage() {
             <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition">
               <button
                 onClick={() => setOpenFaq(openFaq === 3 ? null : 3)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50"
+                className="w-full px-4 sm:px-6 py-3 sm:py-5 text-left flex justify-between items-center hover:bg-gray-50"
               >
-                <span className="font-bold text-gray-900 text-lg">
+                <span className="font-bold text-gray-900 text-xs sm:text-base md:text-lg">
                   {language === 'es' 
                     ? '¿Mi cuenta de Instagram o WhatsApp puede ser baneada?' 
                     : 'Can my Instagram or WhatsApp account be banned?'}
                 </span>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-blue-600 transition-transform ${openFaq === 3 ? 'rotate-180' : ''}`} 
+                  size={20} 
+                  className={`text-blue-600 transition-transform flex-shrink-0 ml-2 sm:w-6 sm:h-6 ${openFaq === 3 ? 'rotate-180' : ''}`} 
                 />
               </button>
               {openFaq === 3 && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-5 text-gray-600 leading-relaxed text-xs sm:text-base">
                   {language === 'es'
                     ? 'No. Barmentech es un Meta Business Partner certificado. Usamos las APIs oficiales de Meta, lo que significa que tu cuenta está 100% segura y cumple con todas las políticas de Facebook, Instagram y WhatsApp. A diferencia de otras soluciones no oficiales, no corres riesgo de baneo.'
                     : 'No. Barmentech is a certified Meta Business Partner. We use Meta\'s official APIs, which means your account is 100% safe and complies with all Facebook, Instagram and WhatsApp policies. Unlike other unofficial solutions, you are not at risk of being banned.'}
@@ -431,20 +431,20 @@ export function CRMLandingPage() {
             <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition">
               <button
                 onClick={() => setOpenFaq(openFaq === 4 ? null : 4)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50"
+                className="w-full px-4 sm:px-6 py-3 sm:py-5 text-left flex justify-between items-center hover:bg-gray-50"
               >
-                <span className="font-bold text-gray-900 text-lg">
+                <span className="font-bold text-gray-900 text-xs sm:text-base md:text-lg">
                   {language === 'es' 
                     ? '¿Cuánto tiempo toma configurar el CRM?' 
                     : 'How long does it take to set up the CRM?'}
                 </span>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-blue-600 transition-transform ${openFaq === 4 ? 'rotate-180' : ''}`} 
+                  size={20} 
+                  className={`text-blue-600 transition-transform flex-shrink-0 ml-2 sm:w-6 sm:h-6 ${openFaq === 4 ? 'rotate-180' : ''}`} 
                 />
               </button>
               {openFaq === 4 && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-5 text-gray-600 leading-relaxed text-xs sm:text-base">
                   {language === 'es'
                     ? 'El proceso completo toma aproximadamente 1-2 días hábiles. Primero creas tu cuenta (2 minutos), luego nuestro equipo te contacta para configurar tus canales (1 hora de trabajo conjunto), y finalmente hacemos pruebas para asegurar que todo funcione perfectamente. ¡Y listo para usar!'
                     : 'The complete process takes approximately 1-2 business days. First you create your account (2 minutes), then our team contacts you to configure your channels (1 hour of joint work), and finally we do tests to ensure everything works perfectly. Ready to use!'}
@@ -456,20 +456,20 @@ export function CRMLandingPage() {
             <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition">
               <button
                 onClick={() => setOpenFaq(openFaq === 5 ? null : 5)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50"
+                className="w-full px-4 sm:px-6 py-3 sm:py-5 text-left flex justify-between items-center hover:bg-gray-50"
               >
-                <span className="font-bold text-gray-900 text-lg">
+                <span className="font-bold text-gray-900 text-xs sm:text-base md:text-lg">
                   {language === 'es' 
                     ? '¿Puedo cancelar mi suscripción en cualquier momento?' 
                     : 'Can I cancel my subscription at any time?'}
                 </span>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-blue-600 transition-transform ${openFaq === 5 ? 'rotate-180' : ''}`} 
+                  size={20} 
+                  className={`text-blue-600 transition-transform flex-shrink-0 ml-2 sm:w-6 sm:h-6 ${openFaq === 5 ? 'rotate-180' : ''}`} 
                 />
               </button>
               {openFaq === 5 && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-5 text-gray-600 leading-relaxed text-xs sm:text-base">
                   {language === 'es'
                     ? 'Sí, puedes cancelar tu suscripción en cualquier momento sin penalidades. Si cancelas, mantendrás acceso hasta el final de tu período de facturación actual. Todos tus datos pueden ser exportados antes de cancelar.'
                     : 'Yes, you can cancel your subscription at any time without penalties. If you cancel, you will maintain access until the end of your current billing period. All your data can be exported before canceling.'}

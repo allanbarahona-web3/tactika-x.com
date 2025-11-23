@@ -25,20 +25,20 @@ export function Features({ language }: FeaturesProps) {
         ];
 
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section id="features" className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-16">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-8 sm:mb-12 md:mb-16">
           {language === 'es' ? 'Por Qué Elegir Barmentech CRM' : 'Why Choose Barmentech CRM'}
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {features.map((item, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                <Zap size={24} className="text-white" />
+            <div key={idx} className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg transition">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-3 sm:mb-4 flex-shrink-0">
+                <Zap size={20} className="text-white sm:w-6 sm:h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-gray-600 text-sm">{item.desc}</p>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
