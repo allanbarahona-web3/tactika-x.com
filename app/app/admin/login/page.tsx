@@ -46,20 +46,20 @@ export default function AdminLoginPage() {
           {/* Header Section */}
           <div className="px-8 pt-12 pb-8 text-center border-b border-gray-100/50">
             {/* Logo */}
-            <div className="flex justify-center mb-6">
-              <div className="relative w-32 h-32">
+            <div className="flex justify-center mb-8">
+              <div className="relative w-48 h-24">
                 <Image 
                   src="/themes/barmentech/logo_barmentech.png" 
                   alt="CRM Portal" 
-                  width={128}
-                  height={128}
+                  width={192}
+                  height={96}
                   className="object-contain w-full h-full drop-shadow-lg"
                 />
               </div>
             </div>
             
             {/* Title */}
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-1">
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900">
               CRM Portal
             </h1>
           </div>
