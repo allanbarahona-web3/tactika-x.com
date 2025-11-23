@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
