@@ -9,17 +9,17 @@ interface HeaderProps {
 
 export function Header({ language, onLanguageChange, onContactClick }: HeaderProps) {
   return (
-    <header className="fixed w-full top-0 z-60 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 border-b border-slate-600 shadow-lg">
+    <header className="fixed w-full top-0 z-60 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition">
-            <div className="relative w-16 h-16 bg-white rounded-xl p-2 shadow-md hover:shadow-lg transition-shadow">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition">
+            <div className="relative w-14 h-14">
               <Image 
                 src="/themes/barmentech/logo_barmentech.png" 
                 alt="Barmentech" 
-                width={60}
-                height={60}
+                width={56}
+                height={56}
                 className="object-contain w-full h-full"
               />
             </div>
@@ -42,7 +42,7 @@ export function Header({ language, onLanguageChange, onContactClick }: HeaderPro
             {/* Contact Button */}
             <button
               onClick={onContactClick}
-              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-700/70 rounded-lg transition border border-slate-600"
+              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition border border-gray-300"
             >
               {language === 'es' ? 'Contáctanos' : 'Contact Us'}
             </button>
@@ -50,7 +50,7 @@ export function Header({ language, onLanguageChange, onContactClick }: HeaderPro
             {/* Sign In Button */}
             <Link
               href="/admin/login"
-              className="hidden lg:inline-flex px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-700/70 rounded-lg transition border border-slate-600"
+              className="hidden lg:inline-flex px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition border border-gray-300"
             >
               {language === 'es' ? 'Iniciar Sesión' : 'Sign In'}
             </Link>
@@ -64,13 +64,13 @@ export function Header({ language, onLanguageChange, onContactClick }: HeaderPro
             </Link>
 
             {/* Language Switcher */}
-            <div className="flex items-center gap-2 bg-slate-700/50 rounded-lg p-1 border border-slate-600">
+            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1 border border-gray-200">
               <button
                 onClick={() => onLanguageChange('es')}
                 className={`px-3 py-1 rounded text-xs font-medium transition ${
                   language === 'es'
-                    ? 'bg-slate-600 text-white shadow-md'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
                 ES
@@ -79,8 +79,8 @@ export function Header({ language, onLanguageChange, onContactClick }: HeaderPro
                 onClick={() => onLanguageChange('en')}
                 className={`px-3 py-1 rounded text-xs font-medium transition ${
                   language === 'en'
-                    ? 'bg-slate-600 text-white shadow-md'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
                 EN
