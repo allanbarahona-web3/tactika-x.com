@@ -30,7 +30,6 @@ export class CategoriesService {
       where: { tenantId },
       orderBy: { order: 'asc' },
       include: {
-        media: true,
         _count: {
           select: { products: true },
         },
@@ -48,9 +47,6 @@ export class CategoriesService {
         isActive: true,
       },
       orderBy: { order: 'asc' },
-      include: {
-        media: true,
-      },
     });
   }
 
@@ -61,7 +57,6 @@ export class CategoriesService {
     const category = await this.prisma.category.findFirst({
       where: { id, tenantId },
       include: {
-        media: true,
         products: {
           where: { isActive: true },
           take: 10,

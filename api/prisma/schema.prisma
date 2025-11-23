@@ -69,6 +69,29 @@ enum PaymentProvider {
   manual
 }
 
+enum ChannelType {
+  whatsapp
+  instagram
+  facebook
+  telegram
+  tiktok
+  sms
+  email
+}
+
+enum MessageDirection {
+  inbound   // Recibido del cliente
+  outbound  // Enviado por el staff
+}
+
+enum MessageStatus {
+  pending
+  sent
+  delivered
+  read
+  failed
+}
+
 // ========================================
 // TENANT (Base del multi-tenant)
 // ========================================
@@ -95,6 +118,8 @@ model Tenant {
   domains     TenantDomain[]
   categories  Category[]
   media       Media[]
+  conversations Conversation[]
+  messages    Message[]
 
   @@map("tenants")
 }
@@ -141,6 +166,7 @@ model Customer {
   // Relaciones
   tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   orders Order[]
+  conversations Conversation[]
 
   @@unique([tenantId, email])
   @@index([tenantId])
@@ -165,7 +191,6 @@ model Category {
   // Relaciones
   tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   products Product[]
-  media    Media[]
 
   @@unique([tenantId, slug])
   @@index([tenantId])
@@ -195,7 +220,6 @@ model Media {
 
   // Relaciones
   tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  category Category? @relation(fields: [entityId], references: [id], onDelete: SetNull)
 
   @@index([tenantId])
   @@index([entityType])
@@ -369,4 +393,66 @@ model AuthSession {
   @@index([jti])
   @@index([expiresAt])
   @@map("auth_sessions")
+}
+
+// ========================================
+// CRM - CONVERSACIONES
+// ========================================
+
+model Conversation {
+  id              String      @id @default(uuid())
+  tenantId        Int
+  customerId      String?     // ID del customer si es conocido
+  channel         ChannelType
+  channelUserId   String      // ID del usuario en el canal (teléfono, username, etc)
+  channelUsername String?     // Nombre de usuario en el canal (opcional)
+  isActive        Boolean     @default(true)
+  lastMessageAt   DateTime?
+  metadata        Json?       // Extra data específica del canal
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relaciones
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  messages Message[]
+
+  @@unique([tenantId, channel, channelUserId])
+  @@index([tenantId])
+  @@index([customerId])
+  @@index([channel])
+  @@index([isActive])
+  @@index([lastMessageAt])
+  @@map("conversations")
+}
+
+// ========================================
+// CRM - MENSAJES
+// ========================================
+
+model Message {
+  id              String         @id @default(uuid())
+  tenantId        Int
+  conversationId  String
+  direction       MessageDirection
+  content         String
+  mediaUrl        String?        // URL de imagen/video si aplica
+  channel         ChannelType
+  status          MessageStatus  @default(pending)
+  externalId      String?        // ID del mensaje en el proveedor (WhatsApp, Telegram, etc)
+  metadata        Json?          // Extra data específica del canal
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Relaciones
+  tenant       Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([conversationId])
+  @@index([channel])
+  @@index([status])
+  @@index([direction])
+  @@index([createdAt])
+  @@map("messages")
 }
