@@ -161,19 +161,19 @@ export default function CRMSignupPage() {
           {/* Header */}
           <div className="mb-8">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-14 h-14">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative w-20 h-20">
                 <Image 
                   src="/themes/barmentech/logo_barmentech.png" 
                   alt="Barmentech CRM" 
-                  width={56}
-                  height={56}
+                  width={80}
+                  height={80}
                   className="object-contain w-full h-full"
                 />
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">{t.title}</h1>
-            <p className="text-gray-500 text-base">{t.subtitle}</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t.title}</h1>
+            <p className="text-gray-500 text-sm">{t.subtitle}</p>
           </div>
 
           {/* Form Card */}
