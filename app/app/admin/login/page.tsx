@@ -44,15 +44,15 @@ export default function AdminLoginPage() {
         {/* Apple-style Card */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 backdrop-blur-xl">
           {/* Header Section */}
-          <div className="px-8 pt-12 pb-8 text-center border-b border-gray-100/50">
+          <div className="px-8 pt-16 pb-8 text-center border-b border-gray-100/50">
             {/* Logo */}
             <div className="flex justify-center mb-8">
-              <div className="relative w-48 h-24">
+              <div className="relative w-40 h-40">
                 <Image 
                   src="/themes/barmentech/logo_barmentech.png" 
                   alt="CRM Portal" 
-                  width={192}
-                  height={96}
+                  width={160}
+                  height={160}
                   className="object-contain w-full h-full drop-shadow-lg"
                 />
               </div>
