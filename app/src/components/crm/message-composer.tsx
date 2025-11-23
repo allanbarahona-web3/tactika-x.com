@@ -11,20 +11,16 @@ interface MessageComposerProps {
 
 export function MessageComposer({ onSend, isLoading, disabled }: MessageComposerProps) {
   const [content, setContent] = useState('');
-  const [isComposing, setIsComposing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = async () => {
     if (!content.trim() || isLoading) return;
 
     try {
-      setIsComposing(true);
       await onSend(content.trim());
       setContent('');
     } catch (error) {
       console.error('Error sending message:', error);
-    } finally {
-      setIsComposing(false);
     }
   };
 

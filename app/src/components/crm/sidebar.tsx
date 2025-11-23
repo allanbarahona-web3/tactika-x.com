@@ -12,19 +12,19 @@ import {
 const menuItems = [
   {
     label: 'Conversaciones',
-    href: '/tenant-admin/crm/conversations',
+    href: '/crm/conversations',
     icon: MessageSquare,
     badge: null,
   },
   {
     label: 'Estadísticas',
-    href: '/tenant-admin/crm/stats',
+    href: '/crm/stats',
     icon: BarChart3,
     badge: null,
   },
   {
     label: 'Configuración',
-    href: '/tenant-admin/crm/settings',
+    href: '/crm/settings',
     icon: Settings,
     badge: null,
   },

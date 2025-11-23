@@ -53,7 +53,7 @@ export function ConversationsList({ conversations, isLoading }: ConversationsLis
       {conversations.map((conversation) => (
         <Link
           key={conversation.id}
-          href={`/tenant-admin/crm/conversations/${conversation.id}`}
+          href={`/crm/conversations/${conversation.id}`}
           className="block hover:bg-slate-50 transition-colors group"
         >
           <div className="px-6 py-4 flex items-center justify-between">
