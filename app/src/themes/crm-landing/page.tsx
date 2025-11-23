@@ -8,10 +8,12 @@ import { Features } from './components/features';
 import { Channels } from './components/channels';
 import { Pricing } from './components/pricing';
 import { Footer } from './components/footer';
+import { ContactModal } from './components/contact-modal';
 
 export function CRMLandingPage() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const whatsappNumber = '+17863918722';
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`;
 
@@ -41,7 +43,7 @@ export function CRMLandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
-      <Header language={language} onLanguageChange={setLanguage} />
+      <Header language={language} onLanguageChange={setLanguage} onContactClick={() => setIsContactOpen(true)} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white">
@@ -520,6 +522,9 @@ export function CRMLandingPage() {
 
       {/* Footer */}
       <Footer language={language} />
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} language={language} />
     </div>
   );
 }

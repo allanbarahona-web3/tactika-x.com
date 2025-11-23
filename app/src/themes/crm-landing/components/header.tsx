@@ -4,9 +4,10 @@ import Image from 'next/image';
 interface HeaderProps {
   language: 'es' | 'en';
   onLanguageChange: (lang: 'es' | 'en') => void;
+  onContactClick: () => void;
 }
 
-export function Header({ language, onLanguageChange }: HeaderProps) {
+export function Header({ language, onLanguageChange, onContactClick }: HeaderProps) {
   return (
     <header className="fixed w-full top-0 z-50 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 backdrop-blur-md border-b border-slate-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,6 +53,14 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
                 EN
               </button>
             </div>
+
+            {/* Contact Button */}
+            <button
+              onClick={onContactClick}
+              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-700/70 rounded-lg transition border border-slate-600"
+            >
+              {language === 'es' ? 'Contáctanos' : 'Contact Us'}
+            </button>
 
             {/* Sign In Button */}
             <Link
