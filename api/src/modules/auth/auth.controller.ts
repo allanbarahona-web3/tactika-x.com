@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { CrmSignupDto } from './dto/crm-signup.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('auth')
@@ -49,5 +50,13 @@ export class AuthController {
   @SkipThrottle()  // Profile endpoint can be called frequently
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Post('crm/signup')
+  @Throttle({ default: { limit: 3, ttl: 3600000 } })  // 3 requests per hour
+  crmSignup(@Body() crmSignupDto: CrmSignupDto, @Request() req) {
+    const ipAddress = req.ip || req.connection?.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    return this.authService.crmSignup(crmSignupDto, ipAddress, userAgent);
   }
 }

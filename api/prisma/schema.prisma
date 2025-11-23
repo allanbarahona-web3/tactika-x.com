@@ -92,20 +92,27 @@ enum MessageStatus {
   failed
 }
 
+enum SubscriptionType {
+  saas_full    // E-commerce completo + CRM + Billing
+  crm_only     // Solo CRM
+  billing_only // Solo Facturación
+}
+
 // ========================================
 // TENANT (Base del multi-tenant)
 // ========================================
 
 model Tenant {
-  id            Int           @id @default(autoincrement())
-  name          String
-  slug          String        @unique
-  status        TenantStatus  @default(active)
-  billingStatus BillingStatus @default(ok)
-  industry      String?
-  config        Json?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id               Int              @id @default(autoincrement())
+  name             String
+  slug             String           @unique
+  status           TenantStatus     @default(active)
+  billingStatus    BillingStatus    @default(ok)
+  subscriptionType SubscriptionType @default(saas_full)
+  industry         String?
+  config           Json?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
   // Relaciones
   tenantUsers TenantUser[]

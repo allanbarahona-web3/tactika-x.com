@@ -12,6 +12,10 @@ const BarmentechPage = dynamic(() => import('@/src/themes/barmentech'), {
   loading: () => <div>Loading...</div>,
 });
 
+const CRMLandingPage = dynamic(() => import('@/src/themes/crm-landing'), {
+  loading: () => <div>Loading...</div>,
+});
+
 export default function StorefrontPage() {
   const [tenantTheme, setTenantTheme] = useState<string | null>(null);
 
@@ -19,7 +23,9 @@ export default function StorefrontPage() {
     // Obtener el tenant del hostname
     const hostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
     
-    if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech')) {
+    if (hostname.includes('crm.barmentech.com')) {
+      setTenantTheme('crm-landing');
+    } else if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech')) {
       setTenantTheme('barmentech');
     } else if (hostname.includes('store.barmentech.com')) {
       setTenantTheme('store');
@@ -33,6 +39,10 @@ export default function StorefrontPage() {
   }
 
   // Renderizar el componente del tenant correspondiente
+  if (tenantTheme === 'crm-landing') {
+    return <CRMLandingPage />;
+  }
+
   if (tenantTheme === 'barmentech') {
     return <BarmentechPage />;
   }

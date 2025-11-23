@@ -1,9 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service';
 import { TokenService } from '../../common/services/token.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { CrmSignupDto } from './dto/crm-signup.dto';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 
@@ -233,5 +234,98 @@ export class AuthService {
     }
 
     return user;
+  }
+
+  /**
+   * CRM Signup - Crea un nuevo tenant con subscriptionType: 'crm_only'
+   * y el primer usuario como owner
+   */
+  async crmSignup(crmSignupDto: CrmSignupDto, ipAddress?: string, userAgent?: string) {
+    const { companyName, email, password } = crmSignupDto;
+
+    // Crear slug único a partir del nombre de la empresa
+    const baseSlug = companyName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    // Verificar que el slug no exista
+    let slug = baseSlug;
+    let counter = 1;
+    while (await this.prisma.tenant.findUnique({ where: { slug } })) {
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+    }
+
+    // Verificar que el email no exista en ningún tenant
+    const existingUser = await this.prisma.tenantUser.findFirst({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException('Email already registered');
+    }
+
+    // Hash del password
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    // Crear tenant y usuario en una transacción
+    const result = await this.prisma.$transaction(async (tx) => {
+      // Crear tenant con subscriptionType: 'crm_only'
+      const tenant = await tx.tenant.create({
+        data: {
+          name: companyName,
+          slug,
+          subscriptionType: 'crm_only',
+          status: 'active',
+          billingStatus: 'ok',
+        },
+      });
+
+      // Crear primer usuario como owner
+      const user = await tx.tenantUser.create({
+        data: {
+          tenantId: tenant.id,
+          email,
+          passwordHash,
+          name: companyName,
+          role: 'owner',
+          status: 'active',
+        },
+      });
+
+      return { tenant, user };
+    });
+
+    // Generar tokens automáticamente (auto-login)
+    const { accessToken, refreshToken } = await this.generateTokens(
+      result.user,
+      ipAddress,
+      userAgent,
+    );
+
+    console.log('✅ CRM Signup successful:', {
+      tenantId: result.tenant.id,
+      slug: result.tenant.slug,
+      email: result.user.email,
+    });
+
+    return {
+      user: {
+        id: result.user.id,
+        email: result.user.email,
+        name: result.user.name,
+        role: result.user.role,
+        tenantId: result.tenant.id,
+      },
+      tenant: {
+        id: result.tenant.id,
+        name: result.tenant.name,
+        slug: result.tenant.slug,
+        subscriptionType: result.tenant.subscriptionType,
+      },
+      accessToken,
+      refreshToken,
+    };
   }
 }
