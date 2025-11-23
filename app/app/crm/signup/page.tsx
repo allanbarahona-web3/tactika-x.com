@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Check } from 'lucide-react';
 
 export default function CRMSignupPage() {
@@ -159,9 +160,16 @@ export default function CRMSignupPage() {
         <div className="w-full max-w-md">
           {/* Header */}
           <div className="mb-8">
+            {/* Logo */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">BM</span>
+              <div className="relative w-14 h-14">
+                <Image 
+                  src="/themes/barmentech/logo_barmentech.png" 
+                  alt="Barmentech CRM" 
+                  width={56}
+                  height={56}
+                  className="object-contain w-full h-full"
+                />
               </div>
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">{t.title}</h1>

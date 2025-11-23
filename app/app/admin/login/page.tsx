@@ -62,7 +62,6 @@ export default function AdminLoginPage() {
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-1">
               CRM Portal
             </h1>
-            <p className="text-sm text-gray-500 font-medium">Admin Panel</p>
           </div>
 
           {/* Form Section */}

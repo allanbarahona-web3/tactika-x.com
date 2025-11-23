@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 
 interface PricingProps {
@@ -61,8 +62,8 @@ export function Pricing({ language }: PricingProps) {
           {plans.map((plan, idx) => (
             <div
               key={idx}
-              className={`p-8 rounded-xl ${
-                plan.featured ? 'border-2 border-blue-600 bg-white shadow-xl' : 'border border-gray-200 bg-white'
+              className={`p-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl ${
+                plan.featured ? 'border-2 border-blue-600 bg-white shadow-xl relative -mt-4' : 'border border-gray-200 bg-white shadow-lg hover:shadow-2xl'
               }`}
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
@@ -78,15 +79,16 @@ export function Pricing({ language }: PricingProps) {
                   </li>
                 ))}
               </ul>
-              <button
-                className={`w-full py-3 rounded-lg font-semibold transition ${
+              <Link
+                href="/crm/signup"
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
                   plan.featured
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
-                    : 'border border-gray-300 text-gray-900 hover:bg-gray-50'
+                    ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg'
+                    : 'border border-gray-300 text-gray-900 hover:bg-gray-50 hover:border-gray-400'
                 }`}
               >
                 {language === 'es' ? 'Comenzar Ahora' : 'Get Started'}
-              </button>
+              </Link>
             </div>
           ))}
         </div>
