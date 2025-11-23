@@ -102,8 +102,8 @@ export function CRMLandingPage() {
       >
         <div className="relative flex items-center justify-center">
           {/* Animated background circles */}
-          <div className="absolute inset-0 bg-green-500 rounded-full animate-pulse opacity-75"></div>
-          <div className="absolute inset-1 bg-green-500 rounded-full animate-bounce" style={{animationDuration: '1.5s'}}></div>
+          <div className="absolute inset-0 bg-green-500 rounded-full animate-pulse opacity-75 pointer-events-none"></div>
+          <div className="absolute inset-1 bg-green-500 rounded-full animate-bounce pointer-events-none" style={{animationDuration: '1.5s'}}></div>
           
           {/* Button */}
           <div className="relative w-14 h-14 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300 cursor-pointer">

@@ -26,6 +26,7 @@ const config: Config = {
       },
       zIndex: {
         '60': '60',
+        '65': '65',
         '70': '70',
       },
       boxShadow: {

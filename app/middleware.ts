@@ -16,9 +16,9 @@ export function middleware(request: NextRequest) {
     requestHeaders.set('x-hostname', hostname);
     
     // Mapeo de dominios a tenants
-    let tenantId = 'tactika-x'; // Default: Tactika-X
+    let tenantId = 'crm-landing'; // Default: CRM Landing for localhost development
     
-    if (hostname.includes('crm.barmentech.com')) {
+    if (hostname.includes('crm.barmentech.com') || hostname.includes('localhost:3001')) {
       tenantId = 'crm-landing';
     } else if (hostname.includes('commerce.barmentech.com') || hostname.includes('barmentech-saas.vercel.app')) {
       tenantId = 'barmentech';
