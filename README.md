@@ -8,7 +8,7 @@ Unlike typical CMS or web templates, Barmentech provides:
 - **Real multi-tenancy architecture (RLS + AI-ready workflows)**
 - **Omnichannel CRM with API integrations and real-time messaging**
 - **Storefront modules customizable by domain, theme and logo**
-- **n8n + Bots + Webhooks for business automation**
+- **Workflow automation via APIs, webhooks, and messaging triggers**
 - **Enterprise-grade security (JWT+JTI, RLS, rate limiting)**
 
 📌 **One backend, multiple business applications.**
@@ -24,16 +24,16 @@ Each tenant becomes its own independent platform with different capabilities.
 
 💬 **Omnichannel CRM**  
 - WebSocket real-time messaging  
-- WhatsApp Business API + Telegram integration  
-- Contact profiles, history, funnels, analytics  
+- WhatsApp / Telegram / email integrations (via APIs & webhooks)  
+- Contact profiles, history, funnels, analytics   
 
 📜 **Invoicing & Billing**  
 - Digital receipts & ledger for orders  
-- Billing rules per tenant  
+- Billing rules per tenant and automation  
 - Ready for integrations with payment providers  
 
 🤖 **Business Automations**  
-- n8n workflows + bots + webhooks  
+- Webhook-based triggers from external systems    
 - Event-driven payments + delivery flows  
 - Triggers for CRM, Storefront or Billing  
 
@@ -46,14 +46,14 @@ Each tenant becomes its own independent platform with different capabilities.
 | **Tenant Storefronts** | Modular commerce with custom domains |
 | **Omnichannel CRM** | Real-time messaging + customer operations |
 | **Invoicing Layer** | Orders ledger, billing, receipts |
-| **Automations Hub** | Webhooks, bots, n8n orchestration |
+| **Automations Hub** | Webhooks, background jobs and workflow orchestration |
 
 🔐 **Each tenant has its own users, domain, products, orders, settings, contacts and data rules.**
 
 ---
 
 ## 🛠 **Tech Architecture (High-Level)**
-> Stack: **NestJS + PostgreSQL (RLS) + Next.js App Router + Stripe + Docker + n8n**
+> Stack: **NestJS + PostgreSQL (RLS) + Next.js App Router + Stripe + Docker**
 
 ┌────────────── Storefront (Next.js) ───────────────┐
 │ Auth • Cart • Checkout • Admin • Custom Themes │
@@ -80,7 +80,7 @@ PostgreSQL + Row-Level Security (RLS)
 ---
 
 ## 🚀 **Project Status**
-🔧 **Backend — Production-Ready (95%+)**
+🔧 **Backend — Production-Ready (85%+)**
 - NestJS + Prisma  
 - Multi-tenancy + Host extraction  
 - RLS Policies across all modules  
@@ -97,8 +97,7 @@ PostgreSQL + Row-Level Security (RLS)
 💬 **CRM & Automations — Architecture Complete**
 - WebSockets + gateway  
 - WhatsApp API + Telegram ready  
-- n8n integrations defined  
-
+- Automation layer planned around events, queues and webhooks 
 ---
 
 ## 📦 **Module Activation (Tenant-Based)**
@@ -156,7 +155,7 @@ app/
 
 - Backend: **Jest + Supertest**  
 - Frontend: **Vitest + Playwright**  
-- Payment testing via **Stripe CLI**
+- Payment testing via **Stripe CLI & Paypal Sandbox & Crypto**
 
 ---
 
@@ -164,17 +163,17 @@ app/
 
 ### Phase 1 — Finishing Commerce & Billing
 - Complete checkout & order tracking  
-- Stripe + PayPal payments  
+- Stripe + PayPal + Crypto payments  
 - Email + receipt automation  
 
 ### Phase 2 — CRM Release
 - Webhooks + smart routing  
-- Full WhatsApp/Telegram flows  
+- Full WhatsApp/Telegram/Instagram/Tiktok/Emails/etc flows  
 - Chat assignment + analytics  
 
 ### Phase 3 — Automations Hub
 - Business rules engine  
-- n8n templates marketplace  
+- Workflow automation via APIs, webhooks, and messaging triggers
 - API marketplace for modules  
 
 ---
